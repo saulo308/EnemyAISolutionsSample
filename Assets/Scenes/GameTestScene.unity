@@ -9603,6 +9603,7 @@ MonoBehaviour:
   m_characterSpeed: 380
   m_characterRigidBody: {fileID: 109437}
   m_characterContainer: {fileID: 109434}
+  m_playerVelocityMagnitude: {fileID: 11400000, guid: d1ff0d478795ae149912e083307c8879, type: 2}
 --- !u!114 &2094651839
 MonoBehaviour:
   m_ObjectHideFlags: 0

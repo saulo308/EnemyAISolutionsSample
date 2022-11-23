@@ -11,7 +11,8 @@ namespace CharacterModule.TopDown2D
         [SerializeField] private float m_characterSpeed = 500f;
 
         [Header("Character - LinkedReferences")]
-        [SerializeField] private Rigidbody2D m_characterRigidBody = null;
+        [SerializeField] protected Rigidbody2D m_characterRigidBody = null;
+        
         [SerializeField] private Transform m_characterContainer = null;
 
         // Unity Methods ---------------------------------------------------
