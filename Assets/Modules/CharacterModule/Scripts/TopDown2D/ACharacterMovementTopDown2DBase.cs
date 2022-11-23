@@ -4,31 +4,26 @@ using UnityEngine;
 
 namespace CharacterModule.TopDown2D
 {
-    public class CharacterMovementTopDown2D : MonoBehaviour
+    public abstract class ACharacterMovementTopDown2DBase : MonoBehaviour
     {
         // Serializable Fields ------------------------------
         [Header("Character - GeneralConfigs")]
         [SerializeField] private float m_characterSpeed = 500f;
 
-        [Header("Character - References")]
+        [Header("Character - LinkedReferences")]
         [SerializeField] private Rigidbody2D m_characterRigidBody = null;
         [SerializeField] private Transform m_characterContainer = null;
 
         // Unity Methods ---------------------------------------------------
-        void Awake()
+        protected virtual void Awake()
         {
             // If component is null, try and get the component on this gameObject
             if(m_characterRigidBody == null)
                 m_characterRigidBody = GetComponent<Rigidbody2D>();
         }
 
-        void Update()
-        {
-            
-        }
-
         // Public Methods ---------------------------------------------------
-        public void ExecuteMovement(float horizontalMovementValue, float verticalMovementValue)
+        public virtual void ExecuteMovement(float horizontalMovementValue, float verticalMovementValue)
         {
             if(!m_characterRigidBody)
             {

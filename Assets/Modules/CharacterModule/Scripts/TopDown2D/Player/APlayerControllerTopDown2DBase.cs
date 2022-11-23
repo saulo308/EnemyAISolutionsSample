@@ -1,34 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
-using GameSharedEventModule;
 using UnityEngine;
 
 namespace CharacterModule.TopDown2D
 {
-    public class PlayerControllerTopDown2D : MonoBehaviour
+    public abstract class APlayerControllerTopDown2DBase : MonoBehaviour
     {
         // Serializable Fields -------------------------------
-        [SerializeField] private CharacterMovementTopDown2D m_characterMovement = null;
+        [Header("LinkedReferences")]
+        [SerializeField] private ACharacterMovementTopDown2DBase m_characterMovement = null;
 
         // Non-Serializable Fields ----------------------------
         private float m_horizontalAxisValue = 0f;
         private float m_verticalAxisValue = 0f;
 
         // Unity Methods -------------------------------------
-        void Awake()
+        protected virtual void Awake()
         {
             // If component is null, try and get the component on this gameObject
             if(m_characterMovement == null)
-                m_characterMovement = GetComponent<CharacterMovementTopDown2D>();
+                m_characterMovement = GetComponent<ACharacterMovementTopDown2DBase>();
         }
 
-        void Update()
+        protected virtual void Update()
         {
             // Get player input values (Horizontal and Vertical axis and store them)
             UpdatePlayerInputValues();
         }
 
-        void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             // Move player according to input values
             RequestPlayerMovement();

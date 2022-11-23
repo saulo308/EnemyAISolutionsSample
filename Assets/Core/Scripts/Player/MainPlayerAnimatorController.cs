@@ -12,8 +12,9 @@ namespace AIProject.GameModule
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityDataEvent;
 
         // Unity Methods -----------------------------------------
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             m_playerVelocityDataEvent.AddListener(OnPlayerVelocityUpdate);
         }
 
