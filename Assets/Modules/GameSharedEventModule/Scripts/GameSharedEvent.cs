@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-namespace GameSharedEventModules
+namespace GameSharedEventModule
 {
     [Serializable, CreateAssetMenu(menuName = "GameSharedEventModule/GameSharedEvent", fileName = "NewGameSharedEvent")]
     public class GameSharedEvent : ScriptableObject
