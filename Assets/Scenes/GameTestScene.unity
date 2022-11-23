@@ -9548,3 +9548,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterMovement: {fileID: 2094651838}
+  asdas: {fileID: 0}

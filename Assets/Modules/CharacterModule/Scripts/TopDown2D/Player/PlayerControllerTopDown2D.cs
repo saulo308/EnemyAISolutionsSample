@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameSharedEventModule;
 using UnityEngine;
 
-namespace AIProject.CharacterModule.TopDown2D
+namespace CharacterModule.TopDown2D
 {
     public class PlayerControllerTopDown2D : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AIProject.CharacterModule.TopDown2D
+namespace CharacterModule.TopDown2D
 {
     public class CharacterMovementTopDown2D : MonoBehaviour
     {
