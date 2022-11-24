@@ -19,9 +19,10 @@ namespace AIProject.GameModule
         }
 
         // Private Methods ----------------------------------------------
-        void OnPlayerVelocityUpdate(float playerVelocity)
+        void OnPlayerVelocityUpdate(float playerVelocityMagnitude)
         {
-            Debug.Log(playerVelocity);
+            bool bIsRunning = playerVelocityMagnitude > 0;
+            SetAnimatorBool("IsRunning",bIsRunning);
         }
     }
 }

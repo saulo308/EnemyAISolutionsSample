@@ -299,7 +299,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 438469615}
-  - component: {fileID: 438469617}
   - component: {fileID: 438469616}
   m_Layer: 0
   m_Name: PlayerAnimator
@@ -335,28 +334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31bc5705bc93d30478c7918302f028c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterAnimator: {fileID: 438469617}
+  m_characterAnimator: {fileID: 1214860355}
   m_playerVelocityDataEvent: {fileID: 11400000, guid: d1ff0d478795ae149912e083307c8879, type: 2}
---- !u!95 &438469617
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438469614}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1155896811
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1214860353}
   - component: {fileID: 1214860354}
+  - component: {fileID: 1214860355}
   m_Layer: 0
   m_Name: PlayerImage
   m_TagString: Untagged
@@ -473,6 +453,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1214860355
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214860352}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d8a334d67056ef64bbe809d5320973f8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1249680799
 GameObject:
   m_ObjectHideFlags: 0
