@@ -13,6 +13,7 @@ namespace AIProject.GameModule
         [Header("SharedEvents")]
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityDataEvent;
         [SerializeField] private GameSharedDataEvent<bool> m_playerShieldInputDataEvent;
+        [SerializeField] private GameSharedDataEvent<string> m_playerAttackInputDataEvent;
         [SerializeField] private GameSharedEvent m_playerRollInputEvent;
 
         // Unity Methods -----------------------------------------
@@ -24,6 +25,7 @@ namespace AIProject.GameModule
             m_playerVelocityDataEvent.AddListener(OnPlayerVelocityUpdate);
             m_playerShieldInputDataEvent.AddListener(OnPlayerShieldInputPressed);
             m_playerRollInputEvent.AddListener(OnPlayerRollInputPressed);
+            m_playerAttackInputDataEvent.AddListener(OnPlayerAttackInputPressed);
         }
 
         // Private Methods ----------------------------------------------
@@ -47,6 +49,12 @@ namespace AIProject.GameModule
         {
             // Set trigger on animator to play roll animation
             SetAnimatorTrigger("Roll");
+        }
+
+        void OnPlayerAttackInputPressed(string attackTriggerName)
+        {
+            // Set trigger on animator
+            SetAnimatorTrigger(attackTriggerName);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace CharacterModule.TopDown2D
             if(!m_canMove) return;
 
             // Use direction to drive rigidBody velocity
-            m_characterRigidBody.velocity = m_characterSpeed * m_currentMovementDirection * Time.fixedDeltaTime;
+            m_characterRigidBody.velocity = m_characterSpeed * m_currentMovementDirection.normalized * Time.fixedDeltaTime;
 
             // Check if player is looking right or left and flip player accordingly
             CheckFlipMovement(horizontalMovementValue);
