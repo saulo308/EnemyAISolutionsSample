@@ -34,11 +34,17 @@ namespace AIProject.GameModule
         void OnShieldUp()
         {
             m_playerShieldInputDataEvent.SharedDataValue = true;
+
+            // Disable player movement (There's no animation of running and blocking, so we should be idle when shield up)
+            m_characterMovement.DisabelMovement(true);
         }
 
         void OnShieldDown()
         {
             m_playerShieldInputDataEvent.SharedDataValue = false;
+
+            // Re-enable player movement
+            m_characterMovement.EnableMovement();
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CharacterModule;
 using GameSharedEventModule;
+using DG.Tweening;
 using UnityEngine;
 
 namespace AIProject.GameModule
@@ -32,10 +33,10 @@ namespace AIProject.GameModule
 
         void OnPlayerShieldInputPressed(bool bShieldUp)
         {
-            // If param is true, then player is initiating a block. Set trigger that contains inital blocking animation
+            // If param is true, then player is initiating a block. Set trigger to play BlockIdle animation
             if(bShieldUp) SetAnimatorTrigger("Block");
 
-            // Also, set boolean to inform Animator if we are still blocking or not (Used for IdleBlock animation)
+            // Also, set boolean to inform Animator if we are still blocking or not (Used to keep playing BlockIdle animation)
             SetAnimatorBool("IsShieldUp",bShieldUp);
         }
     }

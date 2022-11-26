@@ -6,14 +6,16 @@ namespace CharacterModule.TopDown2D
 {
     public abstract class ACharacterMovementTopDown2DBase : MonoBehaviour
     {
-        // Serializable Fields ------------------------------
+        // Serializable Fields ---------------------------------------
         [Header("Character - GeneralConfigs")]
         [SerializeField] private float m_characterSpeed = 500f;
 
         [Header("Character - LinkedReferences")]
         [SerializeField] protected Rigidbody2D m_characterRigidBody = null;
-        
         [SerializeField] private Transform m_characterContainer = null;
+
+        // Non-serializable Fields -------------------------------------
+        private bool m_canMove = true;
 
         // Unity Methods ---------------------------------------------------
         protected virtual void Awake()
@@ -31,6 +33,7 @@ namespace CharacterModule.TopDown2D
                 Debug.LogError("No rigidbody found for CharacterMovement!");
                 return;
             }
+            if(!m_canMove) return;
 
             // Create a vector2 from movement values as a direction to move
             // Horizontal: 1 = Right, -1 = Left
@@ -42,6 +45,19 @@ namespace CharacterModule.TopDown2D
 
             // Check if player is looking right or left and flip player accordingly
             CheckFlipMovement(horizontalMovementValue);
+        }
+
+        public virtual void EnableMovement()
+        {
+            m_canMove = true;
+        }
+
+        public virtual void DisabelMovement(bool bStopCurrentMovement)
+        {
+            m_canMove = false;
+
+            // If we should stop current movement, set velocity to zero
+            if(bStopCurrentMovement) m_characterRigidBody.velocity = Vector3.zero;
         }
 
         // Private Methods -------------------------------------------------------

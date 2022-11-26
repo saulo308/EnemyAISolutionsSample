@@ -8,7 +8,7 @@ namespace CharacterModule.TopDown2D
     {
         // Serializable Fields -------------------------------
         [Header("LinkedReferences")]
-        [SerializeField] private ACharacterMovementTopDown2DBase m_characterMovement = null;
+        [SerializeField] protected ACharacterMovementTopDown2DBase m_characterMovement = null;
 
         // Non-Serializable Fields ----------------------------
         private float m_horizontalAxisValue = 0f;
