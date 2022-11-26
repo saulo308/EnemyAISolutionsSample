@@ -8,13 +8,16 @@ namespace CharacterModule.TopDown2D
     {
         // Serializable Fields ---------------------------------------
         [Header("Character - GeneralConfigs")]
-        [SerializeField] private float m_characterSpeed = 500f;
+        [SerializeField] protected float m_characterSpeed = 500f;
 
         [Header("Character - LinkedReferences")]
         [SerializeField] protected Rigidbody2D m_characterRigidBody = null;
         [SerializeField] private Transform m_characterContainer = null;
 
         // Non-serializable Fields -------------------------------------
+        protected Vector2 m_currentMovementDirection = Vector2.zero;
+        protected Vector2 m_curFacingDirection = Vector2.right;
+
         private bool m_canMove = true;
 
         // Unity Methods ---------------------------------------------------
@@ -28,6 +31,11 @@ namespace CharacterModule.TopDown2D
         // Public Methods ---------------------------------------------------
         public virtual void ExecuteMovement(float horizontalMovementValue, float verticalMovementValue)
         {
+            // Create a vector2 from movement values as a direction to move
+            // Horizontal: 1 = Right, -1 = Left
+            // Vertical: 1 = top, -1 = bottom
+            m_currentMovementDirection = new Vector2(horizontalMovementValue,verticalMovementValue);
+
             if(!m_characterRigidBody)
             {
                 Debug.LogError("No rigidbody found for CharacterMovement!");
@@ -35,13 +43,8 @@ namespace CharacterModule.TopDown2D
             }
             if(!m_canMove) return;
 
-            // Create a vector2 from movement values as a direction to move
-            // Horizontal: 1 = Right, -1 = Left
-            // Vertical: 1 = top, -1 = bottom
-            Vector2 movementDirection = new Vector2(horizontalMovementValue,verticalMovementValue);
-
             // Use direction to drive rigidBody velocity
-            m_characterRigidBody.velocity = m_characterSpeed * movementDirection * Time.fixedDeltaTime;
+            m_characterRigidBody.velocity = m_characterSpeed * m_currentMovementDirection * Time.fixedDeltaTime;
 
             // Check if player is looking right or left and flip player accordingly
             CheckFlipMovement(horizontalMovementValue);
@@ -52,7 +55,7 @@ namespace CharacterModule.TopDown2D
             m_canMove = true;
         }
 
-        public virtual void DisabelMovement(bool bStopCurrentMovement)
+        public virtual void DisableMovement(bool bStopCurrentMovement)
         {
             m_canMove = false;
 
@@ -80,6 +83,7 @@ namespace CharacterModule.TopDown2D
                 // @note: A rotation in Unity is always "Quaternion", a Vector4. 
                 // However, we can use "Quaternion.Euler", which converts a given rotation in Vector3 (x,y,z) to a Quaternion
                 m_characterContainer.rotation = Quaternion.Euler(Vector3.zero);
+                m_curFacingDirection = Vector2.right;
                 return;
             }
 
@@ -87,6 +91,7 @@ namespace CharacterModule.TopDown2D
             // @note: A rotation in Unity is always "Quaternion", a Vector4. 
             // However, we can use "Quaternion.Euler", which converts a given rotation in Vector3 (x,y,z) to a Quaternion
             m_characterContainer.rotation = Quaternion.Euler(new Vector3(0,180,0));
+            m_curFacingDirection = Vector2.left;
         }
     }
 }

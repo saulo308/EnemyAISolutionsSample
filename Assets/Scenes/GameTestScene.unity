@@ -337,6 +337,7 @@ MonoBehaviour:
   m_characterAnimator: {fileID: 1214860355}
   m_playerVelocityDataEvent: {fileID: 11400000, guid: d1ff0d478795ae149912e083307c8879, type: 2}
   m_playerShieldInputDataEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
+  m_playerRollInputEvent: {fileID: 11400000, guid: c5300da85fbd62e449bc66731dcda410, type: 2}
 --- !u!1 &1155896811
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +381,7 @@ GameObject:
   - component: {fileID: 1214860353}
   - component: {fileID: 1214860354}
   - component: {fileID: 1214860355}
+  - component: {fileID: 1214860356}
   m_Layer: 0
   m_Name: PlayerImage
   m_TagString: Untagged
@@ -474,6 +476,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1214860356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214860352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1196af59cb67e5418be857274fc53db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1249680799
 GameObject:
   m_ObjectHideFlags: 0
@@ -9604,7 +9618,10 @@ MonoBehaviour:
   m_characterSpeed: 380
   m_characterRigidBody: {fileID: 109437}
   m_characterContainer: {fileID: 109434}
+  m_rollPlayerSpeedMultipler: 1.8
+  m_playerRollDelay: 1
   m_playerVelocityMagnitude: {fileID: 11400000, guid: d1ff0d478795ae149912e083307c8879, type: 2}
+  m_mainPlayerAnimationEventListener: {fileID: 1214860356}
 --- !u!114 &2094651839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9619,3 +9636,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterMovement: {fileID: 2094651838}
   m_playerShieldInputDataEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
+  m_playerRollInputEvent: {fileID: 11400000, guid: c5300da85fbd62e449bc66731dcda410, type: 2}

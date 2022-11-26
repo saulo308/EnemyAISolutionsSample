@@ -9,12 +9,12 @@ namespace GameSharedEventModule
     public class GameSharedEvent : ScriptableObject
     {
         // Non-Serializable Fields ----------------------------------------------
-        HashSet<System.Action> m_dataEventListeners = new HashSet<System.Action>();
+        HashSet<System.Action> m_sharedEventListeners = new HashSet<System.Action>();
 
         // Public Methods ------------------------------------------------------
-        public void DispatchDataEvent()
+        public void DispatchEvent()
         {
-            foreach(var listener in m_dataEventListeners)
+            foreach(var listener in m_sharedEventListeners)
             {
                 if(listener != null) 
                     listener.Invoke();
@@ -23,24 +23,24 @@ namespace GameSharedEventModule
 
         public void AddListener(System.Action newListener)
         {
-            m_dataEventListeners.Add(newListener);
+            m_sharedEventListeners.Add(newListener);
         }
 
         public void RemoveListener(System.Action listenerToRemove)
         {
-            m_dataEventListeners.Remove(listenerToRemove);
+            m_sharedEventListeners.Remove(listenerToRemove);
         }
 
         public void RemoveAllListeners()
         {
-            m_dataEventListeners.Clear();
+            m_sharedEventListeners.Clear();
         }
 
         public void PurgeListeners()
         {
-            foreach(var listener in m_dataEventListeners)
+            foreach(var listener in m_sharedEventListeners)
             {
-                if(listener == null) m_dataEventListeners.Remove(listener);
+                if(listener == null) m_sharedEventListeners.Remove(listener);
             }
         }
     }
