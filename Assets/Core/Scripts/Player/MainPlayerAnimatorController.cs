@@ -10,19 +10,33 @@ namespace AIProject.GameModule
     {
         // Serializable Fields ------------------------------------
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityDataEvent;
+        [SerializeField] private GameSharedDataEvent<bool> m_playerShieldInputDataEvent;
 
         // Unity Methods -----------------------------------------
         protected override void Awake()
         {
             base.Awake();
+
+            // Binding events on sharedEvents
             m_playerVelocityDataEvent.AddListener(OnPlayerVelocityUpdate);
+            m_playerShieldInputDataEvent.AddListener(OnPlayerShieldInputPressed);
         }
 
         // Private Methods ----------------------------------------------
         void OnPlayerVelocityUpdate(float playerVelocityMagnitude)
         {
+            // If player velocity magnitude is greater than 0, player is moving. 
             bool bIsRunning = playerVelocityMagnitude > 0;
             SetAnimatorBool("IsRunning",bIsRunning);
+        }
+
+        void OnPlayerShieldInputPressed(bool bShieldUp)
+        {
+            // If param is true, then player is initiating a block. Set trigger that contains inital blocking animation
+            if(bShieldUp) SetAnimatorTrigger("Block");
+
+            // Also, set boolean to inform Animator if we are still blocking or not (Used for IdleBlock animation)
+            SetAnimatorBool("IsShieldUp",bShieldUp);
         }
     }
 }
