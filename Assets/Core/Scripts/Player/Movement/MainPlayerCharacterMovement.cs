@@ -68,7 +68,7 @@ namespace AIProject.GameModule
             // Get roll direction. Use currentMovementDirection. If null, then use facing direction
             m_rollDirection = (m_currentMovementDirection.Equals(Vector2.zero)) ?
                 m_curFacingDirection :
-                m_currentMovementDirection;
+                m_currentMovementDirection.normalized;
 
             // Execute roll. First stop baseMovement and then update velocity
             m_characterRigidBody.velocity = (m_characterSpeed * m_rollPlayerSpeedMultipler) * m_rollDirection * Time.fixedDeltaTime;

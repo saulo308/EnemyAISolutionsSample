@@ -43,7 +43,7 @@ namespace AIProject.GameModule
             }
 
             // If player is not pressing right mouse button, shield down
-            if(Input.GetMouseButtonUp(1) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
+            if(Input.GetMouseButtonUp(1))
             {
                 OnShieldDown();
             }
