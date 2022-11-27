@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace AIProject.GameModule
 {
-    // TODO: Shield and attack logic should be in another component, just like movement
     public class MainPlayerCharacterController : APlayerControllerTopDown2DBase
     {
         // Serializable Fields -------------------------------------------
