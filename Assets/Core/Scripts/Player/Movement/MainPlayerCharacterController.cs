@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CharacterModule.TopDown2D;
 using GameSharedEventModule;
 using DG.Tweening;
+using UtilsModule;
 using UnityEngine;
 
 namespace AIProject.GameModule
@@ -15,11 +16,17 @@ namespace AIProject.GameModule
         [SerializeField] private GameSharedDataEvent<bool> m_playerShieldInputDataEvent;
         [SerializeField] private GameSharedDataEvent<string> m_playerAttackInputDataEvent;
         [SerializeField] private GameSharedEvent m_playerRollInputEvent;
+        [SerializeField] private GameSharedEvent m_playerHurtEvent;
+        [SerializeField] private GameSharedEvent m_playerDeadEvent;
 
         [Header("GeneralConfig")]
         [SerializeField] private int m_maxNumberOfAttacksCombo = 3;
         [SerializeField] private float m_attackDelay = 0.4f;
         [SerializeField] private float m_resetComboDelay = 1f;
+
+        // TODO: Refactor into game shared event
+        [Header("MainPlayer - LinkedReferences")]
+        [SerializeField] private AnimationEventListener m_mainPlayerAnimationEventListener = null;
 
         // Non-Serializable Fields -----------------------------------------
         private MainPlayerCharacterMovement m_mainPlayerCharacterMovement;
@@ -31,7 +38,8 @@ namespace AIProject.GameModule
         private float m_timeSinceLastAttack = 0f;
         private Tween m_resetComboTween = null;
 
-
+        private bool m_isHurt = false;
+        private bool m_isDead = false;
 
 
         // Unity Methods ---------------------------------------------------
@@ -41,33 +49,50 @@ namespace AIProject.GameModule
 
             // Cast CharacterMovementBase to MainPlayerCharacter so we can use specific functions (such as roll)
             m_mainPlayerCharacterMovement = m_characterMovement as MainPlayerCharacterMovement;
+
+            // Bind event on animation event listener
+            m_mainPlayerAnimationEventListener.OnAnimationEventTrigger += OnAnimationEventTrigerred;
+        }
+
+        protected void OnDestroy()
+        {
+            m_mainPlayerAnimationEventListener.OnAnimationEventTrigger -= OnAnimationEventTrigerred;
         }
 
         protected override void Update()
         {
             base.Update();
 
-            // Check for player "roll" input
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                OnRoll();
-            }
+            if(Input.GetKeyDown(KeyCode.Q))
+                OnPlayerHurt();
 
-            // Check for player "block"(shield up) animation (Right mouse button)
-            if(Input.GetMouseButtonDown(1) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
-            {
-                OnShieldUp();
-            }
+            if(Input.GetKeyDown(KeyCode.E))
+                OnPlayerDead();
 
-            // If player is not pressing right mouse button, shield down
-            if(Input.GetMouseButtonUp(1))
+            if(!m_isHurt || !m_isDead) 
             {
-                OnShieldDown();
-            }
+                // Check for player "roll" input
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                    OnRoll();
+                }
 
-            if(Input.GetMouseButtonDown(0) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
-            {
-                OnAttackPressed();
+                // Check for player "block"(shield up) animation (Right mouse button)
+                if(Input.GetMouseButtonDown(1) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
+                {
+                    OnShieldUp();
+                }
+
+                // If player is not pressing right mouse button, shield down
+                if(Input.GetMouseButtonUp(1))
+                {
+                    OnShieldDown();
+                }
+
+                if(Input.GetMouseButtonDown(0) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
+                {
+                    OnAttackPressed();
+                }
             }
         }
 
@@ -133,6 +158,52 @@ namespace AIProject.GameModule
 
             // Also, start a delay to rest comboIndex if next combo does not come within treshold
             m_resetComboTween = DOVirtual.DelayedCall(m_resetComboDelay,() => m_curAttackComboIndex = 1);
+        }
+
+        void OnPlayerHurt()
+        {
+            if(m_mainPlayerCharacterMovement.IsPlayerRolling) return;
+
+            // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
+            m_characterMovement.DisableMovement(true);
+
+            // Dispatch hurt event to notify player animator
+            m_playerHurtEvent.DispatchEvent();
+
+            // Set flag to avoid other inputs
+            m_isHurt = true;
+        }
+
+        void OnPlayerDead()
+        {
+            if(m_mainPlayerCharacterMovement.IsPlayerRolling) return;
+
+            // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
+            m_characterMovement.DisableMovement(true);
+
+            // Dispatch hurt event to notify player animator
+            m_playerDeadEvent.DispatchEvent();
+
+            // Set flag to avoid other inputs
+            m_isDead = true;
+        }
+
+        // Evnet Handlers ---------------------------------------------------------------
+        void OnAnimationEventTrigerred(AnimationEvent triggeredAnimationEvent)
+        {
+            if(triggeredAnimationEvent.stringParameter.Equals("OnHurtEnd"))
+            {
+                // Re-enable player movement on hurt animation end
+                m_characterMovement.EnableMovement();
+
+                // Reset flag to re-enable inputs
+                m_isHurt = false;
+            }
+
+            if(triggeredAnimationEvent.stringParameter.Equals("OnDeadEnd"))
+            {
+                Debug.Log("End game!");
+            }
         }
     }
 }

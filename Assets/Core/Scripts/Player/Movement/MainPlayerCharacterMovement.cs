@@ -18,6 +18,7 @@ namespace AIProject.GameModule
         [Header("MainPlayer - SharedDataEvents")]
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityMagnitude = null;
 
+        // TODO: Refactor into game shared event
         [Header("MainPlayer - LinkedReferences")]
         [SerializeField] private AnimationEventListener m_mainPlayerAnimationEventListener = null;
 

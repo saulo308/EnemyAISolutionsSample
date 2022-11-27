@@ -339,6 +339,8 @@ MonoBehaviour:
   m_playerShieldInputDataEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
   m_playerAttackInputDataEvent: {fileID: 11400000, guid: e7e07cce70d10544fa204a03bcd78cb4, type: 2}
   m_playerRollInputEvent: {fileID: 11400000, guid: c5300da85fbd62e449bc66731dcda410, type: 2}
+  m_playerHurtEvent: {fileID: 11400000, guid: b7b479d987088f6419254a81b99f7cf5, type: 2}
+  m_playerDeadEvent: {fileID: 11400000, guid: 48b594db9293e404e9bb6ad3ed0d329b, type: 2}
 --- !u!1 &1155896811
 GameObject:
   m_ObjectHideFlags: 0
@@ -9639,6 +9641,9 @@ MonoBehaviour:
   m_playerShieldInputDataEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
   m_playerAttackInputDataEvent: {fileID: 11400000, guid: e7e07cce70d10544fa204a03bcd78cb4, type: 2}
   m_playerRollInputEvent: {fileID: 11400000, guid: c5300da85fbd62e449bc66731dcda410, type: 2}
+  m_playerHurtEvent: {fileID: 11400000, guid: b7b479d987088f6419254a81b99f7cf5, type: 2}
+  m_playerDeadEvent: {fileID: 11400000, guid: 48b594db9293e404e9bb6ad3ed0d329b, type: 2}
   m_maxNumberOfAttacksCombo: 3
   m_attackDelay: 0.5
   m_resetComboDelay: 1
+  m_mainPlayerAnimationEventListener: {fileID: 1214860356}
