@@ -13,14 +13,14 @@ namespace AIProject.GameModule
         [Header("MainPlayer - LinkedReferences")]
         [SerializeField] private MainPlayerCharacterMovement m_mainPlayerCharacterMovement;
 
-        [Header("SharedEvents")]
+        [Header("MainPlayer - SharedEvents")]
         [SerializeField] private GameSharedDataEvent<string> m_playerAttackInputDataEvent;
         [SerializeField] private GameSharedDataEvent<bool> m_playerShieldInputDataEvent;
         [SerializeField] private GameSharedDataEvent<AnimationEvent> m_playerSharedEventAnimationEvent = null;
         [SerializeField] private GameSharedEvent m_playerHurtEvent;
         [SerializeField] private GameSharedEvent m_playerDeadEvent;
 
-        [Header("GeneralConfig")]
+        [Header("MainPlayer - GeneralConfig")]
         [SerializeField] private int m_maxNumberOfAttacksCombo = 3;
         [SerializeField] private float m_attackDelay = 0.4f;
         [SerializeField] private float m_resetComboDelay = 1f;
@@ -41,7 +41,7 @@ namespace AIProject.GameModule
         public bool IsPlayerDead => m_isDead;
 
         // Unity Methods ---------------------------------------------------
-        void Awake()
+        protected override void Awake()
         {
             // Bind event on animation event listener
             m_playerSharedEventAnimationEvent.AddListener(OnAnimationEventTrigerred);
@@ -90,8 +90,10 @@ namespace AIProject.GameModule
             m_resetComboTween = DOVirtual.DelayedCall(m_resetComboDelay,() => m_curAttackComboIndex = 1);
         }
 
-        public void OnPlayerHurt()
+        // Protected Methods ---------------------------------------------------------------------
+        protected override void OnCharacterHurt()
         {
+            // TODO: Should be replaced by "IsInvicible" during roll
             if(m_mainPlayerCharacterMovement.IsPlayerRolling) return;
 
             // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
@@ -104,8 +106,11 @@ namespace AIProject.GameModule
             m_isHurt = true;
         }
 
-        public void OnPlayerDead()
+        protected override void OnCharacterDead()
         {
+            base.OnCharacterDead();
+
+            // TODO: Should be replaced by "IsInvicible" during roll
             if(m_mainPlayerCharacterMovement.IsPlayerRolling) return;
 
             // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
