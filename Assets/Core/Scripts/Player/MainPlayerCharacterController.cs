@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CharacterModule.TopDown2D;
 using GameSharedEventModule;
-using DG.Tweening;
-using UtilsModule;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 namespace AIProject.GameModule
@@ -41,22 +40,25 @@ namespace AIProject.GameModule
                 {
                     OnRoll();
                 }
-
-                // Check for player "block"(shield up) animation (Right mouse button)
-                if(Input.GetMouseButtonDown(1) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
+                
+                if(!EventSystem.current.IsPointerOverGameObject())
                 {
-                    OnShieldUp();
-                }
+                    // Check for player "block"(shield up) animation (Right mouse button)
+                    if(Input.GetMouseButtonDown(1) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
+                    {
+                        OnShieldUp();
+                    }
 
-                // If player is not pressing right mouse button, shield down
-                if(Input.GetMouseButtonUp(1))
-                {
-                    OnShieldDown();
-                }
+                    // If player is not pressing right mouse button, shield down
+                    if(Input.GetMouseButtonUp(1))
+                    {
+                        OnShieldDown();
+                    }
 
-                if(Input.GetMouseButtonDown(0) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
-                {
-                    OnAttackPressed();
+                    if(Input.GetMouseButtonDown(0) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
+                    {
+                        OnAttackPressed();
+                    }
                 }
             }
         }

@@ -137,7 +137,7 @@ namespace AIProject.GameModule
 
             if(triggeredAnimationEvent.stringParameter.Equals("OnDeadEnd"))
             {
-                Debug.Log("End game!");
+                Debug.Log("Player dead!");
             }
         }
     }
