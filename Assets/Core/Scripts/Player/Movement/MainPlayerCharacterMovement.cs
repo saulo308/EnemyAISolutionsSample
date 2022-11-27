@@ -17,10 +17,7 @@ namespace AIProject.GameModule
 
         [Header("MainPlayer - SharedDataEvents")]
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityMagnitude = null;
-
-        // TODO: Refactor into game shared event
-        [Header("MainPlayer - LinkedReferences")]
-        [SerializeField] private AnimationEventListener m_mainPlayerAnimationEventListener = null;
+        [SerializeField] private GameSharedDataEvent<AnimationEvent> m_playerSharedEventAnimationEvent = null;
 
         // Non-Serializable Fields ----------------------------------------------
         private Vector2 m_rollDirection = Vector2.zero;
@@ -37,12 +34,12 @@ namespace AIProject.GameModule
             base.Awake();
 
             // Bind event on animation event listener
-            m_mainPlayerAnimationEventListener.OnAnimationEventTrigger += OnAnimationEventTrigerred;
+            m_playerSharedEventAnimationEvent.AddListener(OnAnimationEventTrigerred);
         }
 
         protected void OnDestroy()
         {
-            m_mainPlayerAnimationEventListener.OnAnimationEventTrigger -= OnAnimationEventTrigerred;
+            m_playerSharedEventAnimationEvent.RemoveListener(OnAnimationEventTrigerred);
         }
 
         // Public Methods -----------------------------------------------------

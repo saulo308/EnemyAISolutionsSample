@@ -12,21 +12,18 @@ namespace AIProject.GameModule
     public class MainPlayerCharacterController : APlayerControllerTopDown2DBase
     {
         // Serializable Fields -------------------------------------------
-        [Header("Input")]
+        [Header("SharedEvents")]
         [SerializeField] private GameSharedDataEvent<bool> m_playerShieldInputDataEvent;
         [SerializeField] private GameSharedDataEvent<string> m_playerAttackInputDataEvent;
         [SerializeField] private GameSharedEvent m_playerRollInputEvent;
         [SerializeField] private GameSharedEvent m_playerHurtEvent;
         [SerializeField] private GameSharedEvent m_playerDeadEvent;
+        [SerializeField] private GameSharedDataEvent<AnimationEvent> m_playerSharedEventAnimationEvent = null;
 
         [Header("GeneralConfig")]
         [SerializeField] private int m_maxNumberOfAttacksCombo = 3;
         [SerializeField] private float m_attackDelay = 0.4f;
         [SerializeField] private float m_resetComboDelay = 1f;
-
-        // TODO: Refactor into game shared event
-        [Header("MainPlayer - LinkedReferences")]
-        [SerializeField] private AnimationEventListener m_mainPlayerAnimationEventListener = null;
 
         // Non-Serializable Fields -----------------------------------------
         private MainPlayerCharacterMovement m_mainPlayerCharacterMovement;
@@ -51,12 +48,12 @@ namespace AIProject.GameModule
             m_mainPlayerCharacterMovement = m_characterMovement as MainPlayerCharacterMovement;
 
             // Bind event on animation event listener
-            m_mainPlayerAnimationEventListener.OnAnimationEventTrigger += OnAnimationEventTrigerred;
+            m_playerSharedEventAnimationEvent.AddListener(OnAnimationEventTrigerred);
         }
 
         protected void OnDestroy()
         {
-            m_mainPlayerAnimationEventListener.OnAnimationEventTrigger -= OnAnimationEventTrigerred;
+            m_playerSharedEventAnimationEvent.RemoveListener(OnAnimationEventTrigerred);
         }
 
         protected override void Update()
