@@ -17,6 +17,7 @@ namespace AIProject.GameModule
 
         [Header("MainPlayer - SharedDataEvents")]
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityMagnitude = null;
+        [SerializeField] private GameSharedEvent m_playerRollInputEvent;
         [SerializeField] private GameSharedDataEvent<AnimationEvent> m_playerSharedEventAnimationEvent = null;
 
         // Non-Serializable Fields ----------------------------------------------
@@ -58,6 +59,9 @@ namespace AIProject.GameModule
         public void ExecutePlayerRoll()
         {
             if(!m_canPlayerRoll) return;
+
+            // Dispatch sharedEvent so animator can listen to it and play roll animation
+            m_playerRollInputEvent.DispatchEvent();
 
             // Set flags, "m_canPlayerRoll" to await rollDelay and "m_isRolling" to avoid baseMovement
             m_canPlayerRoll = false;
