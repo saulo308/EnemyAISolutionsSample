@@ -20,5 +20,11 @@ namespace AIProject.GameModule
             // Update SharedData for player velocity magnitude (used to update player animator)
             m_enemyVelocityMagnitude.SharedDataValue = m_characterRigidBody.velocity.magnitude;
         }
+
+        public override void StopCurrentMovement()
+        {
+            base.StopCurrentMovement();
+            m_enemyVelocityMagnitude.SharedDataValue = m_characterRigidBody.velocity.magnitude;
+        }
     }
 }
