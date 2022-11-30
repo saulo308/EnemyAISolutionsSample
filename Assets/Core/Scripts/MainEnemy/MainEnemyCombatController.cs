@@ -6,6 +6,14 @@ using UnityEngine;
 
 namespace AIProject.GameModule
 {
+    // Enums ----------------------------------------------------------
+    [System.Serializable]
+    public enum EEnemyAttackType
+    {
+        Melee,
+        Cast
+    }
+
     public class MainEnemyCombatController : ACharacterCombatControllerBase
     {
         [Header("MainEnemy - LinkedReferences")]
@@ -14,10 +22,22 @@ namespace AIProject.GameModule
         [Header("MainEnemy - SharedEvents")]
         [SerializeField] private GameSharedDataEvent<string> m_enemyAttackDataEvent;
 
-        // Public Methods ------------------------------------------------------------------------
-        public void RequestAttack()
+        // Public Methods --------------------------------------------
+        public void RequestAttack(EEnemyAttackType attackType)
         {
-            
+            // Create animator trigger string by attack type
+            string attackAnimatorTriggerStr = attackType switch
+            {
+                EEnemyAttackType.Melee => "AttackMelee",
+                EEnemyAttackType.Cast => "AttackCast",
+                _ => "None"
+            };
+
+            // Set shared data event
+            m_enemyAttackDataEvent.SharedDataValue = attackAnimatorTriggerStr;
+
+            // TODO: Execute attack
+
         }
 
         // Protected Methods ---------------------------------------------------------------------

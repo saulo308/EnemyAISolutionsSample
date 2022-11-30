@@ -102,7 +102,7 @@ namespace CharacterModule
 
             if(triggeredAnimationEvent.stringParameter.Equals("OnDeadEnd"))
             {
-                Debug.Log("Chracter dead!");
+                Debug.Log("Character dead!");
                 m_characterDeadEvent.DispatchEvent();
             }
         }
