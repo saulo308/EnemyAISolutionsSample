@@ -11,6 +11,7 @@ namespace AIProject.GameModule
         // Serializable Fields ------------------------------------
         [Header("SharedEvents")]
         [SerializeField] private GameSharedDataEvent<float> m_enemyVelocityDataEvent;
+        [SerializeField] private GameSharedDataEvent<string> m_enemyAttackDataEvent;
 
         [SerializeField] private GameSharedEvent m_enemyHurtEvent;
         [SerializeField] private GameSharedEvent m_enemyDeadEvent;
@@ -22,6 +23,7 @@ namespace AIProject.GameModule
 
             // Binding events on sharedEvents
             m_enemyVelocityDataEvent.AddListener(OnEnemyVelocityUpdate);
+            m_enemyAttackDataEvent.AddListener(OnEnemyAttack);
             m_enemyHurtEvent.AddListener(OnEnemyHurt);
             m_enemyDeadEvent.AddListener(OnEnemyDead);
         }
@@ -32,6 +34,12 @@ namespace AIProject.GameModule
             // If enemy velocity magnitude is greater than 0, player is moving. 
             bool bIsRunning = enemyVelocityMagnitude > 0;
             SetAnimatorBool("IsRunning",bIsRunning);
+        }
+
+        void OnEnemyAttack(string attackTriggerName)
+        {
+            // Set trigger on animator
+            SetAnimatorTrigger(attackTriggerName);
         }
 
         void OnEnemyHurt()
