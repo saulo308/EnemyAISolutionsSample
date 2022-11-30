@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using CharacterModule;
 using GameSharedEventModule;
-using DG.Tweening;
 using UnityEngine;
 
 namespace AIProject.GameModule
