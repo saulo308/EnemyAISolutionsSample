@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using CharacterModule.TopDown2D;
 using GameSharedEventModule;
-using UtilsModule;
 using UnityEngine;
 
 namespace AIProject.GameModule

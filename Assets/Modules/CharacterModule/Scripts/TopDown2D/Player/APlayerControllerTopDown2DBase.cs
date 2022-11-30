@@ -6,15 +6,15 @@ namespace CharacterModule.TopDown2D
 {
     public abstract class APlayerControllerTopDown2DBase : MonoBehaviour
     {
-        // Serializable Fields -------------------------------
+        // Serializable Fields -----------------------------------------------
         [Header("LinkedReferences")]
         [SerializeField] protected ACharacterMovementTopDown2DBase m_characterMovement = null;
 
-        // Non-Serializable Fields ----------------------------
+        // Non-Serializable Fields -------------------------------------------
         private float m_horizontalAxisValue = 0f;
         private float m_verticalAxisValue = 0f;
 
-        // Unity Methods -------------------------------------
+        // Unity Methods -----------------------------------------------------
         protected virtual void Awake()
         {
             // If component is null, try and get the component on this gameObject
@@ -34,7 +34,7 @@ namespace CharacterModule.TopDown2D
             RequestPlayerMovement();
         }
 
-        // Private Methods ------------------------------------
+        // Private Methods ------------------------------------------------------
         void UpdatePlayerInputValues()
         {
             // Get horizontal axis input

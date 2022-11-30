@@ -50,6 +50,23 @@ namespace CharacterModule.TopDown2D
             CheckFlipMovement(horizontalMovementValue);
         }
 
+        public virtual void MoveToDirection(Vector2 movementDirection)
+        {
+            if(!m_characterRigidBody)
+            {
+                Debug.LogError("No rigidbody found for CharacterMovement!");
+                return;
+            }
+            if(!m_canMove) return;
+
+            // Use direction to drive rigidBody velocity
+            m_currentMovementDirection = movementDirection;
+            m_characterRigidBody.velocity = m_characterSpeed * movementDirection.normalized * Time.fixedDeltaTime;
+
+            // Check if player is looking right or left and flip player accordingly
+            CheckFlipMovement(-m_currentMovementDirection.x);
+        }
+
         public virtual void EnableMovement()
         {
             m_canMove = true;
@@ -60,7 +77,12 @@ namespace CharacterModule.TopDown2D
             m_canMove = false;
 
             // If we should stop current movement, set velocity to zero
-            if(bStopCurrentMovement) m_characterRigidBody.velocity = Vector3.zero;
+            if(bStopCurrentMovement) StopCurrentMovement();
+        }
+        
+        public virtual void StopCurrentMovement()
+        {
+            m_characterRigidBody.velocity = Vector3.zero;
         }
 
         // Private Methods -------------------------------------------------------

@@ -40,7 +40,7 @@ namespace AIProject.GameModule
                     OnRoll();
                 }
                 
-                if(!EventSystem.current.IsPointerOverGameObject())
+                if(EventSystem.current && !EventSystem.current.IsPointerOverGameObject())
                 {
                     // Check for player "block"(shield up) animation (Right mouse button)
                     if(Input.GetMouseButtonDown(1) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
