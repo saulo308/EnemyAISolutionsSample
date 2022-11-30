@@ -16,7 +16,7 @@ namespace AIProject.GameModule
 
         [SerializeField] private GameSharedEvent m_playerRollInputEvent;
         [SerializeField] private GameSharedEvent m_playerHurtEvent;
-        [SerializeField] private GameSharedEvent m_playerDeadEvent;
+        [SerializeField] private GameSharedEvent m_playerEndLifeEvent;
 
         // Unity Methods -----------------------------------------
         protected override void Awake()
@@ -29,7 +29,7 @@ namespace AIProject.GameModule
             m_playerRollInputEvent.AddListener(OnPlayerRollInputPressed);
             m_playerAttackInputDataEvent.AddListener(OnPlayerAttackInputPressed);
             m_playerHurtEvent.AddListener(OnPlayerHurt);
-            m_playerDeadEvent.AddListener(OnPlayerDead);
+            m_playerEndLifeEvent.AddListener(OnPlayerEndLife);
         }
 
         // Private Methods ----------------------------------------------
@@ -66,7 +66,7 @@ namespace AIProject.GameModule
             SetAnimatorTrigger("Hurt");
         }
 
-        void OnPlayerDead()
+        void OnPlayerEndLife()
         {
             SetAnimatorTrigger("Dead");
         }

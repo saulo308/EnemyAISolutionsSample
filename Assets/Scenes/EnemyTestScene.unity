@@ -167,6 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2af67d9dad49247950d76000af6990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterMaxHealth: 100
+  m_characterSharedEventAnimationEvent: {fileID: 11400000, guid: 7a426ed611040f141ae2e3d44a851e97, type: 2}
+  m_characterHurtEvent: {fileID: 11400000, guid: 01b208b8ac1f89c4e987181fffe97e18, type: 2}
+  m_characterEndLifeEvent: {fileID: 11400000, guid: ecc6705995e85ae4da8a05871208324b, type: 2}
+  m_characterDeadEvent: {fileID: 11400000, guid: aedd5a3c285b62b4da6cbe4e7c144c8f, type: 2}
+  m_mainEnemyCharacterMovement: {fileID: 173743528}
+  m_enemyAttackDataEvent: {fileID: 11400000, guid: 4fe2f47ec55daa748be4d4748e63965a, type: 2}
 --- !u!1 &173743526
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,12 +871,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterMaxHealth: 100
+  m_characterSharedEventAnimationEvent: {fileID: 0}
+  m_characterHurtEvent: {fileID: 0}
+  m_characterEndLifeEvent: {fileID: 0}
+  m_characterDeadEvent: {fileID: 0}
   m_mainPlayerCharacterMovement: {fileID: 931367134}
   m_playerAttackInputDataEvent: {fileID: 11400000, guid: e7e07cce70d10544fa204a03bcd78cb4, type: 2}
   m_playerShieldInputDataEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
-  m_playerSharedEventAnimationEvent: {fileID: 11400000, guid: c07a2e1e4d69a76469c687fb3086b2e4, type: 2}
-  m_playerHurtEvent: {fileID: 11400000, guid: b7b479d987088f6419254a81b99f7cf5, type: 2}
-  m_playerDeadEvent: {fileID: 11400000, guid: 48b594db9293e404e9bb6ad3ed0d329b, type: 2}
   m_maxNumberOfAttacksCombo: 3
   m_attackDelay: 0.4
   m_resetComboDelay: 1
@@ -885,6 +893,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2af67d9dad49247950d76000af6990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_characterMaxHealth: 100
+  m_characterSharedEventAnimationEvent: {fileID: 0}
+  m_characterHurtEvent: {fileID: 0}
+  m_characterEndLifeEvent: {fileID: 0}
+  m_characterDeadEvent: {fileID: 0}
+  m_mainEnemyCharacterMovement: {fileID: 0}
+  m_enemyAttackDataEvent: {fileID: 0}
 --- !u!1 &1444479858
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +982,7 @@ MonoBehaviour:
   m_playerAttackInputDataEvent: {fileID: 11400000, guid: e7e07cce70d10544fa204a03bcd78cb4, type: 2}
   m_playerRollInputEvent: {fileID: 11400000, guid: c5300da85fbd62e449bc66731dcda410, type: 2}
   m_playerHurtEvent: {fileID: 11400000, guid: b7b479d987088f6419254a81b99f7cf5, type: 2}
-  m_playerDeadEvent: {fileID: 11400000, guid: 48b594db9293e404e9bb6ad3ed0d329b, type: 2}
+  m_playerEndLifeEvent: {fileID: 0}
 --- !u!1 &1585083794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,7 +1125,7 @@ MonoBehaviour:
   m_enemyVelocityDataEvent: {fileID: 11400000, guid: 56b98e8ec84c33a43b2d03c11053706e, type: 2}
   m_enemyAttackDataEvent: {fileID: 11400000, guid: 4fe2f47ec55daa748be4d4748e63965a, type: 2}
   m_enemyHurtEvent: {fileID: 11400000, guid: 01b208b8ac1f89c4e987181fffe97e18, type: 2}
-  m_enemyDeadEvent: {fileID: 11400000, guid: aedd5a3c285b62b4da6cbe4e7c144c8f, type: 2}
+  m_enemyEndLifeEvent: {fileID: 11400000, guid: ecc6705995e85ae4da8a05871208324b, type: 2}
 --- !u!1 &1613891233
 GameObject:
   m_ObjectHideFlags: 0

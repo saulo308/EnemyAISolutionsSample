@@ -14,7 +14,7 @@ namespace AIProject.GameModule
         [SerializeField] private GameSharedDataEvent<string> m_enemyAttackDataEvent;
 
         [SerializeField] private GameSharedEvent m_enemyHurtEvent;
-        [SerializeField] private GameSharedEvent m_enemyDeadEvent;
+        [SerializeField] private GameSharedEvent m_enemyEndLifeEvent;
 
         // Unity Methods -----------------------------------------
         protected override void Awake()
@@ -25,7 +25,7 @@ namespace AIProject.GameModule
             m_enemyVelocityDataEvent.AddListener(OnEnemyVelocityUpdate);
             m_enemyAttackDataEvent.AddListener(OnEnemyAttack);
             m_enemyHurtEvent.AddListener(OnEnemyHurt);
-            m_enemyDeadEvent.AddListener(OnEnemyDead);
+            m_enemyEndLifeEvent.AddListener(OnEnemyEndLife);
         }
 
         // Private Methods ----------------------------------------------
@@ -47,7 +47,7 @@ namespace AIProject.GameModule
             SetAnimatorTrigger("Hurt");
         }
 
-        void OnEnemyDead()
+        void OnEnemyEndLife()
         {
             SetAnimatorTrigger("Dead");
         }

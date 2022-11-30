@@ -16,9 +16,6 @@ namespace AIProject.GameModule
         [Header("MainPlayer - SharedEvents")]
         [SerializeField] private GameSharedDataEvent<string> m_playerAttackInputDataEvent;
         [SerializeField] private GameSharedDataEvent<bool> m_playerShieldInputDataEvent;
-        [SerializeField] private GameSharedDataEvent<AnimationEvent> m_playerSharedEventAnimationEvent = null;
-        [SerializeField] private GameSharedEvent m_playerHurtEvent;
-        [SerializeField] private GameSharedEvent m_playerDeadEvent;
 
         [Header("MainPlayer - GeneralConfig")]
         [SerializeField] private int m_maxNumberOfAttacksCombo = 3;
@@ -31,26 +28,6 @@ namespace AIProject.GameModule
         private int m_curAttackComboIndex = 1;
         private float m_timeSinceLastAttack = 0f;
         private Tween m_resetComboTween = null;
-
-        // Life flags
-        private bool m_isHurt = false;
-        private bool m_isDead = false;
-
-        // Properties ---------------------------------------------------------
-        public bool IsPlayerHurt => m_isHurt;
-        public bool IsPlayerDead => m_isDead;
-
-        // Unity Methods ---------------------------------------------------
-        protected override void Awake()
-        {
-            // Bind event on animation event listener
-            m_playerSharedEventAnimationEvent.AddListener(OnAnimationEventTrigerred);
-        }
-
-        void OnDestroy()
-        {
-            m_playerSharedEventAnimationEvent.RemoveListener(OnAnimationEventTrigerred);
-        }
 
         // Public Methods -----------------------------------------------------
         public void OnShieldUp()
@@ -93,52 +70,39 @@ namespace AIProject.GameModule
         // Protected Methods ---------------------------------------------------------------------
         protected override void OnCharacterHurt()
         {
-            // TODO: Should be replaced by "IsInvicible" during roll
+            // TODO: Should be replaced by "IsInvincible" during roll
             if(m_mainPlayerCharacterMovement.IsPlayerRolling) return;
 
             // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
             m_mainPlayerCharacterMovement.DisableMovement(true);
 
-            // Dispatch hurt event to notify player animator
-            m_playerHurtEvent.DispatchEvent();
-
-            // Set flag to avoid other inputs
-            m_isHurt = true;
+            // Call base
+            base.OnCharacterHurt();
         }
 
         protected override void OnCharacterDead()
         {
-            base.OnCharacterDead();
-
-            // TODO: Should be replaced by "IsInvicible" during roll
+            // TODO: Should be replaced by "IsInvincible" during roll
             if(m_mainPlayerCharacterMovement.IsPlayerRolling) return;
 
             // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
             m_mainPlayerCharacterMovement.DisableMovement(true);
 
-            // Dispatch hurt event to notify player animator
-            m_playerDeadEvent.DispatchEvent();
-
-            // Set flag to avoid other inputs
-            m_isDead = true;
+            // Call base
+            base.OnCharacterDead();
         }
 
         // Evnet Handlers ---------------------------------------------------------------
-        void OnAnimationEventTrigerred(AnimationEvent triggeredAnimationEvent)
+        protected override void OnAnimationEventTrigerred(AnimationEvent triggeredAnimationEvent)
         {
             if(triggeredAnimationEvent.stringParameter.Equals("OnHurtEnd"))
             {
                 // Re-enable player movement on hurt animation end
                 m_mainPlayerCharacterMovement.EnableMovement();
-
-                // Reset flag to re-enable inputs
-                m_isHurt = false;
             }
 
-            if(triggeredAnimationEvent.stringParameter.Equals("OnDeadEnd"))
-            {
-                Debug.Log("Player dead!");
-            }
+            // Call base
+            base.OnAnimationEventTrigerred(triggeredAnimationEvent);
         }
     }
 }
