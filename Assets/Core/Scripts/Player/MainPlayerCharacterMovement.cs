@@ -14,6 +14,9 @@ namespace AIProject.GameModule
         [SerializeField] private float m_rollPlayerSpeedMultipler = 1.8f;
         [SerializeField] private float m_playerRollDelay = 1f;
 
+        [SerializeField] private LayerMask m_playerLayer;
+        [SerializeField] private LayerMask m_mainEnemyLayer;
+
         [Header("MainPlayer - SharedDataEvents")]
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityMagnitude = null;
         [SerializeField] private GameSharedEvent m_playerRollInputEvent;
@@ -76,6 +79,9 @@ namespace AIProject.GameModule
 
             // Start roll delay using DelayedCall
             _ = DOVirtual.DelayedCall(m_playerRollDelay, () => m_canPlayerRoll = true);
+
+            // Update collider to IGNORE mainEnemey layer (player can dodge through enemy and enemy's attack)
+            Physics2D.IgnoreLayerCollision(GetLayerIdByLayerMask(m_playerLayer),GetLayerIdByLayerMask(m_mainEnemyLayer),true);
         }
 
         // Function called by "Anim_Player_Roll" animation event to reset player roll flag
@@ -90,7 +96,16 @@ namespace AIProject.GameModule
             if(triggeredAnimationEvent.stringParameter.Equals("OnRollEnd"))
             {
                 m_isRolling = false;
+                
+                // Update collider to consider mainEnemey layer
+                // (player can no longer dodge trough enemy and enemy's attack)
+                Physics2D.IgnoreLayerCollision(GetLayerIdByLayerMask(m_playerLayer),GetLayerIdByLayerMask(m_mainEnemyLayer),false);
             }
+        }
+
+        int GetLayerIdByLayerMask(LayerMask target)
+        {
+            return Mathf.RoundToInt(Mathf.Log(target.value,2));
         }
     }
 }

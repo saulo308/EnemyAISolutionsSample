@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2707067820419417520}
   - component: {fileID: 2707067820419417522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2707067820683667830}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Controllers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2707067821280268367}
   - component: {fileID: 2707067821280268366}
   - component: {fileID: 2707067821280268361}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2707067821362322870}
   - component: {fileID: 2707067821362322865}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerMovementController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2707067822047420386}
   - component: {fileID: 2707067822047420413}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerAnimatorController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2707067822098617120}
   - component: {fileID: 2707067822098617123}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCombatController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 2707067822217230199}
   - component: {fileID: 2707067822217230195}
   - component: {fileID: 2707067822217230192}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2299378688502194519}
   - component: {fileID: 2299378688502194518}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyAnimatorController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2299378689173464233}
   - component: {fileID: 2299378689173464247}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 2299378689356111128}
   - component: {fileID: 2299378689356111142}
   - component: {fileID: 2299378689356111143}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MainEnemyContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2299378689395565337}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Controllers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2299378689678364221}
   - component: {fileID: 2299378689678364220}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyCombatController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2299378689799730144}
   - component: {fileID: 2299378689799730159}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyMovementController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2299378689931286758}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyImagePivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 2299378689963112027}
   - component: {fileID: 2299378689963112028}
   - component: {fileID: 2299378689963112029}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
