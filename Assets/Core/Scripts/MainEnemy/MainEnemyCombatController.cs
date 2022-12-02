@@ -24,13 +24,20 @@ namespace AIProject.GameModule
         [Header("MainEnemy - SharedEvents")]
         [SerializeField] private GameSharedDataEvent<string> m_enemyAttackDataEvent;
 
-        [Header("MainEnemy - GeneralConfig")]
+        [Header("MainEnemy - GeneralConfig - Melee")]
         [SerializeField] private float m_enemyDamage = 5f;
         [SerializeField] private float m_attackRaycastDistance = 2.0f;
         [SerializeField] private float m_attackRecoverTime = 0.5f;
         [SerializeField] private LayerMask m_playerLayerMask;
 
+        [Header("MainEnemy - GeneralConfig - Spell")]
+        [SerializeField] private MainEnemySpellController m_spellTemplate = null;
+        [SerializeField] private float m_spellYSpawnOffset = 0.82f;
+        [SerializeField] private float m_spellDamageAmount = 10f;
+
         // Non-Serializable Fields -------------------------------------------
+        private GameObject m_curTargetRef = null;
+
         private bool m_isAttacking = false;
         private Tween m_attackRecoverTimeTween = null;
 
@@ -58,6 +65,11 @@ namespace AIProject.GameModule
 
             // Set shared data event that will trigger animator
             m_enemyAttackDataEvent.SharedDataValue = attackAnimatorTriggerStr;
+        }
+
+        public void SetupData(GameObject targetRef)
+        {
+            m_curTargetRef = targetRef;
         }
 
         // Protected Methods ---------------------------------------------------------------------
@@ -90,7 +102,7 @@ namespace AIProject.GameModule
             Vector2 raycastOrigin = transform.position;
             Vector2 raycastDirection = -transform.right; // == transform.left
             var outHit = Physics2D.Raycast(raycastOrigin, raycastDirection, m_attackRaycastDistance, m_playerLayerMask);
-            Debug.DrawRay(raycastOrigin, raycastDirection * m_attackRaycastDistance, Color.red, 0.1f);
+            // Debug.DrawRay(raycastOrigin, raycastDirection * m_attackRaycastDistance, Color.red, 0.1f);
 
             // Re-enable character movement on recover time
             m_attackRecoverTimeTween = DOVirtual.DelayedCall(m_attackRecoverTime, () => 
@@ -109,7 +121,33 @@ namespace AIProject.GameModule
 
         void OnCastAttackAnimationCastTiming()
         {
+            if(!m_spellTemplate)
+            {
+                Debug.LogError("No spell template!");
+                m_mainEnemyCharacterMovement.EnableMovement();
+                return;
+            }
 
+            // On attackCast animation play, it will dispatch a 'animationEvent' so we can execute spawn cast attack on player
+            // However, it must spawn only when enemy has actually "casted" spell
+            //(e.g. "attackCast" takes 6 frames to actually appear to hit something, frames 0 to 5 are just anticipating attack)
+
+            // Get target position
+            Vector3 targetPos = m_curTargetRef.transform.position;
+
+            // Calculate spell spawn pos (targetPos + yOffset)
+            Vector3 spellSpawnPos = targetPos + new Vector3(0,m_spellYSpawnOffset,0);
+
+            // Spawn spell on position and parent the same parent as this
+            var spawnedSpell = Instantiate(m_spellTemplate,spellSpawnPos,Quaternion.identity,m_characterContainer.transform.parent);
+            spawnedSpell.SetupSpellData(m_spellDamageAmount);
+
+            // Re-enable character movement on recover time
+            m_attackRecoverTimeTween = DOVirtual.DelayedCall(m_attackRecoverTime, () => 
+            {
+                m_mainEnemyCharacterMovement.EnableMovement();
+                m_isAttacking = false;
+            });
         }
 
         // Event Handlers ---------------------------------------------------------------

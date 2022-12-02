@@ -274,6 +274,9 @@ MonoBehaviour:
   m_playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  m_spellTemplate: {fileID: 7480573345714523486, guid: f669752dce276f54c874da902f086cb9, type: 3}
+  m_spellYSpawnOffset: 0.82
+  m_spellDamageAmount: 10
 --- !u!1 &2299378689799730145
 GameObject:
   m_ObjectHideFlags: 0

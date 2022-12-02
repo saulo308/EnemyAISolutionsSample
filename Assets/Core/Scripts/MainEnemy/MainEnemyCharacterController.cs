@@ -11,6 +11,13 @@ namespace AIProject.GameModule
         [Header("MainEnemy - LinkedReferences")]
         [SerializeField] private MainEnemyCombatController m_mainEnemyCombatController = null;
 
+        // Unity Methods ----------------------------------------------
+        protected override void Awake()
+        {
+            base.Awake();
+            m_mainEnemyCombatController.SetupData(m_targetReference);
+        }
+
         // Public Methods --------------------------------------------
         public void AttackTarget(EEnemyAttackType attackType)
         {

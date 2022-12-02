@@ -14,7 +14,7 @@ namespace CharacterModule
         [SerializeField] private bool m_destroyOnDead = true;
 
         [Header("CombatBase - LinkedRefs")]
-        [SerializeField] private GameObject m_characterContainer;
+        [SerializeField] protected GameObject m_characterContainer;
         
         [Header("CombatBase - SharedEvents")]
         [SerializeField] private GameSharedDataEvent<AnimationEvent> m_characterSharedEventAnimationEvent = null;
