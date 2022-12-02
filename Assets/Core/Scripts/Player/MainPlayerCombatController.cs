@@ -19,7 +19,7 @@ namespace AIProject.GameModule
 
         [Header("MainPlayer - GeneralConfig")]
         [SerializeField] private float m_playerDamage = 5f;
-        [SerializeField] private float m_attackRaycastDistance = 1.5f;
+        [SerializeField] private float m_attackRaycastDistance = 2f;
 
         [SerializeField] private int m_maxNumberOfAttacksCombo = 3;
         [SerializeField] private float m_attackDelay = 0.4f;
