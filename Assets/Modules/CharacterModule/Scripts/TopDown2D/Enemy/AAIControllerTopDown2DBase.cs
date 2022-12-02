@@ -55,6 +55,8 @@ namespace CharacterModule.TopDown2D
 
         Vector2 GetDirectionToFollowPlayer()
         {
+            if(!m_targetReference) return Vector2.zero;
+
             Vector2 directionToFollowTarget = Vector2.zero;
 
             // Get target position
@@ -71,6 +73,8 @@ namespace CharacterModule.TopDown2D
 
         float GetDistanceToTarget()
         {
+            if(!m_targetReference) return 0;
+
             // Get target position
             var targetPos = m_targetReference.transform.position;
 

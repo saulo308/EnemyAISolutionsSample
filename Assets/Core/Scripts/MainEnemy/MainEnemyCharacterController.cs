@@ -14,16 +14,19 @@ namespace AIProject.GameModule
         // Public Methods --------------------------------------------
         public void AttackTarget(EEnemyAttackType attackType)
         {
+            if(m_mainEnemyCombatController.IsAttacking) return;
             m_mainEnemyCombatController.RequestAttack(attackType);
         }
 
         public void AttackTarget_Melee()
         {
+            if(m_mainEnemyCombatController.IsAttacking) return;
             m_mainEnemyCombatController.RequestAttack(EEnemyAttackType.Melee);
         }
 
         public void AttackTarget_Cast()
         {
+            if(m_mainEnemyCombatController.IsAttacking) return;
             m_mainEnemyCombatController.RequestAttack(EEnemyAttackType.Cast);
         }
     }

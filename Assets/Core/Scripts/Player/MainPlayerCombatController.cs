@@ -19,7 +19,7 @@ namespace AIProject.GameModule
 
         [Header("MainPlayer - GeneralConfig")]
         [SerializeField] private float m_playerDamage = 5f;
-        [SerializeField] private float m_attackRaycastDistance = 2f;
+        [SerializeField] private float m_attackRaycastDistance = 2.0f;
 
         [SerializeField] private int m_maxNumberOfAttacksCombo = 3;
         [SerializeField] private float m_attackDelay = 0.4f;
@@ -118,13 +118,13 @@ namespace AIProject.GameModule
             m_resetComboTween = DOVirtual.DelayedCall(m_resetComboDelay,() => m_curAttackComboIndex = 1);
         }
 
-        void OnAttackConnected()
+        void OnAttackAnimationConnected()
         {
             // On attack animation play, it will dispatch a 'animationEvent' so we can execute raycast and damage enemy
             // respecting attack animation frame time 
             //(e.g. "attack01" takes 2 frames to actually hit something, frames 0 and 1 are just anticipating attack)
 
-            //Execute a raycast from player to player * forward to check if we hit something
+            //Execute a raycast from player to player right direction (facing direction) to check if we hit something
             Vector2 raycastOrigin = transform.position;
             Vector2 raycastDirection = transform.right;
             var outHit = Physics2D.Raycast(raycastOrigin, raycastDirection, m_attackRaycastDistance, m_mainEnemyLayer);
@@ -148,11 +148,11 @@ namespace AIProject.GameModule
             }
 
             // On attack animation play, it will dispatch a 'animationEvent' so we can execute raycast and damage enemy
-            // respecting attack animation frame time 
-            //(e.g. "attack01" takes 2 frames to actually hit something, frames 0 and 1 are just anticipating attack)
+            // respecting attack animation frame timing
+            //(e.g. "attack01" takes 2 frames to actually appear to hit something, frames 0 and 1 are just anticipating attack)
             if(triggeredAnimationEvent.stringParameter.Equals("OnAttackConnected"))
             {
-                OnAttackConnected();
+                OnAttackAnimationConnected();
             }
 
             // Call base

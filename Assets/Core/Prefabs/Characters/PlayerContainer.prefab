@@ -355,6 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterMaxHealth: 100
+  m_destroyOnDead: 0
   m_characterContainer: {fileID: 2707067822217230196}
   m_characterSharedEventAnimationEvent: {fileID: 11400000, guid: c07a2e1e4d69a76469c687fb3086b2e4, type: 2}
   m_characterHurtEvent: {fileID: 11400000, guid: b7b479d987088f6419254a81b99f7cf5, type: 2}

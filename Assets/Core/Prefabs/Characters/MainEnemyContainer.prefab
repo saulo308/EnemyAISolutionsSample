@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterMaxHealth: 100
+  m_destroyOnDead: 1
   m_characterContainer: {fileID: 2299378689356111129}
   m_characterSharedEventAnimationEvent: {fileID: 11400000, guid: 7a426ed611040f141ae2e3d44a851e97, type: 2}
   m_characterHurtEvent: {fileID: 11400000, guid: 01b208b8ac1f89c4e987181fffe97e18, type: 2}
@@ -267,6 +268,12 @@ MonoBehaviour:
   m_characterHealthPercentageEvent: {fileID: 11400000, guid: 5ec763fcc9923f041a97763e7fe9cfbb, type: 2}
   m_mainEnemyCharacterMovement: {fileID: 2299378689799730159}
   m_enemyAttackDataEvent: {fileID: 11400000, guid: 4fe2f47ec55daa748be4d4748e63965a, type: 2}
+  m_enemyDamage: 30
+  m_attackRaycastDistance: 3.5
+  m_attackRecoverTime: 0.5
+  m_playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &2299378689799730145
 GameObject:
   m_ObjectHideFlags: 0

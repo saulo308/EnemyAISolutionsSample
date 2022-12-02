@@ -11,6 +11,7 @@ namespace CharacterModule
         // Serializable Fields --------------------------------------------
         [Header("CombatBase - GeneralConfig")]
         [SerializeField] private float m_characterMaxHealth = 100;
+        [SerializeField] private bool m_destroyOnDead = true;
 
         [Header("CombatBase - LinkedRefs")]
         [SerializeField] private GameObject m_characterContainer;
@@ -118,7 +119,7 @@ namespace CharacterModule
                 m_characterDeadEvent.DispatchEvent();
 
                 // Destroy gameObj
-                Destroy(m_characterContainer);
+                if(m_destroyOnDead) Destroy(m_characterContainer);
             }
         }
     }
