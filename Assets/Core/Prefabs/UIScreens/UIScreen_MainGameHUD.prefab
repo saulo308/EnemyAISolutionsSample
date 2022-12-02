@@ -509,6 +509,10 @@ MonoBehaviour:
   m_fadeDelay: 1
   m_showOnAwake: 1
   m_uiScreenTargetCanvasGroup: {fileID: 2136247849594972278}
+  m_playerHealthFillBar: {fileID: 2136247849610813975}
+  m_mainEnemyHealthFillBar: {fileID: 2136247848218061901}
+  m_playerHealthPercentageSharedEvent: {fileID: 11400000, guid: 93e51f802efa0fc4ba3a2e177163c577, type: 2}
+  m_mainEnemyHealthPercentageSharedEvent: {fileID: 11400000, guid: 5ec763fcc9923f041a97763e7fe9cfbb, type: 2}
 --- !u!1 &2136247849594972285
 GameObject:
   m_ObjectHideFlags: 0

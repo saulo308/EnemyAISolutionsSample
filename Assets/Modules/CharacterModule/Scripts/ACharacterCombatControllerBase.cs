@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using GameSharedEventModule;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace CharacterModule
         [SerializeField] private GameSharedEvent m_characterHurtEvent;
         [SerializeField] private GameSharedEvent m_characterEndLifeEvent;
         [SerializeField] private GameSharedEvent m_characterDeadEvent;
+        [SerializeField] private GameSharedDataEvent<float> m_characterHealthPercentageEvent;
 
         // Non-Serializable Fields -----------------------------------------
         private float m_characterCurHealth;
@@ -32,7 +34,9 @@ namespace CharacterModule
         // Unity Methods -------------------------------------------------
         protected virtual void Awake()
         {
+            // Set curHealth and Update health percentage
             m_characterCurHealth = m_characterMaxHealth;
+            m_characterHealthPercentageEvent.SharedDataValue = m_characterCurHealth / m_characterMaxHealth;
 
             // Bind event on animation event listener
             m_characterSharedEventAnimationEvent.AddListener(OnAnimationEventTrigerred);
@@ -48,6 +52,9 @@ namespace CharacterModule
         {
             // Remove character health
             RemoveLife(damageAmount);
+
+            // Update health percentage
+            m_characterHealthPercentageEvent.SharedDataValue = m_characterCurHealth / m_characterMaxHealth;
 
             // Call hurt feedback
             OnCharacterHurt();

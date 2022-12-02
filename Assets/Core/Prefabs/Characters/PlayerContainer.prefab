@@ -353,6 +353,7 @@ MonoBehaviour:
   m_characterHurtEvent: {fileID: 11400000, guid: b7b479d987088f6419254a81b99f7cf5, type: 2}
   m_characterEndLifeEvent: {fileID: 11400000, guid: 454bd354b29fb1744a4933beb50948f3, type: 2}
   m_characterDeadEvent: {fileID: 11400000, guid: 48b594db9293e404e9bb6ad3ed0d329b, type: 2}
+  m_characterHealthPercentageEvent: {fileID: 11400000, guid: 93e51f802efa0fc4ba3a2e177163c577, type: 2}
   m_mainPlayerCharacterMovement: {fileID: 2707067821362322865}
   m_playerAttackInputDataEvent: {fileID: 11400000, guid: e7e07cce70d10544fa204a03bcd78cb4, type: 2}
   m_playerShieldInputDataEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
@@ -384,7 +385,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2707067822217230196}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

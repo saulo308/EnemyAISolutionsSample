@@ -263,6 +263,7 @@ MonoBehaviour:
   m_characterHurtEvent: {fileID: 11400000, guid: 01b208b8ac1f89c4e987181fffe97e18, type: 2}
   m_characterEndLifeEvent: {fileID: 11400000, guid: ecc6705995e85ae4da8a05871208324b, type: 2}
   m_characterDeadEvent: {fileID: 11400000, guid: aedd5a3c285b62b4da6cbe4e7c144c8f, type: 2}
+  m_characterHealthPercentageEvent: {fileID: 11400000, guid: 5ec763fcc9923f041a97763e7fe9cfbb, type: 2}
   m_mainEnemyCharacterMovement: {fileID: 2299378689799730159}
   m_enemyAttackDataEvent: {fileID: 11400000, guid: 4fe2f47ec55daa748be4d4748e63965a, type: 2}
 --- !u!1 &2299378689799730145
