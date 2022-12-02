@@ -47,6 +47,12 @@ MonoBehaviour:
   m_characterMovement: {fileID: 2707067821362322865}
   m_playerRollInputEvent: {fileID: 11400000, guid: c5300da85fbd62e449bc66731dcda410, type: 2}
   m_mainPlayerCombatController: {fileID: 2707067822098617123}
+  m_playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  m_mainEnemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &2707067820683667831
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterMaxHealth: 100
+  m_characterContainer: {fileID: 2707067822217230196}
   m_characterSharedEventAnimationEvent: {fileID: 11400000, guid: c07a2e1e4d69a76469c687fb3086b2e4, type: 2}
   m_characterHurtEvent: {fileID: 11400000, guid: b7b479d987088f6419254a81b99f7cf5, type: 2}
   m_characterEndLifeEvent: {fileID: 11400000, guid: 454bd354b29fb1744a4933beb50948f3, type: 2}
@@ -357,6 +364,8 @@ MonoBehaviour:
   m_mainPlayerCharacterMovement: {fileID: 2707067821362322865}
   m_playerAttackInputDataEvent: {fileID: 11400000, guid: e7e07cce70d10544fa204a03bcd78cb4, type: 2}
   m_playerShieldInputDataEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
+  m_playerDamage: 5
+  m_attackRaycastDistance: 1.5
   m_maxNumberOfAttacksCombo: 3
   m_attackDelay: 0.4
   m_resetComboDelay: 1

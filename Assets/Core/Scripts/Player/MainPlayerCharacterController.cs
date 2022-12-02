@@ -16,6 +16,10 @@ namespace AIProject.GameModule
         [Header("MainPlayer - LinkedReferences")]
         [SerializeField] private MainPlayerCombatController m_mainPlayerCombatController = null;
 
+        [Header("MainPlayer - GeneralConfig")]
+        [SerializeField] private LayerMask m_playerLayer;
+        [SerializeField] private LayerMask m_mainEnemyLayer;
+
         // Non-Serializable Fields -----------------------------------------
         private MainPlayerCharacterMovement m_mainPlayerCharacterMovement;
 
@@ -26,6 +30,9 @@ namespace AIProject.GameModule
 
             // Cast CharacterMovementBase to MainPlayerCharacter so we can use specific functions (such as roll)
             m_mainPlayerCharacterMovement = m_characterMovement as MainPlayerCharacterMovement;
+
+            m_mainPlayerCharacterMovement.SetupData(m_playerLayer,m_mainEnemyLayer);
+            m_mainPlayerCombatController.SetupData(m_playerLayer,m_mainEnemyLayer);
         }
 
         protected override void Update()

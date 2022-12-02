@@ -18,6 +18,9 @@ namespace AIProject.GameModule
         [SerializeField] private GameSharedDataEvent<bool> m_playerShieldInputDataEvent;
 
         [Header("MainPlayer - GeneralConfig")]
+        [SerializeField] private float m_playerDamage = 5f;
+        [SerializeField] private float m_attackRaycastDistance = 1.5f;
+
         [SerializeField] private int m_maxNumberOfAttacksCombo = 3;
         [SerializeField] private float m_attackDelay = 0.4f;
         [SerializeField] private float m_resetComboDelay = 1f;
@@ -28,6 +31,9 @@ namespace AIProject.GameModule
         private int m_curAttackComboIndex = 1;
         private float m_timeSinceLastAttack = 0f;
         private Tween m_resetComboTween = null;
+
+        private LayerMask m_playerLayer;
+        private LayerMask m_mainEnemyLayer;
 
         // Public Methods -----------------------------------------------------
         public void OnShieldUp()
@@ -45,26 +51,19 @@ namespace AIProject.GameModule
         public void OnAttackPressed()
         {
             // Get current time and check if it's smaller than attackDelay. If it's then it's too soon to attack
-            float curTime = Time.time;
-            if(curTime - m_timeSinceLastAttack < m_attackDelay) return;
+            if(!CanPlayerAttack()) return;
 
-            // Check if reset coroutine (delay) is active. If it's, then kill it (so we can refresh combo reset delay)
-            if(m_resetComboTween.IsActive()) m_resetComboTween.Kill();
+            // Play attack animation
+            PlayAttackAnimation();
 
-            // Create string "Attack[1,2,3,..]" to send to animator as trigger
-            string attackComboAnimatorTriggerName = string.Format("Attack{0}",m_curAttackComboIndex);
-            m_playerAttackInputDataEvent.SharedDataValue = attackComboAnimatorTriggerName;
-
-            // Increase attack combo index.
-            // If it's already max, then reset to 1
-            if(m_curAttackComboIndex == m_maxNumberOfAttacksCombo) m_curAttackComboIndex = 1;
-            else m_curAttackComboIndex++;
-
-            // Increase time since last attack by time.deltaTime so we can check for attackDelay against future attack time
+            // Get time as timeSinceLastAttack so we can check for attackDelay against future attack time
             m_timeSinceLastAttack = Time.time;
-
-            // Also, start a delay to rest comboIndex if next combo does not come within treshold
-            m_resetComboTween = DOVirtual.DelayedCall(m_resetComboDelay,() => m_curAttackComboIndex = 1);
+        }
+        
+        public void SetupData(LayerMask playerLayerMask, LayerMask enemyLayerMask)
+        {
+            m_playerLayer = playerLayerMask;
+            m_mainEnemyLayer = enemyLayerMask;
         }
 
         // Protected Methods ---------------------------------------------------------------------
@@ -92,13 +91,68 @@ namespace AIProject.GameModule
             base.OnCharacterDead();
         }
 
-        // Evnet Handlers ---------------------------------------------------------------
+        // Private Methods ---------------------------------------------------------------
+        bool CanPlayerAttack()
+        {
+            // Get current time and check if it's smaller than attackDelay. If it's then it's too soon to attack
+            float curTime = Time.time;
+            if(curTime - m_timeSinceLastAttack < m_attackDelay) return false;
+            return true;
+        }
+
+        void PlayAttackAnimation()
+        {
+            // Check if reset coroutine (delay) is active. If it's, then kill it (so we can refresh combo reset delay)
+            if(m_resetComboTween.IsActive()) m_resetComboTween.Kill();
+
+            // Create string "Attack[1,2,3,..]" to send to animator as trigger
+            string attackComboAnimatorTriggerName = string.Format("Attack{0}",m_curAttackComboIndex);
+            m_playerAttackInputDataEvent.SharedDataValue = attackComboAnimatorTriggerName;
+
+            // Increase attack combo index.
+            // If it's already max, then reset to 1
+            if(m_curAttackComboIndex == m_maxNumberOfAttacksCombo) m_curAttackComboIndex = 1;
+            else m_curAttackComboIndex++;
+
+            // Also, start a delay to rest comboIndex if next combo does not come within treshold
+            m_resetComboTween = DOVirtual.DelayedCall(m_resetComboDelay,() => m_curAttackComboIndex = 1);
+        }
+
+        void OnAttackConnected()
+        {
+            // On attack animation play, it will dispatch a 'animationEvent' so we can execute raycast and damage enemy
+            // respecting attack animation frame time 
+            //(e.g. "attack01" takes 2 frames to actually hit something, frames 0 and 1 are just anticipating attack)
+
+            //Execute a raycast from player to player * forward to check if we hit something
+            Vector2 raycastOrigin = transform.position;
+            Vector2 raycastDirection = transform.right;
+            var outHit = Physics2D.Raycast(raycastOrigin, raycastDirection, m_attackRaycastDistance, m_mainEnemyLayer);
+            // Debug.DrawRay(raycastOrigin, raycastDirection * m_attackRaycastDistance, Color.red, 0.1f);
+
+            // Check hit. If nothing found, return
+            if(!outHit) return;
+            
+            // Else, we hit enemy. Make it take damage
+            var hitEnemy = outHit.collider.GetComponentInChildren<MainEnemyCombatController>();
+            hitEnemy.TakeDamage(m_playerDamage);
+        }
+
+        // Event Handlers ---------------------------------------------------------------
         protected override void OnAnimationEventTrigerred(AnimationEvent triggeredAnimationEvent)
         {
             if(triggeredAnimationEvent.stringParameter.Equals("OnHurtEnd"))
             {
                 // Re-enable player movement on hurt animation end
                 m_mainPlayerCharacterMovement.EnableMovement();
+            }
+
+            // On attack animation play, it will dispatch a 'animationEvent' so we can execute raycast and damage enemy
+            // respecting attack animation frame time 
+            //(e.g. "attack01" takes 2 frames to actually hit something, frames 0 and 1 are just anticipating attack)
+            if(triggeredAnimationEvent.stringParameter.Equals("OnAttackConnected"))
+            {
+                OnAttackConnected();
             }
 
             // Call base

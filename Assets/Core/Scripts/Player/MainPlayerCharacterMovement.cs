@@ -14,8 +14,6 @@ namespace AIProject.GameModule
         [SerializeField] private float m_rollPlayerSpeedMultipler = 1.8f;
         [SerializeField] private float m_playerRollDelay = 1f;
 
-        [SerializeField] private LayerMask m_playerLayer;
-        [SerializeField] private LayerMask m_mainEnemyLayer;
 
         [Header("MainPlayer - SharedDataEvents")]
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityMagnitude = null;
@@ -26,6 +24,9 @@ namespace AIProject.GameModule
         private Vector2 m_rollDirection = Vector2.zero;
         private bool m_isRolling = false;
         private bool m_canPlayerRoll = true;
+
+        private LayerMask m_playerLayer;
+        private LayerMask m_mainEnemyLayer;
 
         // Properties ---------------------------------------------------------
         public bool CanPlayerRoll => m_canPlayerRoll;
@@ -88,6 +89,12 @@ namespace AIProject.GameModule
         public void OnPlayerFinishedRoll()
         {
             m_isRolling = false;
+        }
+
+        public void SetupData(LayerMask playerLayerMask, LayerMask enemyLayerMask)
+        {
+            m_playerLayer = playerLayerMask;
+            m_mainEnemyLayer = enemyLayerMask;
         }
 
         // Private Methods -------------------------------------------------------------

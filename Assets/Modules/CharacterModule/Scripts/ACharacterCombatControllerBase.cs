@@ -11,6 +11,9 @@ namespace CharacterModule
         // Serializable Fields --------------------------------------------
         [Header("CombatBase - GeneralConfig")]
         [SerializeField] private float m_characterMaxHealth = 100;
+
+        [Header("CombatBase - LinkedRefs")]
+        [SerializeField] private GameObject m_characterContainer;
         
         [Header("CombatBase - SharedEvents")]
         [SerializeField] private GameSharedDataEvent<AnimationEvent> m_characterSharedEventAnimationEvent = null;
@@ -50,6 +53,8 @@ namespace CharacterModule
         // Public Methods -------------------------------------------------------
         public virtual void TakeDamage(float damageAmount)
         {
+            if(m_isCharacterDead) return;
+
             // Remove character health
             RemoveLife(damageAmount);
 
@@ -109,8 +114,11 @@ namespace CharacterModule
 
             if(triggeredAnimationEvent.stringParameter.Equals("OnDeadEnd"))
             {
-                Debug.Log("Character dead!");
+                // Dispatch onDead event
                 m_characterDeadEvent.DispatchEvent();
+
+                // Destroy gameObj
+                Destroy(m_characterContainer);
             }
         }
     }
