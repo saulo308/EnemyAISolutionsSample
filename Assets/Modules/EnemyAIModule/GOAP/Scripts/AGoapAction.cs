@@ -17,20 +17,20 @@ namespace EnemyAIModule.GOAP
         [SerializeField] private List<GoapStateData> m_actionEffectsData = new List<GoapStateData>();
 
         // Non-Serializable Fields -------------------------------------------------
-        private GoapStateDataDict m_actionPreconditionsDict = new GoapStateDataDict();
-        private GoapStateDataDict m_actionEffectsDict = new GoapStateDataDict();
+        private GoapStateDataDict m_actionPreconditions = new GoapStateDataDict();
+        private GoapStateDataDict m_actionEffects = new GoapStateDataDict();
 
         // Unity Methods -------------------------------------------------------------
-        public virtual void Awake()
+        protected virtual void Awake()
         {
-            m_actionPreconditionsDict = ConstructStateDictFromStateList(m_actionPreconditionsData);
-            m_actionEffectsDict = ConstructStateDictFromStateList(m_actionEffectsData);
+            m_actionPreconditions = ConstructStateDictFromStateList(m_actionPreconditionsData);
+            m_actionEffects = ConstructStateDictFromStateList(m_actionEffectsData);
         }
 
         // Public Methods ----------------------------------------------------------------
-        public bool DoesGivenStateDictFulfillPreconditions(GoapStateDataDict givenStates)
+        public bool DoesGivenStateFulfillPreconditions(GoapStateDataDict givenStates)
         {
-            foreach(var preconditionStateData in m_actionPreconditionsDict.StateDict)
+            foreach(var preconditionStateData in m_actionPreconditions.StateDict)
             {
                 if(!givenStates.StateDict.ContainsKey(preconditionStateData.Key))
                     return false;
