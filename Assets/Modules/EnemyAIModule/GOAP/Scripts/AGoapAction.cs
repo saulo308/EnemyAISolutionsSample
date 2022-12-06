@@ -20,6 +20,12 @@ namespace EnemyAIModule.GOAP
         private GoapStateDataDict m_actionPreconditions = new GoapStateDataDict();
         private GoapStateDataDict m_actionEffects = new GoapStateDataDict();
 
+        // Properties -----------------------------------------------------
+        public string ActionName => m_actionName;
+        public float ActionCost => m_actionCost;
+
+        public GoapStateDataDict ActionEffects => m_actionEffects;
+
         // Unity Methods -------------------------------------------------------------
         protected virtual void Awake()
         {

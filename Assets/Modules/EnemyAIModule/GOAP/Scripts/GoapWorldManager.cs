@@ -14,6 +14,18 @@ namespace EnemyAIModule.GOAP
     public class GoapStateDataDict
     {
         public Dictionary<string, int> StateDict = new Dictionary<string, int>();
+
+        public void MergeWithGoapStateDict(GoapStateDataDict mergeTarget)
+        {
+            foreach(var state in mergeTarget.StateDict)
+                AddUniquePair(state.Key,state.Value);
+        }
+
+        public void AddUniquePair(string Key, int Value)
+        {
+            if(!StateDict.ContainsKey(Key))
+                StateDict.Add(Key,Value);
+        }
     }
 
     public class GoapWorldManager
