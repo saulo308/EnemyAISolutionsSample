@@ -438,6 +438,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1831873776}
+  - {fileID: 1829402580}
   m_Father: {fileID: 1301813179}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -599,6 +600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_agentActionList:
   - {fileID: 1831873777}
+  - {fileID: 1829402581}
   m_agentGoalList:
   - AgentGoalName: DamagePlayerGoal
     GoalPriority: 1
@@ -8627,6 +8629,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1829402579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1829402580}
+  - component: {fileID: 1829402581}
+  m_Layer: 7
+  m_Name: GOAPAction_AttackCast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1829402580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829402579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032640847}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1829402581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829402579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37d13acf82340042a2e61177332df98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_actionName: 
+  m_actionCost: 0
+  m_actionTarget: {fileID: 2707067822217124878}
+  m_actionPreconditionsData: []
+  m_actionEffectsData:
+  - Key: DamagePlayer
+    Value: 0
+  m_mainEnemyController: {fileID: 2036686430}
 --- !u!1 &1831873775
 GameObject:
   m_ObjectHideFlags: 0

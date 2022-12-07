@@ -19,7 +19,9 @@ namespace AIProject.GameModule
 
         // Non-Serializable Fields -------------------------------------------------
         private float m_spellDamage = 0f;
+
         private bool m_hasHitGround = false;
+        private bool m_hasHitEnemy = false;
 
         // Unity Methods --------------------------------------------------------
         void Awake()
@@ -52,9 +54,7 @@ namespace AIProject.GameModule
         // Event Handlers ---------------------------------------------------------------
         void OnAnimationEventTrigerred(AnimationEvent triggeredAnimationEvent)
         {
-            if(m_hasHitGround) return;
-
-            if(triggeredAnimationEvent.stringParameter.Equals("OnSpellHitGround"))
+            if(triggeredAnimationEvent.stringParameter.Equals("OnSpellHitGround") && !m_hasHitGround)
             {
                 // Set flag to avoid multiple calls
                 m_hasHitGround = true;
@@ -69,13 +69,26 @@ namespace AIProject.GameModule
                         .OnComplete(() => Destroy(gameObject));
                 });
             }
+
+            if(triggeredAnimationEvent.stringParameter.Equals("OnSpellFinished"))
+            {
+                // When spell finishes, deactivate collider
+                m_spellCollider.enabled = false;
+                Debug.Log("hI!");
+            }
         }
 
         void OnTriggerEnter2D(Collider2D other)
         {
+            // Check if we collided with main player
             var hitTarget = other.GetComponentInChildren<MainPlayerCombatController>();
             if(!hitTarget) return;
 
+            // If already hit enemy, return
+            if(m_hasHitEnemy) return;
+
+            // Take damage from player
+            m_hasHitEnemy = true;
             hitTarget.TakeDamage(m_spellDamage);
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AIProject.GameModule
 {
-    public class MainEnemyAttackPlayerAction : AGoapAction
+    public class MainEnemyMeleeAttackPlayerAction : AGoapAction
     {
         // Serializable Fields ---------------------------------
         [SerializeField] private MainEnemyCharacterController m_mainEnemyController = null;
@@ -18,7 +18,7 @@ namespace AIProject.GameModule
 
         public override bool Perform()
         {
-            m_mainEnemyController.AttackTarget_Melee();
+            m_mainEnemyController.AttackTarget(EEnemyAttackType.Melee);
             return true;
         }
         

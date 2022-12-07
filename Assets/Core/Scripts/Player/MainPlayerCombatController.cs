@@ -69,7 +69,7 @@ namespace AIProject.GameModule
         // Protected Methods ---------------------------------------------------------------------
         protected override void OnCharacterHurt()
         {
-            // TODO: Should be replaced by "IsInvincible" during roll
+            // If player is rolling, he can not be damaged (dodging attacks)
             if(m_mainPlayerCharacterMovement.IsPlayerRolling) return;
 
             // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
