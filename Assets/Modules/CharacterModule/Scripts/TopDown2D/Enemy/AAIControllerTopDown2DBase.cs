@@ -23,11 +23,9 @@ namespace CharacterModule.TopDown2D
         protected virtual void FixedUpdate()
         {
             // Move enemy to target position (is this sample, target = player)
-            // NOTE: This is really simple, movement logic v.0.1
-            // TODO: Redo enemy movement
             FollowTarget();
         }
-
+        
         // Public Methods ---------------------------------------------------------
         public void SetNewTarget(GameObject newTarget) => m_targetReference = newTarget;
         public void SetNewTargetDistanceLimit(float newTargetDistance) => m_targetDistanceLimit = newTargetDistance;

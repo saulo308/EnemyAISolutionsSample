@@ -13,7 +13,7 @@ namespace AIProject.GameModule
         protected override bool MoveAgentToExecuteAction(AGoapAction actionToExecute)
         {
             m_mainEnemyCharacterController.SetNewTarget(actionToExecute.ActionTarget);
-            return true;
+            return m_mainEnemyCharacterController.IsDistanceToTargetLessThanLimit();
         }
     }
 }

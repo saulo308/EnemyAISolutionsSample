@@ -51,6 +51,7 @@ namespace EnemyAIModule.GOAP
         public virtual bool RequestNewAgentPlan()
         {
             m_currentActionQueue = m_goapPlanner.CreateNewAgentPlan(m_agentActionList,m_agentGoalList[0].GetGoalTargetStatesAsStateDataDict(),null);
+            if(m_currentActionQueue == null) return false;
 
             if(m_currentActionQueue.Count > 0)
             {

@@ -157,6 +157,7 @@ namespace AIProject.GameModule
             {
                 // Re-enable player movement on hurt animation end
                 m_mainEnemyCharacterMovement.EnableMovement();
+                m_isAttacking = false;
             }
             
             // On attackMelee animation play, it will dispatch a 'animationEvent' so we can execute raycast and damage enemy
