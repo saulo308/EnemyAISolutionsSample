@@ -20,6 +20,8 @@ namespace EnemyAIModule.GOAP
         private GoapStateDataDict m_actionPreconditions = new GoapStateDataDict();
         private GoapStateDataDict m_actionEffects = new GoapStateDataDict();
 
+        private bool m_isActionComplete = false;
+
         // Properties -----------------------------------------------------
         public string ActionName => m_actionName;
         public float ActionCost => m_actionCost;
@@ -44,9 +46,16 @@ namespace EnemyAIModule.GOAP
             return true;
         }
 
-        public abstract bool PrePerform();
-        public abstract bool Perform();
-        public abstract bool PostPerform();
+        public virtual void OnActionComplete()
+        {
+            m_isActionComplete = true;
+        }
+
+	    public abstract bool Perform();
+	    public virtual bool IsActionComplete() => m_isActionComplete;
+
+        public abstract bool RequiresRangeToExecute();
+        public virtual bool IsInRangeToExecute() => true;
 
         // Private Methods ---------------------------------------------------------------
         GoapStateDataDict ConstructStateDictFromStateList(List<GoapStateData> goapStateList)

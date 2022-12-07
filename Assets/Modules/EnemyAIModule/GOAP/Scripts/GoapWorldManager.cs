@@ -26,6 +26,18 @@ namespace EnemyAIModule.GOAP
             if(!StateDict.ContainsKey(Key))
                 StateDict.Add(Key,Value);
         }
+
+        public static GoapStateDataDict StateDataListToGoapStateDataDict(List<GoapStateData> statesTargetList)
+        {
+            GoapStateDataDict newGoapStateDataDict = new GoapStateDataDict();
+            Dictionary<string, int> targetStatesDict = new Dictionary<string, int>();
+
+            foreach(var goalTargetState in statesTargetList)
+                targetStatesDict.Add(goalTargetState.Key, goalTargetState.Value);
+            newGoapStateDataDict.StateDict = targetStatesDict;
+            
+            return newGoapStateDataDict;
+        }
     }
 
     public class GoapWorldManager

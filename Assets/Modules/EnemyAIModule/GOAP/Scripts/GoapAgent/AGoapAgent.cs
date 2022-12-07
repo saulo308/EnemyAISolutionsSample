@@ -1,0 +1,103 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace EnemyAIModule.GOAP
+{
+    [System.Serializable]
+    public class AgentGoal
+    {
+        public string AgentGoalName = "";
+        public int GoalPriority = 1;
+        public bool IsPersistent = true;
+        public List<GoapStateData> GoalTargetStates = new List<GoapStateData>();
+
+        public GoapStateDataDict GetGoalTargetStatesAsStateDataDict()
+        {
+            return GoapStateDataDict.StateDataListToGoapStateDataDict(GoalTargetStates);
+        }
+    }
+
+    public abstract class AGoapAgent : MonoBehaviour
+    {
+        // Serializable Fields -----------------------------------------------
+        [SerializeField] private List<AGoapAction> m_agentActionList = new List<AGoapAction>();
+        [SerializeField] private List<AgentGoal> m_agentGoalList = new  List<AgentGoal>();
+        [SerializeField] private GoapAIFSM m_goapAgentFSM = null;
+
+        // Non-Serializable Fields --------------------------------------------- 
+        private GoapPlanner m_goapPlanner = new GoapPlanner();
+
+        private AGoapAction m_currentAgentAction = null;
+        private AgentGoal m_currentAgentGoal = null;
+
+        private Queue<AGoapAction> m_currentActionQueue = new Queue<AGoapAction>();
+
+        // Unity Methods -----------------------------------------------------------
+        protected virtual void Awake()
+        {
+            if(m_agentActionList.Count == 0)
+            {
+                var agentActions = GetComponents<AGoapAction>();
+                foreach(var agentAction in agentActions)
+                    m_agentActionList.Add(agentAction);
+            }
+
+            m_goapAgentFSM.InitializeFSM(this);
+        }
+
+        // Public Methods ------------------------------------------------------------
+        public virtual bool RequestNewAgentPlan()
+        {
+            m_currentActionQueue = m_goapPlanner.CreateNewAgentPlan(m_agentActionList,m_agentGoalList[0].GetGoalTargetStatesAsStateDataDict(),null);
+
+            if(m_currentActionQueue.Count > 0)
+            {
+                m_goapAgentFSM.PopFSMStack();
+                m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.PerformActionState);
+                return true;
+            }
+
+            m_goapAgentFSM.PopFSMStack();
+            m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.IdleState);
+            return false;
+        }
+
+        public virtual bool PerformNextActionOnQueue(GoapAIFSM goapAgentFSM)
+        {
+            // If no actions to execute anymore, return false and FSM will get a new plan
+            if (m_currentActionQueue.Count == 0) 
+            {
+				m_goapAgentFSM.PopFSMStack();
+				m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.IdleState);
+				return false;
+			}
+
+            AGoapAction actionToExecute = m_currentActionQueue.Peek();
+
+            bool bIsActionInRangeToExecute = actionToExecute.RequiresRangeToExecute() ? 
+                actionToExecute.IsInRangeToExecute() : 
+                true;
+
+            if(!bIsActionInRangeToExecute)
+            {
+				m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.MoveToState);
+                return false;
+            }
+
+            bool bDidActionPerformedSuccessfully = actionToExecute.Perform();
+			if (!bDidActionPerformedSuccessfully) 
+            {
+				m_goapAgentFSM.ClearFSMStack();
+				m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.IdleState);
+                return false;
+			} 
+
+            actionToExecute.OnActionComplete();
+			m_currentActionQueue.Dequeue ();
+            return true;
+        }
+
+        // Private Methods --------------------------------------------------------
+    }
+}
