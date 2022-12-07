@@ -50,19 +50,26 @@ namespace EnemyAIModule.GOAP
         // Public Methods ------------------------------------------------------------
         public virtual bool RequestNewAgentPlan()
         {
-            m_currentActionQueue = m_goapPlanner.CreateNewAgentPlan(m_agentActionList,m_agentGoalList[0].GetGoalTargetStatesAsStateDataDict(),null);
-            if(m_currentActionQueue == null) return false;
-
-            if(m_currentActionQueue.Count > 0)
+            // Request a new agent plan 
+            m_currentActionQueue = m_goapPlanner.CreateNewAgentPlan(m_agentActionList,m_agentGoalList[0].GetGoalTargetStatesAsStateDataDict());
+            
+            // If no plan found, execute feedback and push idle state to FSM
+            if(m_currentActionQueue == null)
             {
-                m_goapAgentFSM.PopFSMStack();
-                m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.PerformActionState);
-                return true;
-            }
+                // Execute feedback
+                OnNoPlanFound();
 
+                // Push Idle to stack so we can keep trying to calculate new plan
+                m_goapAgentFSM.PopFSMStack();
+                m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.IdleState);
+                return false;
+            } 
+
+            // Found new plan (m_currentActionQueue.Count > 0)
+            // Start executing plan action by pushing ActionState to FSM
             m_goapAgentFSM.PopFSMStack();
-            m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.IdleState);
-            return false;
+            m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.PerformActionState);
+            return true;
         }
 
         public virtual bool PerformNextActionOnQueue()
@@ -125,5 +132,6 @@ namespace EnemyAIModule.GOAP
 
         // Protected Methods ---------------------------------------------------
         protected abstract bool MoveAgentToExecuteAction(AGoapAction actionToExecute);
+        protected abstract void OnNoPlanFound();
     }
 }

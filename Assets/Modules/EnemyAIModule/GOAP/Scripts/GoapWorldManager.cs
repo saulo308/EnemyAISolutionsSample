@@ -27,6 +27,12 @@ namespace EnemyAIModule.GOAP
                 StateDict.Add(Key,Value);
         }
 
+        public void Remove(string Key)
+        {
+            if(StateDict.ContainsKey(Key))
+                StateDict.Remove(Key);
+        }
+
         public static GoapStateDataDict StateDataListToGoapStateDataDict(List<GoapStateData> statesTargetList)
         {
             GoapStateDataDict newGoapStateDataDict = new GoapStateDataDict();

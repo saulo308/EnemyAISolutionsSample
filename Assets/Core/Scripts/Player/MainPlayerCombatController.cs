@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GameSharedEventModule;
 using CharacterModule;
 using DG.Tweening;
+using EnemyAIModule.GOAP;
 using UnityEngine;
 
 namespace AIProject.GameModule
@@ -34,6 +35,15 @@ namespace AIProject.GameModule
 
         private LayerMask m_playerLayer;
         private LayerMask m_mainEnemyLayer;
+
+        // Unity Methods ----------------------------------------------------
+        protected override void Awake()
+        {
+            base.Awake();
+
+            // Add 'PlayerAlive' state on GOAP world state (pre-condition to most enemy actions)
+            GoapWorldManager.GoapWorldInstance.GetWorldStates().AddUniquePair("PlayerAlive",0);
+        }
 
         // Public Methods -----------------------------------------------------
         public void OnShieldUp()
@@ -83,6 +93,9 @@ namespace AIProject.GameModule
         {
             // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
             m_mainPlayerCharacterMovement.DisableMovement(true);
+
+            // Remove 'PlayerAlive' state from GOAP world state
+            GoapWorldManager.GoapWorldInstance.GetWorldStates().Remove("PlayerAlive");
 
             // Call base
             base.OnCharacterDead();

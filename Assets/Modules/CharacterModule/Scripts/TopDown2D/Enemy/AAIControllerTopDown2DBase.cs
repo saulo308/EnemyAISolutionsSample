@@ -41,7 +41,7 @@ namespace CharacterModule.TopDown2D
             }
 
             // While did not reach target limit, keep going on it's direction
-            if(GetDistanceToTarget() > m_targetDistanceLimit)
+            if(m_targetReference && GetDistanceToTarget() > m_targetDistanceLimit)
             {
                 // Get direction to move (move towards player)
                 Vector2 moveDirection = GetDirectionToFollowPlayer();

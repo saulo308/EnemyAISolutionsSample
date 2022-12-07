@@ -74,7 +74,6 @@ namespace AIProject.GameModule
             {
                 // When spell finishes, deactivate collider
                 m_spellCollider.enabled = false;
-                Debug.Log("hI!");
             }
         }
 

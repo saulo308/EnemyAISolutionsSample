@@ -15,5 +15,10 @@ namespace AIProject.GameModule
             m_mainEnemyCharacterController.SetNewTarget(actionToExecute.ActionTarget);
             return m_mainEnemyCharacterController.IsDistanceToTargetLessThanLimit();
         }
+
+        protected override void OnNoPlanFound()
+        {
+            m_mainEnemyCharacterController.SetNewTarget(null);
+        }
     }
 }

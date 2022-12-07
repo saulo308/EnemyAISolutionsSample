@@ -219,6 +219,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1746215269}
     m_Modifications:
+    - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_actionName
+      value: AttackPlayer_Cast
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_actionTarget
+      value: 
+      objectReference: {fileID: 2707067822217124878}
+    - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_actionPreconditionsData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_actionPreconditionsData.Array.data[0].Key
+      value: PlayerAlive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831873777, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_actionName
+      value: AttackPlayer_Melee
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831873777, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_actionTarget
+      value: 
+      objectReference: {fileID: 2707067822217124878}
+    - target: {fileID: 1831873777, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_actionPreconditionsData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831873777, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_actionPreconditionsData.Array.data[0].Key
+      value: PlayerAlive
+      objectReference: {fileID: 0}
     - target: {fileID: 2299378689173464247, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_targetReference
       value: 
@@ -271,22 +303,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainEnemyContainer
       objectReference: {fileID: 0}
-    - target: {fileID: 2299378689678364220, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_mainEnemySpriteRenderer
-      value: 
-      objectReference: {fileID: 693748100}
-    - target: {fileID: 2299378689963112027, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2299378689963112027, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2299378689963112027, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
 --- !u!4 &453151279 stripped
@@ -294,20 +310,10 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2299378689356111128, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
   m_PrefabInstance: {fileID: 453151278}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &453151280 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2299378689395565337, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-  m_PrefabInstance: {fileID: 453151278}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &536872783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2136247849406565013, guid: 4a47c6646e8d4a34289008108ccd8e22, type: 3}
   m_PrefabInstance: {fileID: 2136247849943436762}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &693748100 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2299378689963112027, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-  m_PrefabInstance: {fileID: 453151278}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &798544661
 GameObject:
@@ -408,39 +414,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1032640846
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1032640847}
-  m_Layer: 7
-  m_Name: GOAPActions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1032640847
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032640846}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1831873776}
-  - {fileID: 1829402580}
-  m_Father: {fileID: 1301813179}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1155896811
 GameObject:
@@ -552,82 +525,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1301813178
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1301813179}
-  - component: {fileID: 1301813180}
-  - component: {fileID: 1301813181}
-  m_Layer: 7
-  m_Name: EnemyGOAPController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1301813179
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301813178}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1032640847}
-  m_Father: {fileID: 453151280}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1301813180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301813178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 380c823790ce1e244bd4a19c33be9614, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_agentActionList:
-  - {fileID: 1831873777}
-  - {fileID: 1829402581}
-  m_agentGoalList:
-  - AgentGoalName: DamagePlayerGoal
-    GoalPriority: 1
-    IsPersistent: 1
-    GoalTargetStates:
-    - Key: DamagePlayer
-      Value: 0
-  - AgentGoalName: StayAliveGoal
-    GoalPriority: 1
-    IsPersistent: 1
-    GoalTargetStates:
-    - Key: StayLive
-      Value: 0
-  m_goapAgentFSM: {fileID: 1301813181}
-  m_mainEnemyCharacterController: {fileID: 2036686430}
---- !u!114 &1301813181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301813178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baaca60d3dfe5884b9f1d54b37636d53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1464476607
 GameObject:
   m_ObjectHideFlags: 0
@@ -8629,121 +8526,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1829402579
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1829402580}
-  - component: {fileID: 1829402581}
-  m_Layer: 7
-  m_Name: GOAPAction_AttackCast
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1829402580
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829402579}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1032640847}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1829402581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829402579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d37d13acf82340042a2e61177332df98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_actionName: 
-  m_actionCost: 0
-  m_actionTarget: {fileID: 2707067822217124878}
-  m_actionPreconditionsData: []
-  m_actionEffectsData:
-  - Key: DamagePlayer
-    Value: 0
-  m_mainEnemyController: {fileID: 2036686430}
---- !u!1 &1831873775
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1831873776}
-  - component: {fileID: 1831873777}
-  m_Layer: 7
-  m_Name: GOAPAction_AttackMelee
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1831873776
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831873775}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1032640847}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1831873777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831873775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13778bca65b1c7b43b27da2b39e32cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_actionName: AttackPlayer
-  m_actionCost: 0
-  m_actionTarget: {fileID: 2707067822217124878}
-  m_actionPreconditionsData: []
-  m_actionEffectsData:
-  - Key: DamagePlayer
-    Value: 0
-  m_mainEnemyController: {fileID: 2036686430}
---- !u!114 &2036686430 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2299378689173464247, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-  m_PrefabInstance: {fileID: 453151278}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc59d64bae6e43041993bc25d872c687, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2058648954
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,218 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1032640846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032640847}
+  m_Layer: 7
+  m_Name: GOAPActions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1032640847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032640846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1831873776}
+  - {fileID: 1829402580}
+  m_Father: {fileID: 1301813179}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1301813178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1301813179}
+  - component: {fileID: 1301813180}
+  - component: {fileID: 1301813181}
+  m_Layer: 7
+  m_Name: EnemyGOAPController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1301813179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301813178}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1032640847}
+  m_Father: {fileID: 2299378689395565337}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1301813180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301813178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 380c823790ce1e244bd4a19c33be9614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_agentActionList:
+  - {fileID: 1831873777}
+  - {fileID: 1829402581}
+  m_agentGoalList:
+  - AgentGoalName: DamagePlayerGoal
+    GoalPriority: 1
+    IsPersistent: 1
+    GoalTargetStates:
+    - Key: DamagePlayer
+      Value: 0
+  - AgentGoalName: StayAliveGoal
+    GoalPriority: 1
+    IsPersistent: 1
+    GoalTargetStates:
+    - Key: StayLive
+      Value: 0
+  m_goapAgentFSM: {fileID: 1301813181}
+  m_mainEnemyCharacterController: {fileID: 2299378689173464247}
+--- !u!114 &1301813181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301813178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baaca60d3dfe5884b9f1d54b37636d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1829402579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1829402580}
+  - component: {fileID: 1829402581}
+  m_Layer: 7
+  m_Name: GOAPAction_AttackCast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1829402580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829402579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032640847}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1829402581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829402579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37d13acf82340042a2e61177332df98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_actionName: 
+  m_actionCost: 0
+  m_actionTarget: {fileID: 0}
+  m_actionPreconditionsData: []
+  m_actionEffectsData:
+  - Key: DamagePlayer
+    Value: 0
+  m_mainEnemyController: {fileID: 2299378689173464247}
+--- !u!1 &1831873775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1831873776}
+  - component: {fileID: 1831873777}
+  m_Layer: 7
+  m_Name: GOAPAction_AttackMelee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1831873776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831873775}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032640847}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831873777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831873775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13778bca65b1c7b43b27da2b39e32cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_actionName: AttackPlayer
+  m_actionCost: 0
+  m_actionTarget: {fileID: 0}
+  m_actionPreconditionsData: []
+  m_actionEffectsData:
+  - Key: DamagePlayer
+    Value: 0
+  m_mainEnemyController: {fileID: 2299378689173464247}
 --- !u!1 &2299378688502194504
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,7 +260,6 @@ MonoBehaviour:
   m_characterAnimator: {fileID: 2299378689963112028}
   m_enemyVelocityDataEvent: {fileID: 11400000, guid: 56b98e8ec84c33a43b2d03c11053706e, type: 2}
   m_enemyAttackDataEvent: {fileID: 11400000, guid: 4fe2f47ec55daa748be4d4748e63965a, type: 2}
-  m_enemyHurtEvent: {fileID: 11400000, guid: 01b208b8ac1f89c4e987181fffe97e18, type: 2}
   m_enemyEndLifeEvent: {fileID: 11400000, guid: ecc6705995e85ae4da8a05871208324b, type: 2}
 --- !u!1 &2299378689173464234
 GameObject:
@@ -211,6 +423,7 @@ Transform:
   - {fileID: 2299378689799730144}
   - {fileID: 2299378689678364221}
   - {fileID: 2299378688502194519}
+  - {fileID: 1301813179}
   m_Father: {fileID: 2299378689356111128}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -266,7 +479,9 @@ MonoBehaviour:
   m_characterEndLifeEvent: {fileID: 11400000, guid: ecc6705995e85ae4da8a05871208324b, type: 2}
   m_characterDeadEvent: {fileID: 11400000, guid: aedd5a3c285b62b4da6cbe4e7c144c8f, type: 2}
   m_characterHealthPercentageEvent: {fileID: 11400000, guid: 5ec763fcc9923f041a97763e7fe9cfbb, type: 2}
+  m_characterCurHealth: 0
   m_mainEnemyCharacterMovement: {fileID: 2299378689799730159}
+  m_mainEnemySpriteRenderer: {fileID: 2299378689963112027}
   m_enemyAttackDataEvent: {fileID: 11400000, guid: 4fe2f47ec55daa748be4d4748e63965a, type: 2}
   m_enemyDamage: 30
   m_attackRaycastDistance: 3.5

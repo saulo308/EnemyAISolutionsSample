@@ -23,10 +23,8 @@ namespace EnemyAIModule.GOAP
     public class GoapPlanner
     {
         // Public Methods -----------------------------------------------------------------
-        public Queue<AGoapAction> CreateNewAgentPlan(List<AGoapAction> agentActionList, GoapStateDataDict agentGoalTargetStates, GoapStateDataDict agentStatesData)
+        public Queue<AGoapAction> CreateNewAgentPlan(List<AGoapAction> agentActionList, GoapStateDataDict agentGoalTargetStates)
         {
-            // Reset all actions
-
             // Check procedural actions
 
             // Start graph leaves list (we are working it backwards)
