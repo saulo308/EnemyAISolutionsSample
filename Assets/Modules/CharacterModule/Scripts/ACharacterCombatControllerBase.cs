@@ -24,11 +24,11 @@ namespace CharacterModule
         [SerializeField] private GameSharedDataEvent<float> m_characterHealthPercentageEvent;
 
         // Non-Serializable Fields -----------------------------------------
-        private float m_characterCurHealth;
+        [SerializeField] private float m_characterCurHealth;
 
         // Life flags
-        private bool m_isCharacterHurt = false;
-        private bool m_isCharacterDead = false;
+        protected bool m_isCharacterHurt = false;
+        protected bool m_isCharacterDead = false;
 
         // Properties ----------------------------------------------------
         public float CharacterCurrentHealth => m_characterCurHealth;

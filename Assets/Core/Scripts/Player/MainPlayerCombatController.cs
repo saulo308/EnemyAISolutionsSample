@@ -81,9 +81,6 @@ namespace AIProject.GameModule
 
         protected override void OnCharacterDead()
         {
-            // TODO: Should be replaced by "IsInvincible" during roll
-            if(m_mainPlayerCharacterMovement.IsPlayerRolling) return;
-
             // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
             m_mainPlayerCharacterMovement.DisableMovement(true);
 

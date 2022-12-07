@@ -72,11 +72,9 @@ namespace EnemyAIModule.GOAP
             foreach(var action in resultingActionPlanList)
                 resultingActionQueue.Enqueue(action);
 
-            Debug.Log("Plan:");
+           /*  Debug.Log("Plan:");
             foreach(var actionInQueue in resultingActionQueue)
-            {
-                Debug.Log(actionInQueue.ActionName);
-            }
+                Debug.Log(actionInQueue.ActionName); */
         
             return resultingActionQueue;
         }

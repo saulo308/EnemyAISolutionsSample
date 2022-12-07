@@ -20,6 +20,7 @@ namespace AIProject.GameModule
         // Serializable Fields -------------------------------------------
         [Header("MainEnemy - LinkedReferences")]
         [SerializeField] private MainEnemyCharacterMovement m_mainEnemyCharacterMovement;
+        [SerializeField] private SpriteRenderer m_mainEnemySpriteRenderer;
 
         [Header("MainEnemy - SharedEvents")]
         [SerializeField] private GameSharedDataEvent<string> m_enemyAttackDataEvent;
@@ -75,11 +76,11 @@ namespace AIProject.GameModule
         // Protected Methods ---------------------------------------------------------------------
         protected override void OnCharacterHurt()
         {
-            // Disable enemy movement (When hurt, enemy should be 'stunned' during hurt animation)
-            m_mainEnemyCharacterMovement.DisableMovement(true);
-
-            // Call base
-            base.OnCharacterHurt();
+            // Blink character on hurt
+            Sequence blinkSequence = DOTween.Sequence();
+            blinkSequence.Append(m_mainEnemySpriteRenderer.DOColor(Color.red,0.05f));
+            blinkSequence.Append(m_mainEnemySpriteRenderer.DOColor(Color.white,0.05f));
+            blinkSequence.Play().SetLoops(2);
         }
 
         protected override void OnCharacterDead()
@@ -153,13 +154,6 @@ namespace AIProject.GameModule
         // Event Handlers ---------------------------------------------------------------
         protected override void OnAnimationEventTrigerred(AnimationEvent triggeredAnimationEvent)
         {
-            if(triggeredAnimationEvent.stringParameter.Equals("OnHurtEnd"))
-            {
-                // Re-enable player movement on hurt animation end
-                m_mainEnemyCharacterMovement.EnableMovement();
-                m_isAttacking = false;
-            }
-            
             // On attackMelee animation play, it will dispatch a 'animationEvent' so we can execute raycast and damage enemy
             // respecting attack animation frame timing
             //(e.g. "attack" takes 5 frames to actually appear to hit something, frames 0 to 4 are just anticipating attack)

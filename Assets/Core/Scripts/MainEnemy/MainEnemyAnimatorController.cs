@@ -13,7 +13,6 @@ namespace AIProject.GameModule
         [SerializeField] private GameSharedDataEvent<float> m_enemyVelocityDataEvent;
         [SerializeField] private GameSharedDataEvent<string> m_enemyAttackDataEvent;
 
-        [SerializeField] private GameSharedEvent m_enemyHurtEvent;
         [SerializeField] private GameSharedEvent m_enemyEndLifeEvent;
 
         // Unity Methods -----------------------------------------
@@ -24,7 +23,6 @@ namespace AIProject.GameModule
             // Binding events on sharedEvents
             m_enemyVelocityDataEvent.AddListener(OnEnemyVelocityUpdate);
             m_enemyAttackDataEvent.AddListener(OnEnemyAttack);
-            m_enemyHurtEvent.AddListener(OnEnemyHurt);
             m_enemyEndLifeEvent.AddListener(OnEnemyEndLife);
         }
 
@@ -40,11 +38,6 @@ namespace AIProject.GameModule
         {
             // Set trigger on animator
             SetAnimatorTrigger(attackTriggerName);
-        }
-
-        void OnEnemyHurt()
-        {
-            SetAnimatorTrigger("Hurt");
         }
 
         void OnEnemyEndLife()

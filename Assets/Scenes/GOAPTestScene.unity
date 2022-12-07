@@ -271,6 +271,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainEnemyContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 2299378689678364220, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_mainEnemySpriteRenderer
+      value: 
+      objectReference: {fileID: 693748100}
+    - target: {fileID: 2299378689963112027, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2299378689963112027, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2299378689963112027, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
 --- !u!4 &453151279 stripped
@@ -287,6 +303,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2136247849406565013, guid: 4a47c6646e8d4a34289008108ccd8e22, type: 3}
   m_PrefabInstance: {fileID: 2136247849943436762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &693748100 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2299378689963112027, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+  m_PrefabInstance: {fileID: 453151278}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &798544661
 GameObject:
