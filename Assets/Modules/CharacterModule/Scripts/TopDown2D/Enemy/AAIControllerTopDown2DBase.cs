@@ -28,6 +28,11 @@ namespace CharacterModule.TopDown2D
             FollowTarget();
         }
 
+        // Public Methods ---------------------------------------------------------
+        public void SetNewTarget(GameObject newTarget) => m_targetReference = newTarget;
+        public void SetNewTargetDistanceLimit(float newTargetDistance) => m_targetDistanceLimit = newTargetDistance;
+        public bool IsDistanceToTargetLessThanLimit() => (GetDistanceToTarget() < m_targetDistanceLimit);
+
         // Private Methods -------------------------------------------------------------
         void FollowTarget()
         {

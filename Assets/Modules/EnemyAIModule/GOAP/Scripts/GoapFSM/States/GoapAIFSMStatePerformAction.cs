@@ -9,7 +9,7 @@ namespace EnemyAIModule.GOAP
         // Public Methods --------------------------------------------
         public override void UpdateState(AGoapAgent goapAgent)
         {
-
+            bool bActionPerformingSuccess = goapAgent.PerformNextActionOnQueue();
         }
     }
 }

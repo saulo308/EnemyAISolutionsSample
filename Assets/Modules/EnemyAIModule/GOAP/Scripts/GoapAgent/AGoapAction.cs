@@ -25,6 +25,7 @@ namespace EnemyAIModule.GOAP
         // Properties -----------------------------------------------------
         public string ActionName => m_actionName;
         public float ActionCost => m_actionCost;
+        public GameObject ActionTarget => m_actionTarget;
 
         public GoapStateDataDict ActionEffects => m_actionEffects;
 

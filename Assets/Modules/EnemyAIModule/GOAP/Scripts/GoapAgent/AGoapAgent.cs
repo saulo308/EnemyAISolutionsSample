@@ -43,6 +43,7 @@ namespace EnemyAIModule.GOAP
                     m_agentActionList.Add(agentAction);
             }
 
+            // Init agent FSM
             m_goapAgentFSM.InitializeFSM(this);
         }
 
@@ -63,7 +64,7 @@ namespace EnemyAIModule.GOAP
             return false;
         }
 
-        public virtual bool PerformNextActionOnQueue(GoapAIFSM goapAgentFSM)
+        public virtual bool PerformNextActionOnQueue()
         {
             // If no actions to execute anymore, return false and FSM will get a new plan
             if (m_currentActionQueue.Count == 0) 
@@ -73,19 +74,25 @@ namespace EnemyAIModule.GOAP
 				return false;
 			}
 
+            // Get next action to execute
             AGoapAction actionToExecute = m_currentActionQueue.Peek();
 
+            // Check if action requeires range
             bool bIsActionInRangeToExecute = actionToExecute.RequiresRangeToExecute() ? 
                 actionToExecute.IsInRangeToExecute() : 
                 true;
 
+            // If not in range, move to it....
             if(!bIsActionInRangeToExecute)
             {
 				m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.MoveToState);
                 return false;
             }
 
+            // In range, try execute
             bool bDidActionPerformedSuccessfully = actionToExecute.Perform();
+
+            // If action fails, abort plan
 			if (!bDidActionPerformedSuccessfully) 
             {
 				m_goapAgentFSM.ClearFSMStack();
@@ -93,11 +100,29 @@ namespace EnemyAIModule.GOAP
                 return false;
 			} 
 
+            // Else, complete action
             actionToExecute.OnActionComplete();
-			m_currentActionQueue.Dequeue ();
+			m_currentActionQueue.Dequeue();
+
             return true;
         }
 
-        // Private Methods --------------------------------------------------------
+        public virtual bool MoveAgentToActionRange()
+        {
+            // Get next action to execute
+            AGoapAction actionToExecute = m_currentActionQueue.Peek();
+
+            bool bReachedActionRange = MoveAgentToExecuteAction(actionToExecute);
+            if(bReachedActionRange)
+            {
+                m_goapAgentFSM.PopFSMStack();
+                return true;
+            }
+
+            return false;
+        }
+
+        // Protected Methods ---------------------------------------------------
+        protected abstract bool MoveAgentToExecuteAction(AGoapAction actionToExecute);
     }
 }

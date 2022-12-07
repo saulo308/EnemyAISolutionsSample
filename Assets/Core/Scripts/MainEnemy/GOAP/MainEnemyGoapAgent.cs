@@ -7,6 +7,13 @@ namespace AIProject.GameModule
 {
     public class MainEnemyGoapAgent : AGoapAgent
     {
-        
+        // Serializable Fields ---------------------------------------------------------
+        [SerializeField] private MainEnemyCharacterController m_mainEnemyCharacterController = null;
+
+        protected override bool MoveAgentToExecuteAction(AGoapAction actionToExecute)
+        {
+            m_mainEnemyCharacterController.SetNewTarget(actionToExecute.ActionTarget);
+            return true;
+        }
     }
 }
