@@ -153,14 +153,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37d13acf82340042a2e61177332df98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_actionName: 
-  m_actionCost: 0
+  m_actionName: AttackPlayer_Cast
+  m_actionCost: 1
   m_actionTarget: {fileID: 0}
-  m_actionPreconditionsData: []
+  m_actionPreconditionsData:
+  - Key: PlayerAlive
+    Value: 0
   m_actionEffectsData:
   - Key: DamagePlayer
     Value: 0
   m_mainEnemyController: {fileID: 2299378689173464247}
+  m_playerShieldUpSharedEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
 --- !u!1 &1831873775
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,10 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13778bca65b1c7b43b27da2b39e32cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_actionName: AttackPlayer
-  m_actionCost: 0
+  m_actionName: AttackPlayer_Melee
+  m_actionCost: 2
   m_actionTarget: {fileID: 0}
-  m_actionPreconditionsData: []
+  m_actionPreconditionsData:
+  - Key: PlayerAlive
+    Value: 0
   m_actionEffectsData:
   - Key: DamagePlayer
     Value: 0

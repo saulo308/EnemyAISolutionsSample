@@ -1,5 +1,81 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9810696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9810697}
+  m_Layer: 6
+  m_Name: ShieldHitSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9810697
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9810696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.31, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2707067822098617120}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1218426999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1218427000}
+  - component: {fileID: 1218427001}
+  m_Layer: 6
+  m_Name: PlayerCachedInputController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1218427000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218426999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2707067820683667830}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1218427001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218426999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74dd673ac6e6efb4cbf581aa190a7bad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mainPlayerCharacterController: {fileID: 2707067820419417522}
 --- !u!1 &2707067820419417521
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,6 +161,7 @@ Transform:
   - {fileID: 2707067821362322870}
   - {fileID: 2707067822098617120}
   - {fileID: 2707067822047420386}
+  - {fileID: 1218427000}
   m_Father: {fileID: 2707067822217230199}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -338,7 +415,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9810697}
   m_Father: {fileID: 2707067820683667830}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -362,6 +440,7 @@ MonoBehaviour:
   m_characterEndLifeEvent: {fileID: 11400000, guid: 454bd354b29fb1744a4933beb50948f3, type: 2}
   m_characterDeadEvent: {fileID: 11400000, guid: 48b594db9293e404e9bb6ad3ed0d329b, type: 2}
   m_characterHealthPercentageEvent: {fileID: 11400000, guid: 93e51f802efa0fc4ba3a2e177163c577, type: 2}
+  m_characterCurHealth: 0
   m_mainPlayerCharacterMovement: {fileID: 2707067821362322865}
   m_playerAttackInputDataEvent: {fileID: 11400000, guid: e7e07cce70d10544fa204a03bcd78cb4, type: 2}
   m_playerShieldInputDataEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
@@ -370,6 +449,8 @@ MonoBehaviour:
   m_maxNumberOfAttacksCombo: 3
   m_attackDelay: 0.4
   m_resetComboDelay: 1
+  m_shieldFxSpawnTransform: {fileID: 9810697}
+  m_shieldEffectTemplate: {fileID: 8294273861750967639, guid: b9c17d8de6fb4d34b8c0d2659473dd43, type: 3}
 --- !u!1 &2707067822217230196
 GameObject:
   m_ObjectHideFlags: 0

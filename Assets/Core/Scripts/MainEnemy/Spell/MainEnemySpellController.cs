@@ -50,8 +50,6 @@ namespace AIProject.GameModule
             m_spellDamage = spellDamage;
         }
 
-        // Private Methods ----------------------------------------------------------
-
         // Event Handlers ---------------------------------------------------------------
         void OnAnimationEventTrigerred(AnimationEvent triggeredAnimationEvent)
         {

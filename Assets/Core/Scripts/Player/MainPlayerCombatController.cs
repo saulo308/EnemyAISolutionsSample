@@ -18,13 +18,17 @@ namespace AIProject.GameModule
         [SerializeField] private GameSharedDataEvent<string> m_playerAttackInputDataEvent;
         [SerializeField] private GameSharedDataEvent<bool> m_playerShieldInputDataEvent;
 
-        [Header("MainPlayer - GeneralConfig")]
+        [Header("MainPlayer - GeneralConfig - Attack")]
         [SerializeField] private float m_playerDamage = 5f;
         [SerializeField] private float m_attackRaycastDistance = 2.0f;
 
         [SerializeField] private int m_maxNumberOfAttacksCombo = 3;
         [SerializeField] private float m_attackDelay = 0.4f;
         [SerializeField] private float m_resetComboDelay = 1f;
+
+        [Header("MainPlayer - GeneralConfig - Shield")]
+        [SerializeField] private Transform m_shieldFxSpawnTransform = null;
+        [SerializeField] private MainPlayerShieldHitEffectController m_shieldEffectTemplate = null;
 
         // Non-Serializable Fields -----------------------------------------
 
@@ -90,7 +94,8 @@ namespace AIProject.GameModule
             // If character hit by a melee attack and shield is up, neglect damage and spawn particle effect
             if(attackType == EEnemyAttackType.Melee && m_isShieldUp) 
             {
-                Debug.Log("Bliiing!");
+                var shieldHitEffect = Instantiate(m_shieldEffectTemplate, m_shieldFxSpawnTransform.parent);
+                shieldHitEffect.transform.localPosition = Vector3.zero;
                 return;
             }
 

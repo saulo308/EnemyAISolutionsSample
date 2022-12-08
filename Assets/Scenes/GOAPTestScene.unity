@@ -220,49 +220,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 1746215269}
     m_Modifications:
     - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_actionCost
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_actionName
-      value: AttackPlayer_Cast
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_actionTarget
-      value: 
-      objectReference: {fileID: 2707067822217124878}
-    - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_playerShieldUpSharedEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
-    - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_actionPreconditionsData.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_actionPreconditionsData.Array.data[0].Key
-      value: PlayerAlive
-      objectReference: {fileID: 0}
-    - target: {fileID: 1831873777, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_actionCost
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1831873777, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_actionName
-      value: AttackPlayer_Melee
-      objectReference: {fileID: 0}
-    - target: {fileID: 1831873777, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_actionTarget
       value: 
       objectReference: {fileID: 2707067822217124878}
     - target: {fileID: 1831873777, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_actionPreconditionsData.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1831873777, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_actionPreconditionsData.Array.data[0].Key
-      value: PlayerAlive
-      objectReference: {fileID: 0}
+      propertyPath: m_actionTarget
+      value: 
+      objectReference: {fileID: 2707067822217124878}
     - target: {fileID: 2299378689173464247, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_targetReference
       value: 
@@ -470,51 +434,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1218426999
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1218427000}
-  - component: {fileID: 1218427001}
-  m_Layer: 6
-  m_Name: PlayerCachedInputController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1218427000
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218426999}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1952190166}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1218427001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218426999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74dd673ac6e6efb4cbf581aa190a7bad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_mainPlayerCharacterController: {fileID: 708754552}
 --- !u!1 &1249680799
 GameObject:
   m_ObjectHideFlags: 0
@@ -8595,11 +8514,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1952190166 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2707067820683667830, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
-  m_PrefabInstance: {fileID: 2707067822217124877}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2036686430 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2299378689173464247, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
