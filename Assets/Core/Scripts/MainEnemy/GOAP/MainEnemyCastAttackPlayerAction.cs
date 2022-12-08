@@ -21,5 +21,10 @@ namespace AIProject.GameModule
             m_mainEnemyController.AttackTarget(EEnemyAttackType.Cast);
             return true;
         }
+
+        public override bool IsActionUsable(AGoapAgent goapAgent)
+        {
+            return true;
+        }
     }
 }

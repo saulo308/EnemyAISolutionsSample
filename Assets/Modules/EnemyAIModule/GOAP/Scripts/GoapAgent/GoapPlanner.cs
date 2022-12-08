@@ -23,16 +23,22 @@ namespace EnemyAIModule.GOAP
     public class GoapPlanner
     {
         // Public Methods -----------------------------------------------------------------
-        public Queue<AGoapAction> CreateNewAgentPlan(List<AGoapAction> agentActionList, GoapStateDataDict agentGoalTargetStates)
+        public Queue<AGoapAction> CreateNewAgentPlan(AGoapAgent instigatorAgent, List<AGoapAction> agentActionList, GoapStateDataDict agentGoalTargetStates)
         {
-            // Check procedural actions
+            // Get actions that are usable
+            List<AGoapAction> usableAgentActionList = new List<AGoapAction>();
+            foreach(var agentAction in agentActionList)
+            {
+                if(agentAction.IsActionUsable(instigatorAgent))
+                    usableAgentActionList.Add(agentAction);
+            }
 
             // Start graph leaves list (we are working it backwards)
             List<PlannerNode> planGraphLeaves = new List<PlannerNode>();
             PlannerNode planGraphRoot = new PlannerNode(null, 0, GoapWorldManager.GoapWorldInstance.GetWorldStates(), null);
 
             // Create graph with all posible actions to take
-            bool bFoundAtLeastOnePath = BuildPlanGraph(planGraphRoot, planGraphLeaves, agentActionList, agentGoalTargetStates);
+            bool bFoundAtLeastOnePath = BuildPlanGraph(planGraphRoot, planGraphLeaves, usableAgentActionList, agentGoalTargetStates);
 
             // If no plan found, return
             if(!bFoundAtLeastOnePath)

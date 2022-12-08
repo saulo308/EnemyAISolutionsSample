@@ -26,5 +26,10 @@ namespace AIProject.GameModule
         {
             return m_mainEnemyController.IsDistanceToTargetLessThanLimit();
         }
+
+        public override bool IsActionUsable(AGoapAgent goapAgent)
+        {
+            return true;
+        }
     }
 }

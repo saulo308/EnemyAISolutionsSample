@@ -27,10 +27,6 @@ namespace EnemyAIModule.GOAP
 
         // Non-Serializable Fields --------------------------------------------- 
         private GoapPlanner m_goapPlanner = new GoapPlanner();
-
-        private AGoapAction m_currentAgentAction = null;
-        private AgentGoal m_currentAgentGoal = null;
-
         private Queue<AGoapAction> m_currentActionQueue = new Queue<AGoapAction>();
 
         // Unity Methods -----------------------------------------------------------
@@ -51,7 +47,7 @@ namespace EnemyAIModule.GOAP
         public virtual bool RequestNewAgentPlan()
         {
             // Request a new agent plan 
-            m_currentActionQueue = m_goapPlanner.CreateNewAgentPlan(m_agentActionList,m_agentGoalList[0].GetGoalTargetStatesAsStateDataDict());
+            m_currentActionQueue = m_goapPlanner.CreateNewAgentPlan(this, m_agentActionList,m_agentGoalList[0].GetGoalTargetStatesAsStateDataDict());
             
             // If no plan found, execute feedback and push idle state to FSM
             if(m_currentActionQueue == null)

@@ -54,6 +54,7 @@ namespace EnemyAIModule.GOAP
 
 	    public abstract bool Perform();
 	    public virtual bool IsActionComplete() => m_isActionComplete;
+        public abstract bool IsActionUsable(AGoapAgent goapAgent);
 
         public abstract bool RequiresRangeToExecute();
         public virtual bool IsInRangeToExecute() => true;
