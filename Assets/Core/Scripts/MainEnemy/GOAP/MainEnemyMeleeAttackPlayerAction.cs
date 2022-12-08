@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CharacterModule;
 using EnemyAIModule.GOAP;
 using UnityEngine;
 

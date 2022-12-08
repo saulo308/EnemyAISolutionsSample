@@ -7,14 +7,6 @@ using UnityEngine;
 
 namespace AIProject.GameModule
 {
-    // Enums ----------------------------------------------------------
-    [System.Serializable]
-    public enum EEnemyAttackType
-    {
-        Melee,
-        Cast
-    }
-
     public class MainEnemyCombatController : ACharacterCombatControllerBase
     {
         // Serializable Fields -------------------------------------------
@@ -55,6 +47,11 @@ namespace AIProject.GameModule
 
             // Disable character movement
             m_mainEnemyCharacterMovement.DisableMovement(true);
+
+            // Rotate towards player
+            var mainPlayer = MainGameInstance.GameInstance.MainPlayerController;
+            Vector2 playerFacingDirection = mainPlayer.MainPlayerCharacterMovement.CurFacingDirection;
+            m_mainEnemyCharacterMovement.FlipCharacter(playerFacingDirection);
 
             // Create animator trigger string by attack type
             string attackAnimatorTriggerStr = attackType switch
@@ -117,7 +114,7 @@ namespace AIProject.GameModule
             
             // Else, we hit player. Make it take damage
             var hitEnemy = outHit.collider.GetComponentInChildren<MainPlayerCombatController>();
-            hitEnemy.TakeDamage(m_enemyDamage);
+            hitEnemy.TakeDamage(m_enemyDamage,EEnemyAttackType.Melee);
         }
 
         void OnCastAttackAnimationCastTiming()

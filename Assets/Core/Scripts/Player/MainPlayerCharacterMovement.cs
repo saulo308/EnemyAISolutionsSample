@@ -14,7 +14,6 @@ namespace AIProject.GameModule
         [SerializeField] private float m_rollPlayerSpeedMultipler = 1.8f;
         [SerializeField] private float m_playerRollDelay = 1f;
 
-
         [Header("MainPlayer - SharedDataEvents")]
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityMagnitude = null;
         [SerializeField] private GameSharedEvent m_playerRollInputEvent;
@@ -89,6 +88,9 @@ namespace AIProject.GameModule
         public void OnPlayerFinishedRoll()
         {
             m_isRolling = false;
+
+            // Trigger check for cached inputs
+            PlayerInputCacheController.Instance.CheckForCachedInputs();
         }
 
         public void SetupData(LayerMask playerLayerMask, LayerMask enemyLayerMask)
@@ -102,11 +104,12 @@ namespace AIProject.GameModule
         {
             if(triggeredAnimationEvent.stringParameter.Equals("OnRollEnd"))
             {
-                m_isRolling = false;
-                
                 // Update collider to consider mainEnemey layer
                 // (player can no longer dodge trough enemy and enemy's attack)
                 Physics2D.IgnoreLayerCollision(GetLayerIdByLayerMask(m_playerLayer),GetLayerIdByLayerMask(m_mainEnemyLayer),false);
+
+                // Call finishedRoll
+                OnPlayerFinishedRoll();
             }
         }
 

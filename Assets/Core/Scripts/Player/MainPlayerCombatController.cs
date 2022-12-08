@@ -33,8 +33,12 @@ namespace AIProject.GameModule
         private float m_timeSinceLastAttack = 0f;
         private Tween m_resetComboTween = null;
 
+        private bool m_isShieldUp = false;
+
         private LayerMask m_playerLayer;
         private LayerMask m_mainEnemyLayer;
+
+        // Properties --------------------------------------------------------
 
         // Unity Methods ----------------------------------------------------
         protected override void Awake()
@@ -50,12 +54,14 @@ namespace AIProject.GameModule
         {
             // Dispatch sharedEvent so animator can listen
             m_playerShieldInputDataEvent.SharedDataValue = true;
+            m_isShieldUp = true;
         }
 
         public void OnShieldDown()
         {
             // Dispatch sharedEvent so animator can listen
             m_playerShieldInputDataEvent.SharedDataValue = false;
+            m_isShieldUp = false;
         }
 
         public void OnAttackPressed()
@@ -76,12 +82,24 @@ namespace AIProject.GameModule
             m_mainEnemyLayer = enemyLayerMask;
         }
 
-        // Protected Methods ---------------------------------------------------------------------
-        protected override void OnCharacterHurt()
+        public override void TakeDamage(float damageAmount, EEnemyAttackType attackType)
         {
             // If player is rolling, he can not be damaged (dodging attacks)
             if(m_mainPlayerCharacterMovement.IsPlayerRolling) return;
 
+            // If character hit by a melee attack and shield is up, neglect damage and spawn particle effect
+            if(attackType == EEnemyAttackType.Melee && m_isShieldUp) 
+            {
+                Debug.Log("Bliiing!");
+                return;
+            }
+
+            base.TakeDamage(damageAmount);
+        }
+
+        // Protected Methods ---------------------------------------------------------------------
+        protected override void OnCharacterHurt()
+        {
             // Disable player movement (When hurt, player should be 'stunned' during hurt animation)
             m_mainPlayerCharacterMovement.DisableMovement(true);
 
@@ -155,6 +173,9 @@ namespace AIProject.GameModule
             {
                 // Re-enable player movement on hurt animation end
                 m_mainPlayerCharacterMovement.EnableMovement();
+                
+                // Trigger check for cached inputs
+                PlayerInputCacheController.Instance.CheckForCachedInputs();
             }
 
             // On attack animation play, it will dispatch a 'animationEvent' so we can execute raycast and damage enemy

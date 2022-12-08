@@ -20,6 +20,9 @@ namespace CharacterModule.TopDown2D
 
         private bool m_canMove = true;
 
+        // Properties ------------------------------------------------
+        public Vector2 CurFacingDirection => m_curFacingDirection;
+
         // Unity Methods ---------------------------------------------------
         protected virtual void Awake()
         {
@@ -85,6 +88,17 @@ namespace CharacterModule.TopDown2D
             m_characterRigidBody.velocity = Vector3.zero;
         }
 
+        public virtual void FlipCharacter(Vector2 flipDirection)
+        {
+            // Update facing direction
+            m_curFacingDirection = flipDirection;
+            
+            // Rotate character
+            m_characterContainer.rotation = (flipDirection.Equals(Vector2.right)) ?
+                Quaternion.Euler(Vector3.zero) :
+                Quaternion.Euler(new Vector3(0,180,0));
+        }
+
         // Private Methods -------------------------------------------------------
         void CheckFlipMovement(float horizontalMovementValue)
         {
@@ -104,16 +118,14 @@ namespace CharacterModule.TopDown2D
                 // If looking right, rotate player to zero (0,0,0)
                 // @note: A rotation in Unity is always "Quaternion", a Vector4. 
                 // However, we can use "Quaternion.Euler", which converts a given rotation in Vector3 (x,y,z) to a Quaternion
-                m_characterContainer.rotation = Quaternion.Euler(Vector3.zero);
-                m_curFacingDirection = Vector2.right;
+                FlipCharacter(Vector2.right);
                 return;
             }
 
             // Player is looking left, rotate player 180° on y-axis (0,180,0)
             // @note: A rotation in Unity is always "Quaternion", a Vector4. 
             // However, we can use "Quaternion.Euler", which converts a given rotation in Vector3 (x,y,z) to a Quaternion
-            m_characterContainer.rotation = Quaternion.Euler(new Vector3(0,180,0));
-            m_curFacingDirection = Vector2.left;
+            FlipCharacter(Vector2.left);
         }
     }
 }

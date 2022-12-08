@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CharacterModule;
 using GameSharedEventModule;
 using DG.Tweening;
 using UnityEngine;
@@ -88,7 +89,7 @@ namespace AIProject.GameModule
 
             // Take damage from player
             m_hasHitEnemy = true;
-            hitTarget.TakeDamage(m_spellDamage);
+            hitTarget.TakeDamage(m_spellDamage,EEnemyAttackType.Cast);
         }
     }
 }

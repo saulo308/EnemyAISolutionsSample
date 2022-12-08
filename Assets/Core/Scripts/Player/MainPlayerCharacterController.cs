@@ -23,6 +23,10 @@ namespace AIProject.GameModule
         // Non-Serializable Fields -----------------------------------------
         private MainPlayerCharacterMovement m_mainPlayerCharacterMovement;
 
+        // Properties -------------------------------------------------------
+        public MainPlayerCombatController PlayerCombatController => m_mainPlayerCombatController;
+        public MainPlayerCharacterMovement MainPlayerCharacterMovement => m_mainPlayerCharacterMovement;
+
         // Unity Methods ---------------------------------------------------
         protected override void Awake()
         {
@@ -66,6 +70,17 @@ namespace AIProject.GameModule
                         OnAttackPressed();
                     }
                 }
+            }
+        }
+
+        public void CheckCachedInputs()
+        {
+            if(EventSystem.current && !EventSystem.current.IsPointerOverGameObject())
+            {
+                // Check if player is still pressing player "block"(shield up) animation.
+                // Shield Up can be canceled by "Roll" and "Hurt" logic an trigerred again by InputCacheController
+                if(Input.GetMouseButton(1) && !m_mainPlayerCharacterMovement.IsPlayerRolling)
+                    OnShieldUp();
             }
         }
 

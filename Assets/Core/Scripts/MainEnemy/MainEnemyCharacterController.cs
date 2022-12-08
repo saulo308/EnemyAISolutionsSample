@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CharacterModule;
 using CharacterModule.TopDown2D;
 using UnityEngine;
 

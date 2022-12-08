@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using AIProject.GameModule;
 using GameSharedEventModule;
 using UnityEngine;
 
 namespace CharacterModule
 {
+    // Enums ----------------------------------------------------------
+    [System.Serializable]
+    public enum EEnemyAttackType
+    {
+        Melee,
+        Cast
+    }
+    
     public abstract class ACharacterCombatControllerBase : MonoBehaviour
     {
         // Serializable Fields --------------------------------------------
@@ -64,6 +73,11 @@ namespace CharacterModule
 
             // Call hurt feedback
             OnCharacterHurt();
+        }
+
+        public virtual void TakeDamage(float damageAmount, EEnemyAttackType attackType)
+        {
+            TakeDamage(damageAmount);
         }
 
         public virtual void KillCharacter()
