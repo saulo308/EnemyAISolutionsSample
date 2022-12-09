@@ -219,6 +219,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1746215269}
     m_Modifications:
+    - target: {fileID: 1709115365, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_actionTarget
+      value: 
+      objectReference: {fileID: 2707067822217124878}
     - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_actionTarget
       value: 
@@ -279,6 +283,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainEnemyContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 2299378689678364220, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_healParticleSystem
+      value: 
+      objectReference: {fileID: 1483988001}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
 --- !u!4 &453151279 stripped
@@ -575,6 +583,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1483988001 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1483988001, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+  m_PrefabInstance: {fileID: 453151278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1585083794
 GameObject:
   m_ObjectHideFlags: 0

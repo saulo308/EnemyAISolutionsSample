@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using GameSharedEventModule;
 using CharacterModule;
+using EnemyAIModule.GOAP;
 using UnityEngine;
 
 namespace AIProject.GameModule
@@ -16,11 +17,14 @@ namespace AIProject.GameModule
 
         [Header("MainEnemy - SharedEvents")]
         [SerializeField] private GameSharedDataEvent<string> m_enemyAttackDataEvent;
+        [SerializeField] private GameSharedEvent m_enemyHealEvent;
+        
+        [Header("MainEnemy - GeneralConfig")]
+        [SerializeField] private float m_abilityRecoverTime = 0.5f;
 
         [Header("MainEnemy - GeneralConfig - Melee")]
         [SerializeField] private float m_enemyDamage = 5f;
         [SerializeField] private float m_attackRaycastDistance = 2.0f;
-        [SerializeField] private float m_attackRecoverTime = 0.5f;
         [SerializeField] private LayerMask m_playerLayerMask;
 
         [Header("MainEnemy - GeneralConfig - Spell")]
@@ -28,33 +32,50 @@ namespace AIProject.GameModule
         [SerializeField] private float m_spellYSpawnOffset = 0.82f;
         [SerializeField] private float m_spellDamageAmount = 10f;
 
+        [Header("MainEnemy - GeneralConfig - Heal")]
+        [SerializeField] private float m_healAmount = 50f;
+        [SerializeField] private ParticleSystem m_healParticleSystem = null;
+
         // Non-Serializable Fields -------------------------------------------
         private GameObject m_curTargetRef = null;
 
-        private bool m_isAttacking = false;
-        private Tween m_attackRecoverTimeTween = null;
+        private bool m_isExecutingAbility = false;
+        private Tween m_abilityRecoverTimeTween = null;
 
         // Properties ---------------------------------------------------------
-        public bool IsAttacking => m_isAttacking;
+        public bool IsExecutingAbility => m_isExecutingAbility;
 
         // Public Methods --------------------------------------------
+        public override void TakeDamage(float damageAmount)
+        {
+            base.TakeDamage(damageAmount);
+
+            // If main enemy reaches half health, add state to GOAP world state.
+            // If not, remove it (if it exists)
+            bool bIsMainEnemyHalfHealth = m_characterCurHealth <= (m_characterMaxHealth / 2f);
+            if(bIsMainEnemyHalfHealth) GoapWorldManager.GoapWorldInstance.GetWorldStates().AddUniquePair("MainEnemyIsHalfHealth",0);
+            else GoapWorldManager.GoapWorldInstance.GetWorldStates().Remove("MainEnemyIsHalfHealth");
+        }
+
         public void RequestAttack(EEnemyAttackType attackType)
         {
             // If enemy still in recover time, ignore attack (an attack has been requested before recover time)
-            if(m_attackRecoverTimeTween.IsActive()) return;
+            if(m_abilityRecoverTimeTween.IsActive()) return;
 
-            m_isAttacking = true;
+            m_isExecutingAbility = true;
 
             // Disable character movement
             m_mainEnemyCharacterMovement.DisableMovement(true);
 
-            // Rotate towards player
+            // Rotate towards player ---
+            // Get player and calculate direction from enemy to player pos
             var mainPlayer = MainGameInstance.GameInstance.MainPlayerController;
             Vector2 enemyToPlayerDirection = (transform.position - mainPlayer.transform.position).normalized;
+
+            // If x-axis is positive, player is on enemy's right. Else, is on enemy's left
             if(enemyToPlayerDirection.x > 0) m_mainEnemyCharacterMovement.FlipCharacter(Vector2.right);
             else m_mainEnemyCharacterMovement.FlipCharacter(Vector2.left);
-            /* Vector2 playerFacingDirection = mainPlayer.MainPlayerCharacterMovement.CurFacingDirection;
-            m_mainEnemyCharacterMovement.FlipCharacter(playerFacingDirection); */
+            // ----
 
             // Create animator trigger string by attack type
             string attackAnimatorTriggerStr = attackType switch
@@ -66,6 +87,30 @@ namespace AIProject.GameModule
 
             // Set shared data event that will trigger animator
             m_enemyAttackDataEvent.SharedDataValue = attackAnimatorTriggerStr;
+        }
+
+        public void RequestHeal()
+        {
+            // If enemy still in recover time, ignore ability use
+            if(m_abilityRecoverTimeTween.IsActive()) return;
+
+            m_isExecutingAbility = true;
+
+            // Disable character movement
+            m_mainEnemyCharacterMovement.DisableMovement(true);
+
+            // Rotate towards player ---
+            // Get player and calculate direction from enemy to player pos
+            var mainPlayer = MainGameInstance.GameInstance.MainPlayerController;
+            Vector2 enemyToPlayerDirection = (transform.position - mainPlayer.transform.position).normalized;
+
+            // If x-axis is positive, player is on enemy's right. Else, is on enemy's left
+            if(enemyToPlayerDirection.x > 0) m_mainEnemyCharacterMovement.FlipCharacter(Vector2.right);
+            else m_mainEnemyCharacterMovement.FlipCharacter(Vector2.left);
+            // ----
+
+            // Set shared data event that will trigger animator
+            m_enemyHealEvent.DispatchEvent();
         }
 
         public void SetupData(GameObject targetRef)
@@ -106,10 +151,10 @@ namespace AIProject.GameModule
             // Debug.DrawRay(raycastOrigin, raycastDirection * m_attackRaycastDistance, Color.red, 0.1f);
 
             // Re-enable character movement on recover time
-            m_attackRecoverTimeTween = DOVirtual.DelayedCall(m_attackRecoverTime, () => 
+            m_abilityRecoverTimeTween = DOVirtual.DelayedCall(m_abilityRecoverTime, () => 
             {
                 m_mainEnemyCharacterMovement.EnableMovement();
-                m_isAttacking = false;
+                m_isExecutingAbility = false;
             });
 
             // Check hit. If nothing found, return
@@ -144,10 +189,31 @@ namespace AIProject.GameModule
             spawnedSpell.SetupSpellData(m_spellDamageAmount);
 
             // Re-enable character movement on recover time
-            m_attackRecoverTimeTween = DOVirtual.DelayedCall(m_attackRecoverTime, () => 
+            m_abilityRecoverTimeTween = DOVirtual.DelayedCall(m_abilityRecoverTime, () => 
             {
                 m_mainEnemyCharacterMovement.EnableMovement();
-                m_isAttacking = false;
+                m_isExecutingAbility = false;
+            });
+        }
+
+        void OnHealAnimationExecuted()
+        {
+            // Spawn particles 
+            if(m_healParticleSystem) m_healParticleSystem.Play();
+
+            // Request heal
+            HealCharacter(m_healAmount);
+
+            // Check if life is greater than half health. If it's, remove world state
+            bool bIsMainEnemyHalfHealth = m_characterCurHealth <= (m_characterMaxHealth / 2f);
+            if(!bIsMainEnemyHalfHealth)
+                GoapWorldManager.GoapWorldInstance.GetWorldStates().Remove("MainEnemyIsHalfHealth");
+            
+            // Re-enable character movement on recover time
+            m_abilityRecoverTimeTween = DOVirtual.DelayedCall(m_abilityRecoverTime, () => 
+            {
+                m_mainEnemyCharacterMovement.EnableMovement();
+                m_isExecutingAbility = false;
             });
         }
 
@@ -168,6 +234,12 @@ namespace AIProject.GameModule
             if(triggeredAnimationEvent.stringParameter.Equals("OnAttackCastTiming"))
             {
                 OnCastAttackAnimationCastTiming();
+            }
+
+            // On heal animation correct frame time, spawn heal particles and heal enemy
+            if(triggeredAnimationEvent.stringParameter.Equals("OnHeal"))
+            {
+                OnHealAnimationExecuted();
             }
 
             // Call base

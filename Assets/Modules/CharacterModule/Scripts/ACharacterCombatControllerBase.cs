@@ -19,7 +19,7 @@ namespace CharacterModule
     {
         // Serializable Fields --------------------------------------------
         [Header("CombatBase - GeneralConfig")]
-        [SerializeField] private float m_characterMaxHealth = 100;
+        [SerializeField] protected float m_characterMaxHealth = 100;
         [SerializeField] private bool m_destroyOnDead = true;
 
         [Header("CombatBase - LinkedRefs")]
@@ -33,7 +33,7 @@ namespace CharacterModule
         [SerializeField] private GameSharedDataEvent<float> m_characterHealthPercentageEvent;
 
         // Non-Serializable Fields -----------------------------------------
-        [SerializeField] private float m_characterCurHealth;
+        [SerializeField] protected float m_characterCurHealth;
 
         // Life flags
         protected bool m_isCharacterHurt = false;
@@ -78,6 +78,18 @@ namespace CharacterModule
         public virtual void TakeDamage(float damageAmount, EEnemyAttackType attackType)
         {
             TakeDamage(damageAmount);
+        }
+
+        public virtual void HealCharacter(float healAmount)
+        {
+            if(m_isCharacterDead) return;
+
+            // Update heal to healed value
+            m_characterCurHealth += healAmount;
+            if(m_characterCurHealth > m_characterMaxHealth) m_characterCurHealth = m_characterMaxHealth;
+
+            // Update health percentage
+            m_characterHealthPercentageEvent.SharedDataValue = m_characterCurHealth / m_characterMaxHealth;
         }
 
         public virtual void KillCharacter()
