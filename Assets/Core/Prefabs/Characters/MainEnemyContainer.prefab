@@ -154,8 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_actionName: AttackPlayer_Cast
-  m_actionCost: 1
+  m_actionCost: 2
   m_actionTarget: {fileID: 0}
+  m_endActionDelay: 0.25
   m_actionPreconditionsData:
   - Key: PlayerAlive
     Value: 0
@@ -211,6 +212,7 @@ MonoBehaviour:
   m_actionName: AttackPlayer_Melee
   m_actionCost: 2
   m_actionTarget: {fileID: 0}
+  m_endActionDelay: 1.5
   m_actionPreconditionsData:
   - Key: PlayerAlive
     Value: 0

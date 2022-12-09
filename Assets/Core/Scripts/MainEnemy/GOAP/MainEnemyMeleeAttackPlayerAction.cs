@@ -19,6 +19,8 @@ namespace AIProject.GameModule
 
         public override bool Perform()
         {
+            base.Perform();
+
             m_mainEnemyController.AttackTarget(EEnemyAttackType.Melee);
             return true;
         }

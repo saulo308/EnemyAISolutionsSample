@@ -50,8 +50,11 @@ namespace AIProject.GameModule
 
             // Rotate towards player
             var mainPlayer = MainGameInstance.GameInstance.MainPlayerController;
-            Vector2 playerFacingDirection = mainPlayer.MainPlayerCharacterMovement.CurFacingDirection;
-            m_mainEnemyCharacterMovement.FlipCharacter(playerFacingDirection);
+            Vector2 enemyToPlayerDirection = (transform.position - mainPlayer.transform.position).normalized;
+            if(enemyToPlayerDirection.x > 0) m_mainEnemyCharacterMovement.FlipCharacter(Vector2.right);
+            else m_mainEnemyCharacterMovement.FlipCharacter(Vector2.left);
+            /* Vector2 playerFacingDirection = mainPlayer.MainPlayerCharacterMovement.CurFacingDirection;
+            m_mainEnemyCharacterMovement.FlipCharacter(playerFacingDirection); */
 
             // Create animator trigger string by attack type
             string attackAnimatorTriggerStr = attackType switch

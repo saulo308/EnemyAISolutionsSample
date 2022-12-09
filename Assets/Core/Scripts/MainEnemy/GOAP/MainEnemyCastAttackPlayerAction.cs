@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CharacterModule;
 using EnemyAIModule.GOAP;
 using GameSharedEventModule;
+using DG.Tweening;
 using UnityEngine;
 
 namespace AIProject.GameModule
@@ -17,7 +18,7 @@ namespace AIProject.GameModule
         [SerializeField] private GameSharedDataEvent<bool> m_playerShieldUpSharedEvent = null;
 
         // Non-Serializable Fields ----------------------------------
-        private bool m_canCast = false;
+        private bool m_isPlayerShieldUp = false;
 
         // Unity Methods -------------------------------------------
         protected override void Awake()
@@ -40,13 +41,20 @@ namespace AIProject.GameModule
 
         public override bool IsActionUsable(AGoapAgent goapAgent)
         {
-            return m_canCast;
+            // Gives a random chance to: 
+            // Either choose that action is usable immediately or only if player shield is up
+            // 50% (0.5f) will only mark this action as usable if player shield is up and the other 50%
+            // will mark this action as usable regardless
+            float randomChance = Random.Range(0f,1f);
+
+            if(randomChance > 0.5f) return m_isPlayerShieldUp;
+            return true;
         }
 
         // Private Methods ------------------------------------------------
         void OnPlayerShieldToggle(bool bIsShieldUp)
         {
-            m_canCast = bIsShieldUp;
+            m_isPlayerShieldUp = bIsShieldUp;
         }
     }
 }

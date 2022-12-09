@@ -219,10 +219,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1746215269}
     m_Modifications:
-    - target: {fileID: 1301813180, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_agentGoalList.Array.data[1].GoalPriority
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_actionTarget
       value: 
@@ -290,6 +286,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2299378689356111128, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
   m_PrefabInstance: {fileID: 453151278}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &492260912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 492260913}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &492260913
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492260912}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.6083026, y: 0.04472673, z: -0.011322174}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &536872783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2136247849406565013, guid: 4a47c6646e8d4a34289008108ccd8e22, type: 3}
@@ -9705,6 +9732,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1155896812}
     m_Modifications:
+    - target: {fileID: 2707067821362322865, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
+      propertyPath: m_playerRollDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2707067822217230196, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
       propertyPath: m_Name
       value: PlayerContainer

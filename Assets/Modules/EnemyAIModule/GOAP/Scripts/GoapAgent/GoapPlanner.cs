@@ -25,6 +25,10 @@ namespace EnemyAIModule.GOAP
         // Public Methods -----------------------------------------------------------------
         public Queue<AGoapAction> CreateNewAgentPlan(AGoapAgent instigatorAgent, List<AGoapAction> agentActionList, GoapStateDataDict agentGoalTargetStates)
         {
+            // Reset all actions
+            foreach(var agentAction in agentActionList)
+                agentAction.ResetAction();
+
             // Get actions that are usable
             List<AGoapAction> usableAgentActionList = new List<AGoapAction>();
             foreach(var agentAction in agentActionList)
@@ -47,7 +51,7 @@ namespace EnemyAIModule.GOAP
                 return null;
             }
 
-            // If found at least one path, get the least expensive one
+            // If found at least one path, get the cheapest one (so we can get the cheapest action path)
             PlannerNode cheapestNode = null;
             foreach(var leaf in planGraphLeaves)
             {
@@ -60,6 +64,20 @@ namespace EnemyAIModule.GOAP
                 if(leaf.NodeCost < cheapestNode.NodeCost)
                     cheapestNode = leaf;
             }
+
+            // However, we may have more than one path with same 'cheapest' cost.
+            // Get all of them and randomize
+            List<PlannerNode> cheapestNodesList = new List<PlannerNode>();
+            foreach(var leaf in planGraphLeaves)
+            {
+                if(leaf.NodeCost == cheapestNode.NodeCost)
+                    cheapestNodesList.Add(leaf);
+            }
+
+            // Set cheapestNode as random
+            Random.InitState ((int)System.DateTime.Now.Ticks);
+            int randomIdx = Random.Range(0, cheapestNodesList.Count);
+            cheapestNode = cheapestNodesList[randomIdx];
 
             // Get actions from chosen plan
             List<AGoapAction> resultingActionPlanList = new List<AGoapAction>();
@@ -76,9 +94,12 @@ namespace EnemyAIModule.GOAP
             foreach(var action in resultingActionPlanList)
                 resultingActionQueue.Enqueue(action);
 
-           /*  Debug.Log("Plan:");
+            // DEBUG: Debug cur chosen action plan
+            /* Debug.Log("Plan:");
             foreach(var actionInQueue in resultingActionQueue)
-                Debug.Log(actionInQueue.ActionName); */
+                Debug.Log(actionInQueue.ActionName); 
+            Debug.Log("---"); */
+            
         
             return resultingActionQueue;
         }

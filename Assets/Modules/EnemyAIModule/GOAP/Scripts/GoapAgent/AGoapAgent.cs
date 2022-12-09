@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace EnemyAIModule.GOAP
@@ -51,7 +52,8 @@ namespace EnemyAIModule.GOAP
             if(newAgentGoal == null) return false;
 
             // Request a new agent plan 
-            m_currentActionQueue = m_goapPlanner.CreateNewAgentPlan(this, m_agentActionList, newAgentGoal.GetGoalTargetStatesAsStateDataDict());
+            GoapStateDataDict agentGoalTargetStates = newAgentGoal.GetGoalTargetStatesAsStateDataDict();
+            m_currentActionQueue = m_goapPlanner.CreateNewAgentPlan(this, m_agentActionList, agentGoalTargetStates);
             
             // If no plan found, execute feedback and push idle state to FSM
             if(m_currentActionQueue == null)
@@ -84,6 +86,12 @@ namespace EnemyAIModule.GOAP
 
             // Get next action to execute
             AGoapAction actionToExecute = m_currentActionQueue.Peek();
+            if(actionToExecute.IsActionPerforming()) return false;
+            if(actionToExecute.IsActionComplete() && !actionToExecute.IsActionPerforming()) 
+            {
+                m_currentActionQueue.Dequeue();
+                return true;
+            }
 
             // Check if action requeires range
             bool bIsActionInRangeToExecute = actionToExecute.RequiresRangeToExecute() ? 
@@ -110,7 +118,6 @@ namespace EnemyAIModule.GOAP
 
             // Else, complete action
             actionToExecute.OnActionComplete();
-			m_currentActionQueue.Dequeue();
 
             return true;
         }
