@@ -76,7 +76,7 @@ namespace CharacterModule.TopDown2D
 
         float GetDistanceToTarget()
         {
-            if(!m_targetReference) return 0;
+            if(!m_targetReference) return 9999f;
 
             // Get target position
             var targetPos = m_targetReference.transform.position;

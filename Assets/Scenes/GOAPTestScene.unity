@@ -219,6 +219,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1746215269}
     m_Modifications:
+    - target: {fileID: 1301813180, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_agentGoalList.Array.data[1].GoalPriority
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_actionTarget
       value: 
