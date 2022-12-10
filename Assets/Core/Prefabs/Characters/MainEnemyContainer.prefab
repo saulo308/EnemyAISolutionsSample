@@ -5193,7 +5193,7 @@ MonoBehaviour:
   - Key: StayAlive
     Value: 0
   m_mainEnemyController: {fileID: 2299378689173464247}
-  m_healAbilityCooldown: 10
+  m_healAbilityCooldown: 25
 --- !u!1 &1829402579
 GameObject:
   m_ObjectHideFlags: 0
@@ -5567,7 +5567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2af67d9dad49247950d76000af6990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterMaxHealth: 100
+  m_characterMaxHealth: 300
   m_destroyOnDead: 1
   m_characterContainer: {fileID: 2299378689356111129}
   m_characterSharedEventAnimationEvent: {fileID: 11400000, guid: 7a426ed611040f141ae2e3d44a851e97, type: 2}
@@ -5590,8 +5590,8 @@ MonoBehaviour:
     m_Bits: 64
   m_spellTemplate: {fileID: 7480573345714523486, guid: f669752dce276f54c874da902f086cb9, type: 3}
   m_spellYSpawnOffset: 0.82
-  m_spellDamageAmount: 10
-  m_healAmount: 50
+  m_spellDamageAmount: 30
+  m_healAmount: 40
   m_healParticleSystem: {fileID: 1483988001}
   m_enemySpriteRenderer: {fileID: 2299378689963112027}
   m_enemyBoxCollider: {fileID: 2299378689356111142}

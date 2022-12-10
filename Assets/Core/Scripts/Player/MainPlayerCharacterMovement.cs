@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using CharacterModule.TopDown2D;
 using GameSharedEventModule;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace AIProject.GameModule
@@ -13,6 +14,7 @@ namespace AIProject.GameModule
         [Header("MainPlayer - GeneralConfig")]
         [SerializeField] private float m_rollPlayerSpeedMultipler = 1.8f;
         [SerializeField] private float m_playerRollDelay = 1f;
+        [SerializeField] private Image m_dodgeFillBar = null;
 
         [Header("MainPlayer - SharedDataEvents")]
         [SerializeField] private GameSharedDataEvent<float> m_playerVelocityMagnitude = null;
@@ -27,6 +29,8 @@ namespace AIProject.GameModule
         private LayerMask m_playerLayer;
         private LayerMask m_mainEnemyLayer;
 
+        private Tween m_dodgeCooldownTween = null;
+
         // Properties ---------------------------------------------------------
         public bool CanPlayerRoll => m_canPlayerRoll;
         public bool IsPlayerRolling => m_isRolling;
@@ -38,6 +42,12 @@ namespace AIProject.GameModule
 
             // Bind event on animation event listener
             m_playerSharedEventAnimationEvent.AddListener(OnAnimationEventTrigerred);
+        }
+
+        protected virtual void Update()
+        {
+            if(m_dodgeCooldownTween.IsActive())
+                m_dodgeFillBar.fillAmount = 1 - m_dodgeCooldownTween.ElapsedPercentage();
         }
 
         protected void OnDestroy()
@@ -78,7 +88,7 @@ namespace AIProject.GameModule
             m_characterRigidBody.velocity = (m_characterSpeed * m_rollPlayerSpeedMultipler) * m_rollDirection * Time.fixedDeltaTime;
 
             // Start roll delay using DelayedCall
-            _ = DOVirtual.DelayedCall(m_playerRollDelay, () => m_canPlayerRoll = true);
+            m_dodgeCooldownTween = DOVirtual.DelayedCall(m_playerRollDelay, () => m_canPlayerRoll = true);
 
             // Update collider to IGNORE mainEnemey layer (player can dodge through enemy and enemy's attack)
             Physics2D.IgnoreLayerCollision(GetLayerIdByLayerMask(m_playerLayer),GetLayerIdByLayerMask(m_mainEnemyLayer),true);

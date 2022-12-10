@@ -235,10 +235,6 @@ PrefabInstance:
       propertyPath: m_actionTarget
       value: 
       objectReference: {fileID: 2707067822217124878}
-    - target: {fileID: 1709115365, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_healAbilityCooldown
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 1829402581, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_actionTarget
       value: 
@@ -298,14 +294,6 @@ PrefabInstance:
     - target: {fileID: 2299378689356111129, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_Name
       value: MainEnemyContainer
-      objectReference: {fileID: 0}
-    - target: {fileID: 2299378689678364220, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_healAmount
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 2299378689678364220, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_spellDamageAmount
-      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
@@ -9760,10 +9748,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1155896812}
     m_Modifications:
-    - target: {fileID: 2707067821362322865, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
-      propertyPath: m_playerRollDelay
-      value: 2
-      objectReference: {fileID: 0}
+    - target: {fileID: 1407598230, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 264567427}
     - target: {fileID: 2707067822098617123, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
       propertyPath: m_characterMaxHealth
       value: 30
@@ -9794,15 +9782,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2707067822217230199, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2707067822217230199, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2707067822217230199, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2707067822217230199, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
