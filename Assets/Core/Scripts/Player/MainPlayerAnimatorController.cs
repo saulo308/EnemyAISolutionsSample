@@ -32,6 +32,16 @@ namespace AIProject.GameModule
             m_playerEndLifeEvent.AddListener(OnPlayerEndLife);
         }
 
+        void OnDestroy()
+        {
+            m_playerVelocityDataEvent.RemoveAllListeners();
+            m_playerShieldInputDataEvent.RemoveAllListeners();
+            m_playerRollInputEvent.RemoveAllListeners();
+            m_playerAttackInputDataEvent.RemoveAllListeners();
+            m_playerHurtEvent.RemoveAllListeners();
+            m_playerEndLifeEvent.RemoveAllListeners();
+        }
+
         // Private Methods ----------------------------------------------
         void OnPlayerVelocityUpdate(float playerVelocityMagnitude)
         {

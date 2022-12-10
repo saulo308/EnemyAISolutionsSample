@@ -29,6 +29,13 @@ namespace AIProject.GameModule
             m_mainEnemyHealthPercentageSharedEvent.AddListener(OnMainEnemyHealthChange);
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            m_playerHealthPercentageSharedEvent.RemoveAllListeners();
+            m_mainEnemyHealthPercentageSharedEvent.RemoveAllListeners();
+        }
+
         // Private Methods ------------------------------------------------
         void OnPlayerHealthChange(float newPlayerHealthPercentage)
         {

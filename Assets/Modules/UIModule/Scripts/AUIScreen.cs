@@ -14,6 +14,9 @@ namespace UIModule
 
         [Header("UIScreenBase - LinkedReferences")]
         [SerializeField] private CanvasGroup m_uiScreenTargetCanvasGroup = null;
+
+        // Non-Serializable Fields -----------------------------------------
+        [SerializeField] private Tween m_fadeTween = null;
         
         // Unity Methods -----------------------------------------------------
         protected virtual void Awake()
@@ -31,22 +34,28 @@ namespace UIModule
             // After that, DOFade with fadeDelay
             if(m_showOnAwake)
             {
-                m_uiScreenTargetCanvasGroup.DOFade(0,0f);
+                if(m_fadeTween != null) m_fadeTween.Kill();
+                m_fadeTween = m_uiScreenTargetCanvasGroup.DOFade(0,0f);
                 ShowScreen();
             }
+        }
+
+        protected virtual void OnDestroy()
+        {
+            m_fadeTween.Kill();
         }
 
         // Public Methods ------------------------------------------------------
         public virtual void ShowScreen()
         {
             if(!m_uiScreenTargetCanvasGroup) return;
-            m_uiScreenTargetCanvasGroup.DOFade(1,m_fadeDelay);
+            m_fadeTween = m_uiScreenTargetCanvasGroup.DOFade(1,m_fadeDelay);
         }
 
         public virtual void HideScreen()
         {
             if(!m_uiScreenTargetCanvasGroup) return;
-            m_uiScreenTargetCanvasGroup.DOFade(0,m_fadeDelay);
+            m_fadeTween = m_uiScreenTargetCanvasGroup.DOFade(0,m_fadeDelay);
         }
     }
 }

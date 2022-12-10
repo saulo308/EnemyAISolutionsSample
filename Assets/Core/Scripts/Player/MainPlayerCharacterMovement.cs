@@ -46,8 +46,9 @@ namespace AIProject.GameModule
 
         protected virtual void Update()
         {
-            if(m_dodgeCooldownTween.IsActive())
-                m_dodgeFillBar.fillAmount = 1 - m_dodgeCooldownTween.ElapsedPercentage();
+            // Update dodge bar
+            if(m_dodgeCooldownTween.IsActive()) m_dodgeFillBar.fillAmount = 1 - m_dodgeCooldownTween.ElapsedPercentage();
+            else m_dodgeFillBar.fillAmount = 0;
         }
 
         protected void OnDestroy()

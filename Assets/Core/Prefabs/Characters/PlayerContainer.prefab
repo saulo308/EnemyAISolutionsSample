@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ec2953140914443aea66f94ffb8957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterMaxHealth: 1000
+  m_characterMaxHealth: 30
   m_destroyOnDead: 0
   m_characterContainer: {fileID: 2707067822217230196}
   m_characterSharedEventAnimationEvent: {fileID: 11400000, guid: c07a2e1e4d69a76469c687fb3086b2e4, type: 2}

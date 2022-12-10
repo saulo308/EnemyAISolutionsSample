@@ -27,6 +27,11 @@ namespace AIProject.GameModule
             m_playerShieldUpSharedEvent.AddListener(OnPlayerShieldToggle);
         }
 
+        void OnDestroy()
+        {
+            m_playerShieldUpSharedEvent.RemoveAllListeners();
+        }
+
         // Public Methods -----------------------------------------
         public override bool RequiresRangeToExecute()
         {

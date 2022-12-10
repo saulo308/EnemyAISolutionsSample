@@ -32,6 +32,16 @@ namespace AIProject.GameModule
             m_enemyEndInvisibilityEvent.AddListener(OnEnemyEndInvisibility);
         }
 
+        void OnDestroy()
+        {
+            m_enemyVelocityDataEvent.RemoveAllListeners();
+            m_enemyAttackDataEvent.RemoveAllListeners();
+            m_enemyEndLifeEvent.RemoveAllListeners();
+            m_enemyHealEvent.RemoveAllListeners();
+            m_enemyStartInvisibilityEvent.RemoveAllListeners();
+            m_enemyEndInvisibilityEvent.RemoveAllListeners();
+        }
+
         // Private Methods ----------------------------------------------
         void OnEnemyVelocityUpdate(float enemyVelocityMagnitude)
         {

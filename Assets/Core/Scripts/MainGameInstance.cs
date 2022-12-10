@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 namespace AIProject.GameModule
@@ -7,6 +8,7 @@ namespace AIProject.GameModule
     public class MainGameInstance : MonoBehaviour
     {
         // Serializable Fields -------------------------------------------
+        [Header("GameInstance - LinkedRefs - Characters")]
         [SerializeField] private MainPlayerCharacterController m_mainPlayerController = null;
         [SerializeField] private MainEnemyCharacterController m_mainEnemyPlayerController = null;
 
@@ -23,6 +25,12 @@ namespace AIProject.GameModule
         void Awake()
         {
             m_mainGameInstance = this;
+        }
+
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+                SceneManager.LoadScene("GOAPTestScene");
         }
     }
 }
