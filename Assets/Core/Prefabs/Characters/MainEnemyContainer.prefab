@@ -1,5 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &929240601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 929240602}
+  - component: {fileID: 929240603}
+  m_Layer: 7
+  m_Name: GOAPAction_AttackMelee_FromInvisibility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &929240602
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929240601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032640847}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &929240603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929240601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b0fba518d668a14788c0532f1e62794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_actionName: MainEnemy_AttackMelee_FromInvisibility
+  m_actionCost: 1
+  m_actionTarget: {fileID: 0}
+  m_endActionDelay: 1.5
+  m_actionPreconditionsData:
+  - Key: HasEnemyExitInvisible
+    Value: 0
+  m_actionEffectsData:
+  - Key: DamagePlayer
+    Value: 0
+  m_mainEnemyController: {fileID: 2299378689173464247}
 --- !u!1 &1032640846
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,9 +86,125 @@ Transform:
   - {fileID: 1831873776}
   - {fileID: 1829402580}
   - {fileID: 1709115364}
+  - {fileID: 1250189259}
+  - {fileID: 1197405109}
+  - {fileID: 929240602}
   m_Father: {fileID: 1301813179}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1197405108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1197405109}
+  - component: {fileID: 1197405110}
+  m_Layer: 7
+  m_Name: GOAPAction_EndInvisibility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1197405109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197405108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032640847}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1197405110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197405108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14f71881f67dda4cbb67f7774cbe7cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_actionName: MainEnemy_EndInvisibility
+  m_actionCost: 1
+  m_actionTarget: {fileID: 0}
+  m_endActionDelay: 0.8
+  m_actionPreconditionsData:
+  - Key: IsEnemyInvisible
+    Value: 0
+  m_actionEffectsData:
+  - Key: HasEnemyExitInvisible
+    Value: 0
+  m_mainEnemyController: {fileID: 2299378689173464247}
+--- !u!1 &1250189258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1250189259}
+  - component: {fileID: 1250189260}
+  m_Layer: 7
+  m_Name: GOAPAction_StartInvisibility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1250189259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250189258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1032640847}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1250189260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250189258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dadeb5a792f67741b84db36642f656e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_actionName: MainEnemy_StartInvisibiliy
+  m_actionCost: 1
+  m_actionTarget: {fileID: 0}
+  m_endActionDelay: 3
+  m_actionPreconditionsData:
+  - Key: PlayerAlive
+    Value: 0
+  - Key: MainEnemyIsHalfHealth
+    Value: 0
+  m_actionEffectsData:
+  - Key: IsEnemyInvisible
+    Value: 0
+  m_mainEnemyController: {fileID: 2299378689173464247}
+  m_invisibilityAbilityCooldown: 15
 --- !u!1 &1301813178
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,6 +255,9 @@ MonoBehaviour:
   - {fileID: 1831873777}
   - {fileID: 1829402581}
   - {fileID: 1709115365}
+  - {fileID: 1250189260}
+  - {fileID: 1197405110}
+  - {fileID: 929240603}
   m_agentGoalList:
   - AgentGoalName: DamagePlayerGoal
     GoalPriority: 1
@@ -193,7 +367,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5009,7 +5183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_actionName: MainEnemy_Heal
-  m_actionCost: 2
+  m_actionCost: 3
   m_actionTarget: {fileID: 0}
   m_endActionDelay: 1.5
   m_actionPreconditionsData:
@@ -5065,9 +5239,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_actionName: AttackPlayer_Cast
-  m_actionCost: 2
+  m_actionCost: 3
   m_actionTarget: {fileID: 0}
-  m_endActionDelay: 0.25
+  m_endActionDelay: 1
   m_actionPreconditionsData:
   - Key: PlayerAlive
     Value: 0
@@ -5121,7 +5295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_actionName: AttackPlayer_Melee
-  m_actionCost: 2
+  m_actionCost: 3
   m_actionTarget: {fileID: 0}
   m_endActionDelay: 1.5
   m_actionPreconditionsData:
@@ -5180,6 +5354,8 @@ MonoBehaviour:
   m_enemyAttackDataEvent: {fileID: 11400000, guid: 4fe2f47ec55daa748be4d4748e63965a, type: 2}
   m_enemyEndLifeEvent: {fileID: 11400000, guid: ecc6705995e85ae4da8a05871208324b, type: 2}
   m_enemyHealEvent: {fileID: 11400000, guid: 0e7bbeb38976d6c4bb524df34ae1d78a, type: 2}
+  m_enemyStartInvisibilityEvent: {fileID: 11400000, guid: 45d17a120f5089e44b17b960c9e204d9, type: 2}
+  m_enemyEndInvisibilityEvent: {fileID: 11400000, guid: 06b8f4cb0f37de849b252b7c2e28e1cf, type: 2}
 --- !u!1 &2299378689173464234
 GameObject:
   m_ObjectHideFlags: 0
@@ -5404,6 +5580,8 @@ MonoBehaviour:
   m_mainEnemySpriteRenderer: {fileID: 2299378689963112027}
   m_enemyAttackDataEvent: {fileID: 11400000, guid: 4fe2f47ec55daa748be4d4748e63965a, type: 2}
   m_enemyHealEvent: {fileID: 11400000, guid: 0e7bbeb38976d6c4bb524df34ae1d78a, type: 2}
+  m_invisibilityStartAbilityEvent: {fileID: 11400000, guid: 45d17a120f5089e44b17b960c9e204d9, type: 2}
+  m_invisibilityEndAbilityEvent: {fileID: 11400000, guid: 06b8f4cb0f37de849b252b7c2e28e1cf, type: 2}
   m_abilityRecoverTime: 0.5
   m_enemyDamage: 30
   m_attackRaycastDistance: 3.5
@@ -5414,6 +5592,9 @@ MonoBehaviour:
   m_spellYSpawnOffset: 0.82
   m_spellDamageAmount: 10
   m_healAmount: 50
+  m_healParticleSystem: {fileID: 1483988001}
+  m_enemySpriteRenderer: {fileID: 2299378689963112027}
+  m_enemyBoxCollider: {fileID: 2299378689356111142}
 --- !u!1 &2299378689799730145
 GameObject:
   m_ObjectHideFlags: 0

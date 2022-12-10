@@ -99,7 +99,6 @@ namespace EnemyAIModule.GOAP
             foreach(var actionInQueue in resultingActionQueue)
                 Debug.Log(actionInQueue.ActionName); 
             Debug.Log("---"); */
-            
         
             return resultingActionQueue;
         }

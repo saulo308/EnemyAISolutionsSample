@@ -15,6 +15,8 @@ namespace AIProject.GameModule
 
         [SerializeField] private GameSharedEvent m_enemyEndLifeEvent;
         [SerializeField] private GameSharedEvent m_enemyHealEvent;
+        [SerializeField] private GameSharedEvent m_enemyStartInvisibilityEvent;
+        [SerializeField] private GameSharedEvent m_enemyEndInvisibilityEvent;
 
         // Unity Methods -----------------------------------------
         protected override void Awake()
@@ -26,6 +28,8 @@ namespace AIProject.GameModule
             m_enemyAttackDataEvent.AddListener(OnEnemyAttack);
             m_enemyEndLifeEvent.AddListener(OnEnemyEndLife);
             m_enemyHealEvent.AddListener(OnEnemyHeal);
+            m_enemyStartInvisibilityEvent.AddListener(OnEnemyStartInvisibility);
+            m_enemyEndInvisibilityEvent.AddListener(OnEnemyEndInvisibility);
         }
 
         // Private Methods ----------------------------------------------
@@ -50,6 +54,16 @@ namespace AIProject.GameModule
         void OnEnemyHeal()
         {
             SetAnimatorTrigger("Heal");
+        }
+
+        void OnEnemyStartInvisibility()
+        {
+            SetAnimatorTrigger("InvisibleStart");
+        }
+
+        void OnEnemyEndInvisibility()
+        {
+            SetAnimatorTrigger("InvisibleEnd");
         }
     }
 }

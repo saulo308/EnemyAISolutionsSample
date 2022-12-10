@@ -43,5 +43,17 @@ namespace AIProject.GameModule
             if(m_mainEnemyCombatController.IsExecutingAbility) return;
             m_mainEnemyCombatController.RequestHeal();
         }
+
+        public void RequestStartInvisibilityAbility()
+        {
+            if(m_mainEnemyCombatController.IsExecutingAbility) return;
+            m_mainEnemyCombatController.RequestStartInvisibility();
+        } 
+        
+        public void RequestEndInvisibilityAbility()
+        {
+            if(m_mainEnemyCombatController.IsExecutingAbility) return;
+            m_mainEnemyCombatController.RequestEndInvisibility();
+        }
     }
 }

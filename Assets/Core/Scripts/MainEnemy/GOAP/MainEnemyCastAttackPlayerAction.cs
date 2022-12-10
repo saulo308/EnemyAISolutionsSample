@@ -35,17 +35,24 @@ namespace AIProject.GameModule
 
         public override bool Perform()
         {
+            base.Perform();
+
             m_mainEnemyController.AttackTarget(EEnemyAttackType.Cast);
             return true;
         }
 
         public override bool IsActionUsable(AGoapAgent goapAgent)
         {
-            // Gives a random chance to: 
-            // Either choose that action is usable immediately or only if player shield is up
-            // 50% (0.5f) will only mark this action as usable if player shield is up and the other 50%
-            // will mark this action as usable regardless
+            // Gives a random chance to cast spell
+            //      If player shield is up, then chance to cast action to be usable is 80% (randomChance > 0.2f)
+            //      If player shield is not up, then chance to cast to be usable is 50% (randomChance > 0.5f)
             float randomChance = Random.Range(0f,1f);
+
+            if(m_isPlayerShieldUp)
+            {
+                if(randomChance > 0.2f) return true;
+                return false;
+            }
 
             if(randomChance > 0.5f) return m_isPlayerShieldUp;
             return true;

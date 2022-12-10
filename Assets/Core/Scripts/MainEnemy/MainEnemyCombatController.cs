@@ -18,6 +18,8 @@ namespace AIProject.GameModule
         [Header("MainEnemy - SharedEvents")]
         [SerializeField] private GameSharedDataEvent<string> m_enemyAttackDataEvent;
         [SerializeField] private GameSharedEvent m_enemyHealEvent;
+        [SerializeField] private GameSharedEvent m_invisibilityStartAbilityEvent;
+        [SerializeField] private GameSharedEvent m_invisibilityEndAbilityEvent;
         
         [Header("MainEnemy - GeneralConfig")]
         [SerializeField] private float m_abilityRecoverTime = 0.5f;
@@ -35,6 +37,10 @@ namespace AIProject.GameModule
         [Header("MainEnemy - GeneralConfig - Heal")]
         [SerializeField] private float m_healAmount = 50f;
         [SerializeField] private ParticleSystem m_healParticleSystem = null;
+
+        [Header("MainEnemy - GeneralConfig - Invisibility")]
+        [SerializeField] private SpriteRenderer m_enemySpriteRenderer = null;
+        [SerializeField] private BoxCollider2D m_enemyBoxCollider = null;
 
         // Non-Serializable Fields -------------------------------------------
         private GameObject m_curTargetRef = null;
@@ -111,8 +117,41 @@ namespace AIProject.GameModule
             else m_mainEnemyCharacterMovement.FlipCharacter(Vector2.left);
             // ----
 
-            // Set shared data event that will trigger animator
+            // Dispatch event that will trigger animator
             m_enemyHealEvent.DispatchEvent();
+        }
+
+        public void RequestStartInvisibility()
+        {
+            // If enemy still in recover time, ignore ability use
+            if(m_abilityRecoverTimeTween.IsActive()) return;
+            if(m_isCharacterDead) return;
+
+            m_isExecutingAbility = true;
+
+            // Disable character movement
+            m_mainEnemyCharacterMovement.DisableMovement(true);
+
+            // Dispatch event that will trigger animator
+            m_invisibilityStartAbilityEvent.DispatchEvent();
+        }
+
+        public void RequestEndInvisibility()
+        {
+            // If enemy still in recover time, ignore ability use
+            if(m_abilityRecoverTimeTween.IsActive()) return;
+            if(m_isCharacterDead) return;
+
+            m_isExecutingAbility = true;
+
+            // Disable character movement
+            m_mainEnemyCharacterMovement.DisableMovement(true);
+
+            // Enable sprite renderer
+            m_enemySpriteRenderer.enabled = true;
+
+            // Dispatch event that will trigger animator
+            m_invisibilityEndAbilityEvent.DispatchEvent();
         }
 
         public void SetupData(GameObject targetRef)
@@ -190,8 +229,8 @@ namespace AIProject.GameModule
             var spawnedSpell = Instantiate(m_spellTemplate,spellSpawnPos,Quaternion.identity,m_characterContainer.transform.parent);
             spawnedSpell.SetupSpellData(m_spellDamageAmount);
 
-            // Re-enable character movement on recover time
-            m_abilityRecoverTimeTween = DOVirtual.DelayedCall(m_abilityRecoverTime, () => 
+            // Re-enable character movement on (recover time / 2f)
+            m_abilityRecoverTimeTween = DOVirtual.DelayedCall(m_abilityRecoverTime / 2f, () => 
             {
                 m_mainEnemyCharacterMovement.EnableMovement();
                 m_isExecutingAbility = false;
@@ -219,6 +258,26 @@ namespace AIProject.GameModule
             });
         }
 
+        void OnStartInvisibility()
+        {
+            // Deactivate spriteRenderer and collider
+            m_enemySpriteRenderer.enabled = false;
+            m_enemyBoxCollider.enabled = false;
+
+            // Re-enable character movement
+            m_mainEnemyCharacterMovement.EnableMovement();
+            m_isExecutingAbility = false;
+        }
+
+        void OnEndInvisibility()
+        {
+            // Activate collider
+            m_enemyBoxCollider.enabled = true;
+
+            m_mainEnemyCharacterMovement.EnableMovement();
+            m_isExecutingAbility = false;
+        }
+
         // Event Handlers ---------------------------------------------------------------
         protected override void OnAnimationEventTrigerred(AnimationEvent triggeredAnimationEvent)
         {
@@ -242,6 +301,18 @@ namespace AIProject.GameModule
             if(triggeredAnimationEvent.stringParameter.Equals("OnHeal"))
             {
                 OnHealAnimationExecuted();
+            }
+
+            // On invisible animation end, make enemy 'inivisible' (disable image and colliders)
+            if(triggeredAnimationEvent.stringParameter.Equals("OnInvisibleStart"))
+            {
+                OnStartInvisibility();
+            }
+            
+            // On invisible animation end, make enemy shown (disable image and colliders)
+            if(triggeredAnimationEvent.stringParameter.Equals("OnInvisibleReverse"))
+            {
+                OnEndInvisibility();
             }
 
             // Call base

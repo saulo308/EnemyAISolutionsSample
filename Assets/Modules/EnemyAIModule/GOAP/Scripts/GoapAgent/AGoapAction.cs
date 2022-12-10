@@ -25,6 +25,8 @@ namespace EnemyAIModule.GOAP
         protected bool m_isActionComplete = false;
         protected bool m_isActionPerfoming = false;
 
+        private Tween m_endDelayTween = null;
+
         // Properties -----------------------------------------------------
         public string ActionName => m_actionName;
         public float ActionCost => m_actionCost;
@@ -54,7 +56,9 @@ namespace EnemyAIModule.GOAP
         public virtual void OnActionComplete()
         {
             m_isActionComplete = true;
-            DOVirtual.DelayedCall(m_endActionDelay, () => m_isActionPerfoming = false);
+
+            if((m_endDelayTween != null) && m_endDelayTween.IsActive()) m_endDelayTween.Kill();
+            m_endDelayTween = DOVirtual.DelayedCall(m_endActionDelay, () => m_isActionPerfoming = false);
         }
 
         public abstract bool IsActionUsable(AGoapAgent goapAgent);
