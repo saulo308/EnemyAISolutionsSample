@@ -12,13 +12,14 @@ namespace AIProject.GameModule
         // Serializable Fields ---------------------------------------------------
         [Header("GeneralConfig")]
         [SerializeField] private SpriteRenderer m_spellSpriteRenderer = null;
-        [SerializeField] private BoxCollider2D m_spellCollider = null;
         [SerializeField] private float m_destroyDelay = 0.2f;
 
         [Header("SharedEvents")]
         [SerializeField] private GameSharedDataEvent<AnimationEvent> m_spellSharedEventAnimationEvent = null;
 
         // Non-Serializable Fields -------------------------------------------------
+        private BoxCollider2D[] m_spellColliderList;
+
         private float m_spellDamage = 0f;
 
         private bool m_hasHitGround = false;
@@ -34,8 +35,10 @@ namespace AIProject.GameModule
             // Bind animationEvent
             m_spellSharedEventAnimationEvent.AddListener(OnAnimationEventTrigerred);
 
-            // Deactivate collider
-            m_spellCollider.enabled = false; 
+            // Deactivate colliders
+            m_spellColliderList = GetComponents<BoxCollider2D>();
+            foreach(var boxCollider in m_spellColliderList)
+                boxCollider.enabled = false; 
         }
 
         void OnDestroy()
@@ -58,8 +61,9 @@ namespace AIProject.GameModule
                 // Set flag to avoid multiple calls
                 m_hasHitGround = true;
 
-                // When spell hits ground, activate collider
-                m_spellCollider.enabled = true;
+                // When spell hits ground, activate colliders
+                foreach(var boxCollider in m_spellColliderList)
+                    boxCollider.enabled = true; 
 
                 // Execute fade out and destroy on completed
                 _ = DOVirtual.DelayedCall(m_destroyDelay,()=>
@@ -71,8 +75,9 @@ namespace AIProject.GameModule
 
             if(triggeredAnimationEvent.stringParameter.Equals("OnSpellFinished"))
             {
-                // When spell finishes, deactivate collider
-                m_spellCollider.enabled = false;
+                // When spell finishes, deactivate colliders
+                foreach(var boxCollider in m_spellColliderList)
+                    boxCollider.enabled = false; 
             }
         }
 

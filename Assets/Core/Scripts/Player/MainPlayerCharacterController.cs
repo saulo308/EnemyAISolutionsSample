@@ -43,7 +43,7 @@ namespace AIProject.GameModule
         {
             base.Update();
 
-            if(!m_mainPlayerCombatController.IsCharacterHurt || !m_mainPlayerCombatController.IsCharacterDead) 
+            if(!m_mainPlayerCombatController.IsCharacterHurt && !m_mainPlayerCombatController.IsCharacterDead) 
             {
                 // Check for player "roll" input
                 if(Input.GetKeyDown(KeyCode.Space))
