@@ -219,6 +219,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1746215269}
     m_Modifications:
+    - target: {fileID: 1483988001, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1709115365, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_actionTarget
       value: 
@@ -282,6 +286,10 @@ PrefabInstance:
     - target: {fileID: 2299378689356111129, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_Name
       value: MainEnemyContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2299378689678364220, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_characterMaxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2299378689678364220, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
       propertyPath: m_healParticleSystem

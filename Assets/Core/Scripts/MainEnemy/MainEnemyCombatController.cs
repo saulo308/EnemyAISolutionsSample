@@ -61,6 +61,7 @@ namespace AIProject.GameModule
         {
             // If enemy still in recover time, ignore attack (an attack has been requested before recover time)
             if(m_abilityRecoverTimeTween.IsActive()) return;
+            if(m_isCharacterDead) return;
 
             m_isExecutingAbility = true;
 
@@ -93,6 +94,7 @@ namespace AIProject.GameModule
         {
             // If enemy still in recover time, ignore ability use
             if(m_abilityRecoverTimeTween.IsActive()) return;
+            if(m_isCharacterDead) return;
 
             m_isExecutingAbility = true;
 
