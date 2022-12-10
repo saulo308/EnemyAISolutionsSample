@@ -19,7 +19,7 @@ namespace AIProject.GameModule
         [SerializeField] private GameSharedDataEvent<bool> m_playerShieldInputDataEvent;
 
         [Header("MainPlayer - GeneralConfig - Attack")]
-        [SerializeField] private float m_playerDamage = 5f;
+        [SerializeField] private float m_playerBaseDamage = 5f;
         [SerializeField] private float m_attackRaycastDistance = 2.0f;
 
         [SerializeField] private int m_maxNumberOfAttacksCombo = 3;
@@ -36,6 +36,7 @@ namespace AIProject.GameModule
         private int m_curAttackComboIndex = 1;
         private float m_timeSinceLastAttack = 0f;
         private Tween m_resetComboTween = null;
+        private float m_playerCurDamage = 0f;
 
         private bool m_isShieldUp = false;
 
@@ -48,6 +49,9 @@ namespace AIProject.GameModule
         protected override void Awake()
         {
             base.Awake();
+
+            // Setup cur damage
+            m_playerCurDamage = m_playerBaseDamage;
 
             // Add 'PlayerAlive' state on GOAP world state (pre-condition to most enemy actions)
             GoapWorldManager.GoapWorldInstance.GetWorldStates().AddUniquePair("PlayerAlive",0);
@@ -141,6 +145,18 @@ namespace AIProject.GameModule
             // Create string "Attack[1,2,3,..]" to send to animator as trigger
             string attackComboAnimatorTriggerName = string.Format("Attack{0}",m_curAttackComboIndex);
             m_playerAttackInputDataEvent.SharedDataValue = attackComboAnimatorTriggerName;
+            
+            // If started combo, calculate new damage by multiplying it by a randomMultiplier (30% to 50% more damage)
+            // Else, reset curDamage
+            if(m_curAttackComboIndex > 1)
+            {
+                float damageMultiplier = Random.Range(1.3f,1.5f);
+                m_playerCurDamage *= damageMultiplier;
+            }
+            else
+            {
+                m_playerCurDamage = m_playerBaseDamage;
+            }
 
             // Increase attack combo index.
             // If it's already max, then reset to 1
@@ -168,7 +184,7 @@ namespace AIProject.GameModule
             
             // Else, we hit enemy. Make it take damage
             var hitEnemy = outHit.collider.GetComponentInChildren<MainEnemyCombatController>();
-            hitEnemy.TakeDamage(m_playerDamage);
+            hitEnemy.TakeDamage(m_playerCurDamage);
         }
 
         // Event Handlers ---------------------------------------------------------------
