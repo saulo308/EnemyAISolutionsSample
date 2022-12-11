@@ -622,7 +622,7 @@ MonoBehaviour:
   m_mainPlayerCharacterMovement: {fileID: 2707067821362322865}
   m_playerAttackInputDataEvent: {fileID: 11400000, guid: e7e07cce70d10544fa204a03bcd78cb4, type: 2}
   m_playerShieldInputDataEvent: {fileID: 11400000, guid: 6adf31d986930dd48b9946bdb2b6de4d, type: 2}
-  m_playerDamage: 5
+  m_playerBaseDamage: 5
   m_attackRaycastDistance: 2
   m_maxNumberOfAttacksCombo: 3
   m_attackDelay: 0.4

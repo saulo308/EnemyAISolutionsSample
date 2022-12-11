@@ -186,10 +186,31 @@ namespace AIProject.GameModule
             //(e.g. "attack" takes 5 frames to actually appear to hit something, frames 0 to 4 are just anticipating attack)
 
             //Execute a raycast from enemy to enemy left direction (facing direction) to check if we hit something
-            Vector2 raycastOrigin = transform.position;
-            Vector2 raycastDirection = -transform.right; // == transform.left
-            var outHit = Physics2D.Raycast(raycastOrigin, raycastDirection, m_attackRaycastDistance, m_playerLayerMask);
-            // Debug.DrawRay(raycastOrigin, raycastDirection * m_attackRaycastDistance, Color.red, 0.1f);
+            
+            // @note Little 'gambiarra' here. The game is top down, and player may not be in the same 'y' as enemy, making
+            // a single raycast not hit anyone. 
+            // Workarround: Execute 3 raycasts with different 'y' offset (one o enemy's head, 
+            // one on enemy's chest and another one on enemy's feet)
+            // To see this, enable 'Debug' line
+            Vector2 raycastOrigin = transform.position + new Vector3(0,2,0);
+            for(int i = 0;i < 3; i ++)
+            {
+                // For each raycast, subtract given offset
+                raycastOrigin -= new Vector2(0,1);
+                Vector2 raycastDirection = -transform.right; // == transform.left
+                var outHit = Physics2D.Raycast(raycastOrigin, raycastDirection, m_attackRaycastDistance, m_playerLayerMask);
+                
+                // Enable debug to see how we use 3 raycasts here
+                // Debug.DrawRay(raycastOrigin, raycastDirection * m_attackRaycastDistance, Color.red, 0.1f);
+
+                // Check hit. If nothing found, return
+                if(!outHit) continue;
+                
+                // Else, we hit player. Make it take damage
+                var hitEnemy = outHit.collider.GetComponentInChildren<MainPlayerCombatController>();
+                hitEnemy.TakeDamage(m_enemyDamage,EEnemyAttackType.Melee);
+                break;
+            }
 
             // Re-enable character movement on recover time
             m_abilityRecoverTimeTween = DOVirtual.DelayedCall(m_abilityRecoverTime, () => 
@@ -197,13 +218,6 @@ namespace AIProject.GameModule
                 m_mainEnemyCharacterMovement.EnableMovement();
                 m_isExecutingAbility = false;
             });
-
-            // Check hit. If nothing found, return
-            if(!outHit) return;
-            
-            // Else, we hit player. Make it take damage
-            var hitEnemy = outHit.collider.GetComponentInChildren<MainPlayerCombatController>();
-            hitEnemy.TakeDamage(m_enemyDamage,EEnemyAttackType.Melee);
         }
 
         void OnCastAttackAnimationCastTiming()

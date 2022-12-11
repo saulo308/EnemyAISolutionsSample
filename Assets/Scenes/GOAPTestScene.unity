@@ -295,10 +295,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainEnemyContainer
       objectReference: {fileID: 0}
-    - target: {fileID: 2299378689678364220, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
-      propertyPath: m_characterMaxHealth
-      value: 200
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
 --- !u!4 &453151279 stripped
@@ -9809,10 +9805,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 264567427}
-    - target: {fileID: 2707067822098617123, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
-      propertyPath: m_characterMaxHealth
-      value: 3000
-      objectReference: {fileID: 0}
     - target: {fileID: 2707067822217230196, guid: 54386518cf0c572408b0f3431ed2d39c, type: 3}
       propertyPath: m_Name
       value: PlayerContainer

@@ -34,6 +34,7 @@ namespace AIProject.GameModule
             base.OnDestroy();
             m_playerHealthPercentageSharedEvent.RemoveAllListeners();
             m_mainEnemyHealthPercentageSharedEvent.RemoveAllListeners();
+            DOTween.KillAll();
         }
 
         // Private Methods ------------------------------------------------

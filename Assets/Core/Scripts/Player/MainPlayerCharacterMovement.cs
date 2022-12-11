@@ -47,13 +47,16 @@ namespace AIProject.GameModule
         protected virtual void Update()
         {
             // Update dodge bar
-            if(m_dodgeCooldownTween.IsActive()) m_dodgeFillBar.fillAmount = 1 - m_dodgeCooldownTween.ElapsedPercentage();
-            else m_dodgeFillBar.fillAmount = 0;
+            if(m_dodgeCooldownTween != null && 
+                m_dodgeCooldownTween.IsActive()) m_dodgeFillBar.fillAmount = (1 - m_dodgeCooldownTween.ElapsedPercentage());
+            else 
+                m_dodgeFillBar.fillAmount = 0;
         }
 
         protected void OnDestroy()
         {
             m_playerSharedEventAnimationEvent.RemoveListener(OnAnimationEventTrigerred);
+            if(m_dodgeCooldownTween != null) m_dodgeCooldownTween.Kill();
         }
 
         // Public Methods -----------------------------------------------------
