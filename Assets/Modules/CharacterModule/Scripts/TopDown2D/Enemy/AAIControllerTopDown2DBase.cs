@@ -65,7 +65,7 @@ namespace CharacterModule.TopDown2D
             // Get target position
             var targetPos = m_targetReference.transform.position;
 
-            // Get AI pos
+            // Get AI position
             var currentPos = transform.position;
 
             // Calculate direction to target
@@ -81,9 +81,10 @@ namespace CharacterModule.TopDown2D
             // Get target position
             var targetPos = m_targetReference.transform.position;
 
-            // Get AI pos
+            // Get AI position
             var currentPos = transform.position;
 
+            // Calculate distance from two positions
             return Vector2.Distance(currentPos,targetPos);
         }
     }

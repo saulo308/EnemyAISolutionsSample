@@ -33,19 +33,6 @@ namespace AIProject.GameModule
         }
 
         // Public Methods -----------------------------------------
-        public override bool RequiresRangeToExecute()
-        {
-            return false;
-        }
-
-        public override bool Perform()
-        {
-            base.Perform();
-
-            m_mainEnemyController.AttackTarget(EEnemyAttackType.Cast);
-            return true;
-        }
-
         public override bool IsActionUsable(AGoapAgent goapAgent)
         {
             // Gives a random chance to cast spell
@@ -60,6 +47,16 @@ namespace AIProject.GameModule
             }
 
             if(randomChance > 0.5f) return m_isPlayerShieldUp;
+            return true;
+        }
+
+        public override bool RequiresRangeToExecute() => false;
+
+        public override bool Perform()
+        {
+            base.Perform();
+
+            m_mainEnemyController.AttackTarget(EEnemyAttackType.Cast);
             return true;
         }
 

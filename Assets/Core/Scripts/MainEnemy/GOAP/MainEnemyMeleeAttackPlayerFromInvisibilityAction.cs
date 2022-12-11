@@ -12,20 +12,14 @@ namespace AIProject.GameModule
         [SerializeField] private MainEnemyCharacterController m_mainEnemyController = null;
 
         // Public Methods -----------------------------------------
-        public override bool RequiresRangeToExecute()
-        {
-            return false;
-        }
+        public override bool IsActionUsable(AGoapAgent goapAgent) => true;
+        
+        public override bool RequiresRangeToExecute() => false;
 
         public override bool Perform()
         {
             base.Perform();
             m_mainEnemyController.AttackTarget(EEnemyAttackType.Melee);
-            return true;
-        }
-
-        public override bool IsActionUsable(AGoapAgent goapAgent)
-        {
             return true;
         }
     }

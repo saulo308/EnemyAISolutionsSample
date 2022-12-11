@@ -87,10 +87,10 @@ namespace AIProject.GameModule
             var hitTarget = other.GetComponentInChildren<MainPlayerCombatController>();
             if(!hitTarget) return;
 
-            // If already hit enemy, return
+            // If already hit player, return
             if(m_hasHitEnemy) return;
 
-            // Take damage from player
+            // Call TakeDamage() on player
             m_hasHitEnemy = true;
             hitTarget.TakeDamage(m_spellDamage,EEnemyAttackType.Cast);
         }

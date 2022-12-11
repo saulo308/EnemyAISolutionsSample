@@ -24,44 +24,35 @@ namespace EnemyAIModule.GOAP
         // Unity Methods -----------------------------------------------
         void Update()
         {
+            // Every tick, update FSM current stack (FSM.peek())
             UpdateCurrentState();
         }
 
         // Public Methods -----------------------------------------------
         public void InitializeFSM(AGoapAgent targetGoapAgent)
         {
+            // Set goapAgent that owns this FSM
             m_targetGoapAgent = targetGoapAgent;
 
+            // Push first idle state and set flag to true so we can start updating FSM
             m_fsmStack.Push(m_idleState);
-
             m_boolCanRun = true;
         }
 
-        public AGoapAIFSMStateBase PeekFSMStack()
-        {
-            return m_fsmStack.Peek();
-        }
+        // Helping functions to update FSM stack
+        public AGoapAIFSMStateBase PeekFSMStack() => m_fsmStack.Peek();
+        public void ClearFSMStack() =>  m_fsmStack.Clear();
 
-        public void PushFSMStack(AGoapAIFSMStateBase stateToPush)
-        {
-            m_fsmStack.Push(stateToPush);
-        }
-
-        public AGoapAIFSMStateBase PopFSMStack()
-        {
-            return m_fsmStack.Pop();
-        }
-
-        public void ClearFSMStack()
-        {
-            m_fsmStack.Clear();
-        }
+        public void PushFSMStack(AGoapAIFSMStateBase stateToPush) =>  m_fsmStack.Push(stateToPush);
+        public AGoapAIFSMStateBase PopFSMStack() =>  m_fsmStack.Pop();
 
         // Private Methods -------------------------------------------------
         void UpdateCurrentState()
         {
+            // Test if FSM can run
             if(!m_boolCanRun) return;
 
+            // Get state that is on first position (peek()) and update it's state with 'UpdateState()' call()
             AGoapAIFSMStateBase currentState = m_fsmStack.Peek();
 		    if (currentState != null)
 			    currentState.UpdateState(m_targetGoapAgent);

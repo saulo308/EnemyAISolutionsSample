@@ -288,6 +288,7 @@ namespace AIProject.GameModule
             // Activate collider
             m_enemyBoxCollider.enabled = true;
 
+            // Re-enable character movement
             m_mainEnemyCharacterMovement.EnableMovement();
             m_isExecutingAbility = false;
         }

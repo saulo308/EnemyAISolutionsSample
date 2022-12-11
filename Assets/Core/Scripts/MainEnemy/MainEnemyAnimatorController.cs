@@ -50,30 +50,11 @@ namespace AIProject.GameModule
             SetAnimatorBool("IsRunning",bIsRunning);
         }
 
-        void OnEnemyAttack(string attackTriggerName)
-        {
-            // Set trigger on animator
-            SetAnimatorTrigger(attackTriggerName);
-        }
-
-        void OnEnemyEndLife()
-        {
-            SetAnimatorTrigger("Dead");
-        }
-        
-        void OnEnemyHeal()
-        {
-            SetAnimatorTrigger("Heal");
-        }
-
-        void OnEnemyStartInvisibility()
-        {
-            SetAnimatorTrigger("InvisibleStart");
-        }
-
-        void OnEnemyEndInvisibility()
-        {
-            SetAnimatorTrigger("InvisibleEnd");
-        }
+        // Set triggers on animator
+        void OnEnemyAttack(string attackTriggerName) => SetAnimatorTrigger(attackTriggerName);
+        void OnEnemyEndLife() => SetAnimatorTrigger("Dead");
+        void OnEnemyHeal() => SetAnimatorTrigger("Heal");
+        void OnEnemyStartInvisibility() => SetAnimatorTrigger("InvisibleStart");
+        void OnEnemyEndInvisibility() => SetAnimatorTrigger("InvisibleEnd");
     }
 }

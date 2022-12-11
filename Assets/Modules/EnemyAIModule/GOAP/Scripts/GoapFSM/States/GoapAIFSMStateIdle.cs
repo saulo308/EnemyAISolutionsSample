@@ -9,6 +9,7 @@ namespace EnemyAIModule.GOAP
         // Public Methods --------------------------------------------
         public override void UpdateState(AGoapAgent goapAgent)
         {
+            // On 'idle' state, calculates a new plan for agent
             bool bFoundPlan = goapAgent.RequestNewAgentPlan();
         }
     }

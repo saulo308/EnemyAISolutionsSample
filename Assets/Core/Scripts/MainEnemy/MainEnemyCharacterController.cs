@@ -26,18 +26,6 @@ namespace AIProject.GameModule
             m_mainEnemyCombatController.RequestAttack(attackType);
         }
 
-        public void AttackTarget_Melee()
-        {
-            if(m_mainEnemyCombatController.IsExecutingAbility) return;
-            m_mainEnemyCombatController.RequestAttack(EEnemyAttackType.Melee);
-        }
-
-        public void AttackTarget_Cast()
-        {
-            if(m_mainEnemyCombatController.IsExecutingAbility) return;
-            m_mainEnemyCombatController.RequestAttack(EEnemyAttackType.Cast);
-        }
-
         public void RequestHealAbility()
         {
             if(m_mainEnemyCombatController.IsExecutingAbility) return;

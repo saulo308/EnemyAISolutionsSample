@@ -9,6 +9,7 @@ namespace EnemyAIModule.GOAP
         // Public Methods --------------------------------------------
         public override void UpdateState(AGoapAgent goapAgent)
         {
+            // On 'MoveTo' state, moves GoapAgent to action's range so it can be peformed
             bool bReachedActionRange = goapAgent.MoveAgentToActionRange();
         }
     }

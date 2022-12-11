@@ -12,7 +12,7 @@ namespace EnemyAIModule.GOAP
         [SerializeField] private string m_actionName = "";
         [SerializeField] private float m_actionCost = 0f;
         [SerializeField] private GameObject m_actionTarget = null;
-        [SerializeField] private float m_endActionDelay = 0f;
+        [SerializeField] private float m_endActionDelay = 0f; // Delay to execute after action has been executed
 
         [Header("GOAPActionBase - States")]
         [SerializeField] private List<GoapStateData> m_actionPreconditionsData = new List<GoapStateData>();
@@ -38,6 +38,9 @@ namespace EnemyAIModule.GOAP
         // Unity Methods -------------------------------------------------------------
         protected virtual void Awake()
         {
+            // Note, for serialization, we use list to store data. But for implementation, it's easier (and better performance)
+            // To use dictionaries instead.
+            // Construct dictionaries from given list data
             m_actionPreconditions = ConstructStateDictFromStateList(m_actionPreconditionsData);
             m_actionEffects = ConstructStateDictFromStateList(m_actionEffectsData);
         }
@@ -45,8 +48,10 @@ namespace EnemyAIModule.GOAP
         // Public Methods ----------------------------------------------------------------
         public bool DoesGivenStateFulfillPreconditions(GoapStateDataDict givenStates)
         {
+            // Checks if 'givenStates' has all conditions needed for this actions execution (preconditions)
             foreach(var preconditionStateData in m_actionPreconditions.StateDict)
             {
+                // If 'givenStates' does not have this precondition, then it does not fulfill all preconditions
                 if(!givenStates.StateDict.ContainsKey(preconditionStateData.Key))
                     return false;
             }
@@ -55,8 +60,13 @@ namespace EnemyAIModule.GOAP
 
         public virtual void OnActionComplete()
         {
+            // set flag
             m_isActionComplete = true;
 
+            // Start a delay tween with 'm_endActionDelay'. This will keep 'm_isActionPerfoming' to true
+            // until delay is done
+            // The effect of this is that the GoapAgent will keep this action on 'Action's queue' into it is still
+            // performing and will not start performing the next action on it's queue
             if((m_endDelayTween != null) && m_endDelayTween.IsActive()) m_endDelayTween.Kill();
             m_endDelayTween = DOVirtual.DelayedCall(m_endActionDelay, () => m_isActionPerfoming = false);
         }

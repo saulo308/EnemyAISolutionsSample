@@ -59,26 +59,10 @@ namespace AIProject.GameModule
             SetAnimatorBool("IsShieldUp",bShieldUp);
         }
 
-        void OnPlayerRollInputPressed()
-        {
-            // Set trigger on animator to play roll animation
-            SetAnimatorTrigger("Roll");
-        }
-
-        void OnPlayerAttackInputPressed(string attackTriggerName)
-        {
-            // Set trigger on animator
-            SetAnimatorTrigger(attackTriggerName);
-        }
-
-        void OnPlayerHurt()
-        {
-            SetAnimatorTrigger("Hurt");
-        }
-
-        void OnPlayerEndLife()
-        {
-            SetAnimatorTrigger("Dead");
-        }
+        // Set triggers on animator
+        void OnPlayerRollInputPressed() =>  SetAnimatorTrigger("Roll");
+        void OnPlayerAttackInputPressed(string attackTriggerName) => SetAnimatorTrigger(attackTriggerName);
+        void OnPlayerHurt() => SetAnimatorTrigger("Hurt");
+        void OnPlayerEndLife() => SetAnimatorTrigger("Dead");
     }
 }

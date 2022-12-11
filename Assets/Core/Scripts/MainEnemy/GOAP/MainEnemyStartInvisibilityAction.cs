@@ -18,10 +18,15 @@ namespace AIProject.GameModule
         private bool m_isInvisibilityAbilityOnCooldown = false;
 
         // Public Methods -----------------------------------------
-        public override bool RequiresRangeToExecute()
+        
+        public override bool IsActionUsable(AGoapAgent goapAgent)
         {
-            return false;
+            // If invisibility ability is on cooldown, then action is not usable
+            return !m_isInvisibilityAbilityOnCooldown;
         }
+        
+        public override bool RequiresRangeToExecute() => false;
+        public override bool IsInRangeToExecute() =>  true;
 
         public override bool Perform()
         {
@@ -38,17 +43,6 @@ namespace AIProject.GameModule
             });
 
             return true;
-        }
-        
-        public override bool IsInRangeToExecute()
-        {
-            return true;
-        }
-
-        public override bool IsActionUsable(AGoapAgent goapAgent)
-        {
-            // If invisibility ability is on cooldown, then action is not usable
-            return !m_isInvisibilityAbilityOnCooldown;
         }
     }
 }

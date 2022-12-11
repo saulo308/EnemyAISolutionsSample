@@ -5,20 +5,19 @@ using UnityEngine;
 
 namespace EnemyAIModule.GOAP
 {
+    /** Stores a single agent goal data */
     [System.Serializable]
     public class AgentGoal
     {
         public string AgentGoalName = "";
         public int GoalPriority = 1;
-        public bool IsPersistent = true;
-        public List<GoapStateData> GoalTargetStates = new List<GoapStateData>();
+        public List<GoapStateData> GoalTargetStates = new List<GoapStateData>(); // States that this goal needs to meet to consider achieved
 
-        public GoapStateDataDict GetGoalTargetStatesAsStateDataDict()
-        {
-            return GoapStateDataDict.StateDataListToGoapStateDataDict(GoalTargetStates);
-        }
+        public GoapStateDataDict GetGoalTargetStatesAsStateDataDict() =>
+            GoapStateDataDict.StateDataListToGoapStateDataDict(GoalTargetStates);
     }
 
+    /** Represent a GOAP agent that will have actions, goals and a plan to execute and reach given goal */
     public abstract class AGoapAgent : MonoBehaviour
     {
         // Serializable Fields -----------------------------------------------
@@ -33,6 +32,8 @@ namespace EnemyAIModule.GOAP
         // Unity Methods -----------------------------------------------------------
         protected virtual void Awake()
         {
+            // Alternatively, GoapAction could be on the same script as this GoapAgent (though I do not recommend)
+            // Get all actions on this object on Awake
             if(m_agentActionList.Count == 0)
             {
                 var agentActions = GetComponents<AGoapAction>();
@@ -47,12 +48,14 @@ namespace EnemyAIModule.GOAP
         // Public Methods ------------------------------------------------------------
         public virtual bool RequestNewAgentPlan()
         {
-            // Get new agent goal
+            // Get new agent goal (this will go through all agent's and get the highest priority goal)
             AgentGoal newAgentGoal = GetNewAgentGoal();
             if(newAgentGoal == null) return false;
 
-            // Request a new agent plan 
+            // Get target states that fulfills chosen agens goal
             GoapStateDataDict agentGoalTargetStates = newAgentGoal.GetGoalTargetStatesAsStateDataDict();
+
+            // Request a new agent plan to goapPlanner
             m_currentActionQueue = m_goapPlanner.CreateNewAgentPlan(this, m_agentActionList, agentGoalTargetStates);
             
             // If no plan found, execute feedback and push idle state to FSM
@@ -61,7 +64,7 @@ namespace EnemyAIModule.GOAP
                 // Execute feedback
                 OnNoPlanFound();
 
-                // Push Idle to stack so we can keep trying to calculate new plan
+                // Push Idle to stack so we can keep trying to calculate new plan (IdleState calls request plan func)
                 m_goapAgentFSM.PopFSMStack();
                 m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.IdleState);
                 return false;
@@ -86,29 +89,36 @@ namespace EnemyAIModule.GOAP
 
             // Get next action to execute
             AGoapAction actionToExecute = m_currentActionQueue.Peek();
+
+            // If action is already performing, return false and FSM will keep calling this into action is done
             if(actionToExecute.IsActionPerforming()) return false;
+
+            // If action is marked as complete and it's not performing anymore, then we can remove it from queue
             if(actionToExecute.IsActionComplete() && !actionToExecute.IsActionPerforming()) 
             {
+                // This will eventually lead to (m_currentActionQueue.count == 0). Meaning we finished this plan's actions
                 m_currentActionQueue.Dequeue();
                 return true;
             }
 
-            // Check if action requeires range
+            // Check if action requeires range to execute. If not, then just set it to true
+            // If id does require range, check if we are in range to execute
             bool bIsActionInRangeToExecute = actionToExecute.RequiresRangeToExecute() ? 
                 actionToExecute.IsInRangeToExecute() : 
                 true;
 
-            // If not in range, move to it....
+            // If not in range, move to it GoapAgent to range
+            // This is done by pushing a 'MoveTo' state to FSM
             if(!bIsActionInRangeToExecute)
             {
 				m_goapAgentFSM.PushFSMStack(m_goapAgentFSM.MoveToState);
                 return false;
             }
 
-            // In range, try execute
+            // If in action's range, try to perform it
             bool bDidActionPerformedSuccessfully = actionToExecute.Perform();
 
-            // If action fails, abort plan
+            // If action fails, abort plan (IdleState will not calculate a new plan)
 			if (!bDidActionPerformedSuccessfully) 
             {
 				m_goapAgentFSM.ClearFSMStack();
@@ -116,18 +126,21 @@ namespace EnemyAIModule.GOAP
                 return false;
 			} 
 
-            // Else, complete action
+            // If action succeded, mark action as complete 
+            // (altough it might be still performing, keeping it on stack)
             actionToExecute.OnActionComplete();
-
             return true;
         }
 
         public virtual bool MoveAgentToActionRange()
         {
-            // Get next action to execute
+            // Get action that is being executed (FSM peek)
             AGoapAction actionToExecute = m_currentActionQueue.Peek();
 
+            // Move agent to action's range into it has not yet reached it
             bool bReachedActionRange = MoveAgentToExecuteAction(actionToExecute);
+
+            // If we get into action's range, we can pop this 'MoveTo' state from FSM stack
             if(bReachedActionRange)
             {
                 m_goapAgentFSM.PopFSMStack();

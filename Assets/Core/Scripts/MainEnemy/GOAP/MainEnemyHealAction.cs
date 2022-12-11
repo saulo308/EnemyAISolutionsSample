@@ -18,10 +18,12 @@ namespace AIProject.GameModule
         private bool m_isHealAbilityOnCooldown = false;
 
         // Public Methods -----------------------------------------
-        public override bool RequiresRangeToExecute()
-        {
-            return false;
-        }
+
+        // If heal ability is on cooldown, then action is not usable
+        public override bool IsActionUsable(AGoapAgent goapAgent) => !m_isHealAbilityOnCooldown;
+
+        public override bool RequiresRangeToExecute() => false;
+        public override bool IsInRangeToExecute() => true;
 
         public override bool Perform()
         {
@@ -39,17 +41,6 @@ namespace AIProject.GameModule
             });
 
             return true;
-        }
-        
-        public override bool IsInRangeToExecute()
-        {
-            return true;
-        }
-
-        public override bool IsActionUsable(AGoapAgent goapAgent)
-        {
-            // If heal ability is on cooldown, then action is not usable
-            return !m_isHealAbilityOnCooldown;
         }
     }
 }

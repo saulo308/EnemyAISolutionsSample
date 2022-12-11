@@ -32,20 +32,15 @@ namespace AIProject.GameModule
         protected override void OnDestroy()
         {
             base.OnDestroy();
+
+            // Remove listeners and kill all dotweens
             m_playerHealthPercentageSharedEvent.RemoveAllListeners();
             m_mainEnemyHealthPercentageSharedEvent.RemoveAllListeners();
             DOTween.KillAll();
         }
 
         // Private Methods ------------------------------------------------
-        void OnPlayerHealthChange(float newPlayerHealthPercentage)
-        {
-            m_playerHealthFillBar.DOFillAmount(newPlayerHealthPercentage,0.5f);
-        }
-
-        void OnMainEnemyHealthChange(float newMainEnemyPlayerHealthPercentage)
-        {
-            m_mainEnemyHealthFillBar.DOFillAmount(newMainEnemyPlayerHealthPercentage,0.5f);
-        }
+        void OnPlayerHealthChange(float newPlayerHealthPercentage) => m_playerHealthFillBar.DOFillAmount(newPlayerHealthPercentage,0.5f);
+        void OnMainEnemyHealthChange(float newMainEnemyPlayerHealthPercentage) => m_mainEnemyHealthFillBar.DOFillAmount(newMainEnemyPlayerHealthPercentage,0.5f);
     }
 }

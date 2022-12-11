@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace GameSharedEventModule
 {
+    /** Can be used to liste to a GameSharedEvent and call a editor UnityEvent */
     public class GameSharedEventListener : MonoBehaviour
     {
         // Serializable Fields -------------------------------
