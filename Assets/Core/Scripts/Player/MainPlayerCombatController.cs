@@ -150,7 +150,7 @@ namespace AIProject.GameModule
             // Else, reset curDamage
             if(m_curAttackComboIndex > 1)
             {
-                float damageMultiplier = Random.Range(1.3f,1.5f);
+                float damageMultiplier = Random.Range(1.1f,1.2f);
                 m_playerCurDamage *= damageMultiplier;
             }
             else

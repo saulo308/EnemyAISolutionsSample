@@ -261,13 +261,11 @@ MonoBehaviour:
   m_agentGoalList:
   - AgentGoalName: DamagePlayerGoal
     GoalPriority: 1
-    IsPersistent: 1
     GoalTargetStates:
     - Key: DamagePlayer
       Value: 0
   - AgentGoalName: StayAliveGoal
     GoalPriority: 1
-    IsPersistent: 1
     GoalTargetStates:
     - Key: StayAlive
       Value: 0
@@ -5297,7 +5295,7 @@ MonoBehaviour:
   m_actionName: AttackPlayer_Melee
   m_actionCost: 3
   m_actionTarget: {fileID: 0}
-  m_endActionDelay: 1
+  m_endActionDelay: 1.1
   m_actionPreconditionsData:
   - Key: PlayerAlive
     Value: 0
@@ -5567,7 +5565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc2af67d9dad49247950d76000af6990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterMaxHealth: 200
+  m_characterMaxHealth: 250
   m_destroyOnDead: 1
   m_characterContainer: {fileID: 2299378689356111129}
   m_characterSharedEventAnimationEvent: {fileID: 11400000, guid: 7a426ed611040f141ae2e3d44a851e97, type: 2}

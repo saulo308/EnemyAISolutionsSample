@@ -295,6 +295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainEnemyContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 2299378689678364220, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
+      propertyPath: m_characterMaxHealth
+      value: 350
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7c0dfd443c79804681f540f983cda5e, type: 3}
 --- !u!4 &453151279 stripped
