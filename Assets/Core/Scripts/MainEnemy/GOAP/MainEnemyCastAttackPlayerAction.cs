@@ -36,17 +36,17 @@ namespace AIProject.GameModule
         public override bool IsActionUsable(AGoapAgent goapAgent)
         {
             // Gives a random chance to cast spell
-            //      If player shield is up, then chance to cast action to be usable is 80% (randomChance > 0.2f)
-            //      If player shield is not up, then chance to cast to be usable is 50% (randomChance > 0.5f)
+            //      If player shield is up, then chance to cast action to be usable is 95% (randomChance > 0.05f)
+            //      If player shield is not up, then chance to cast to be usable is 80% (randomChance > 0.2f)
             float randomChance = Random.Range(0f,1f);
 
             if(m_isPlayerShieldUp)
             {
-                if(randomChance > 0.2f) return true;
+                if(randomChance > 0.05f) return true;
                 return false;
             }
 
-            if(randomChance > 0.5f) return m_isPlayerShieldUp;
+            if(randomChance > 0.2f) return m_isPlayerShieldUp;
             return true;
         }
 
